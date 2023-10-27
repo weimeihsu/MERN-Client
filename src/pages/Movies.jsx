@@ -1,9 +1,8 @@
 import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
-
+import MovieForm from '../component/movieForm'
 import MovieRecords from '../component/MovieRecords'
 import Container from '@mui/material/Container'
-import MovieForm from '../component/movieForm'
 
 const Movies = () => {
     return ( 

@@ -35,7 +35,7 @@ const OpenModal = ({_id, title, category}) => {
         aria-describedby="modal-modal-description"
         >
             <Box sx={style}>
-                <RecordForm recordID={_id} recordTitle={title} recordCategory={category} formTitle={'Record Update'} btnText={'Update'}/>
+                <RecordForm recordID={_id} recordTitle={title} recordCategory={category} formTitle={'Movie Update'} btnText={'Update'}/>
             </Box>
         </Modal>
         </>  

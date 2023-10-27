@@ -1,6 +1,5 @@
 import { Routes, Route } from 'react-router-dom'
 import Movies from '../pages/Movies'
-import RecordnForm from '../pages/RecordnForm'
 import HomePage from '../pages/HomePage'
 import SiteDomain from '../pages/SiteDomain'
 import SiteRoutes from './SiteRoutes'
