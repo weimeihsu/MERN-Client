@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router-dom'
 import RecordnForm from '../pages/RecordnForm'
-import HomePage from '../pages/Homepage'
+import HomePage from '../pages/HomePage'
 import SiteDomain from '../pages/SiteDomain'
 import SiteRoutes from './SiteRoutes'
 
