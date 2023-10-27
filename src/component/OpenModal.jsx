@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import RecordForm from './recordForm'
+import MovieForm from './MovieForm'
 import Modal from '@mui/material/Modal'
 import IconButton from '@mui/material/IconButton'
 import EditIcon from '@mui/icons-material/Edit'
@@ -31,11 +31,11 @@ const OpenModal = ({_id, title, category}) => {
         <Modal
         open={open}
         onClose={handleClose}
-        aria-labelledby="modal-recordForm"
-        aria-describedby="modal-modal-description"
+        aria-labelledby="modal-MovieForm"
+        aria-describedby="modal-description"
         >
             <Box sx={style}>
-                <RecordForm recordID={_id} recordTitle={title} recordCategory={category} formTitle={'Movie Update'} btnText={'Update'}/>
+                <MovieForm recordID={_id} recordTitle={title} recordCategory={category} formTitle={'Movie Update'} btnText={'Update'}/>
             </Box>
         </Modal>
         </>  
