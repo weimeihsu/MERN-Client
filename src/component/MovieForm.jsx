@@ -13,7 +13,6 @@ const MovieForm = ({recordID, recordTitle, recordCategory, formTitle, btnText}) 
     const dispatch = useDispatch()
     const {categories} = useSelector(store => store.recordSlice)
     // this state is for button and title text
-    const [createMode, setCreateMode] = useState(true)
 
     const id = recordID ? recordID : undefined
     const [title, setTitle] = useState(id ? recordTitle : '')
@@ -106,7 +105,7 @@ const MovieForm = ({recordID, recordTitle, recordCategory, formTitle, btnText}) 
 }
 
 MovieForm.defaultProps = {
-    formTitle: 'Create Record',
+    formTitle: 'Create Movie',
     btnText:'Create',
 }
 export default MovieForm;

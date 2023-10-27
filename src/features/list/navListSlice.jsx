@@ -4,7 +4,7 @@ const initialState = {
     mainMenu:[
         {id:1, path:'/', name:'Homepage'},
         {id:2, path:'/site-domain', name:'Site List'},
-        {id:3, path:'/recordform', name:'List & Form'}
+        {id:3, path:'/movies', name:'Movies'}
     ],
     selectedMainMenuID: null,
     siteLevelMenu:[
