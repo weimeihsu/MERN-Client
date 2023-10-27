@@ -1,9 +1,9 @@
 import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
 
-import RecordForm from '../component/recordForm'
-import Records from '../component/Records'
+import MovieRecords from '../component/MovieRecords'
 import Container from '@mui/material/Container'
+import MovieForm from '../component/movieForm'
 
 const RecordnForm = () => {
 
@@ -13,10 +13,12 @@ const RecordnForm = () => {
                 <Grid container spacing={4}>
                     <Grid item xs={8}>
                         <h1>Records</h1>
-                        <Records/>
+                        <MovieRecords/>
+                        
                     </Grid>
                     <Grid item xs={4}>
-                        <RecordForm/>
+                        <MovieForm/>
+                        
                     </Grid>
                 </Grid>
             </Box>
