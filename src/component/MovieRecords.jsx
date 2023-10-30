@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { fetchRecords, deleteRecord } from '../features/recordCRUD/recordSlice'
+import { fetchRecords } from '../features/recordCRUD/recordSlice'
 
 import Card from '@mui/material/Card'
 import CardActions from '@mui/material/CardActions'
@@ -13,24 +13,22 @@ import Typography from '@mui/material/Typography'
 import Chip from '@mui/material/Chip'
 
 import OpenModal from './OpenModal'
+import axios from 'axios'
 
 const movieRecords = () => {
     const dispatch = useDispatch()
-    const {records, status, error} = useSelector(store => store.recordSlice)
+    const {records} = useSelector(store => store.recordSlice)
     
     useEffect(()=>{
         dispatch(fetchRecords())
     },[])
 
-    const handleRemove = async (id) =>{
-
-        const res = await fetch(`/api/records/${id}`, {
-            method: 'DELETE'
-        })
-        const theRecord = await res.json()
-
-        if(res.ok){
-            dispatch(deleteRecord({theRecord}))
+    const handleDelete = async (id) =>{
+        try{
+            await axios.delete(`/api/records/${id}`)
+            dispatch(fetchRecords())
+        }catch(err){
+            return err.message
         }
     }
     return ( 
@@ -50,10 +48,10 @@ const movieRecords = () => {
                 </Box>
                 <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                 <CardActions sx={{p:2}}>
-                    <IconButton size="small" aria-label="delete" onClick={() => handleRemove(recordItem._id)}>
+                    <IconButton size="small" aria-label="delete" onClick={() => handleDelete(recordItem._id)}>
                         <DeleteIcon fontSize="inherit"/>
                     </IconButton>
-                    <OpenModal key={recordItem._id} {...recordItem}/>
+                    <OpenModal key={recordItem._id} id={recordItem._id} title={recordItem.title} category={recordItem.category}/>
                 </CardActions>
                 </Box>  
             </Card>

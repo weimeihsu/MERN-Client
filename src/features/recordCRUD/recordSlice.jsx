@@ -1,11 +1,9 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
 
-const FETCH_URL = '/api/records'
-
 const initialState = {
     records:[],
-    categories:['Action','Drama','Fiction','Fantasy'],
+    categories:['Action','Drama','Fiction','Fantasy','Animation'],
     status:'idle', //'idle' | 'loading' | 'succeded' | 'failed'
     error:null
   } 
@@ -16,7 +14,7 @@ const initialState = {
 
 export const fetchRecords = createAsyncThunk('records/fetchRecords', async()=>{
     try{
-        const res = await axios.get(FETCH_URL)
+        const res = await axios.get('/api/records')
         return res.data // or [...res.data]
     }catch(err){
         return err.message
@@ -30,12 +28,11 @@ export const recordsSlice = createSlice({
             const { newRecord } = action.payload
             state.records = [newRecord, ...state.records]
         },
-        deleteRecord: (state, action)=>{
-            const { theRecord } = action.payload
-            state.records = state.records.filter(item=>item._id !== theRecord._id)
-        },
+        // deleteRecord: (state, action)=>{
+        //     const { theRecord } = action.payload
+        //     state.records = state.records.filter(item=>item._id !== theRecord._id)
+        // },
         updateRecord: ()=>{
-            
         }
     },
     extraReducers(builder) {

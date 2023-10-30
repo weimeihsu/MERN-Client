@@ -1,22 +1,22 @@
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { addRecord } from '../features/recordCRUD/recordSlice'
-
+import Box from '@mui/material/Box'
 import InputLabel from '@mui/material/InputLabel'
 import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl'
 import Select from '@mui/material/Select'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
+import Stack from '@mui/material/Stack'
 
-const MovieForm = ({recordID, recordTitle, recordCategory, formTitle, btnText}) => {
+const MovieForm = ({recordID, recordTitle, recordCategory, formTitle, btnText, closeForm}) => {
     const dispatch = useDispatch()
     const {categories} = useSelector(store => store.recordSlice)
     // this state is for button and title text
 
-    const id = recordID ? recordID : undefined
-    const [title, setTitle] = useState(id ? recordTitle : '')
-    const [category, setCategory] = useState(id ? recordCategory :'')
+    const [title, setTitle] = useState(recordID ? recordTitle : '')
+    const [category, setCategory] = useState(recordID ? recordCategory :'')
     const [error, setError] = useState(null)
     
     const changeTitle = (e) => {
@@ -79,8 +79,14 @@ const MovieForm = ({recordID, recordTitle, recordCategory, formTitle, btnText}) 
         <>
         <h1>{formTitle}</h1>
         <form onSubmit={handleSubmit}>
-            <p>{recordTitle}</p>
-            <p>{recordCategory}</p>
+            {recordID && 
+            <Box>
+            <h4>Origin Data</h4>
+            <p>Movie ID:{recordID}</p>
+            <p>Moview Title:{recordTitle}</p>
+            <p>Movie Category:{recordCategory}</p>
+            </Box>}
+            
                 <TextField id="outlined-basic" label="Movie name" variant="outlined" size="small" sx={{mb:2}} fullWidth required onChange={changeTitle} value={title}/>
                     <FormControl fullWidth size="small" sx={{mb:2}}>
                         <InputLabel id="movie-category">Category</InputLabel>
@@ -89,15 +95,18 @@ const MovieForm = ({recordID, recordTitle, recordCategory, formTitle, btnText}) 
                         id="demo-simple-select"
                         value={category}
                         label="Category"
-                        onChange={changeCategory}
-                        
+                        onChange={changeCategory}  
                         >
                             {categories.map((categoryItem, idx)=>(
                                 <MenuItem key={idx} value={categoryItem}>{categoryItem}</MenuItem>
                             ))}
                         </Select>
                     </FormControl>
-                <Button variant="contained" type='submit'>{btnText}</Button>
+                <Stack spacing={2} direction="row">
+                    <Button variant="contained" type='submit'>{btnText}</Button>
+                    {recordID && <Button variant="outlined" type='cacenl' onClick={closeForm}>Cancel</Button> }
+                        
+                </Stack>
                 {error && <div>{error}</div>}
         </form>
         </>

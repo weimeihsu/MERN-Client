@@ -17,7 +17,7 @@ const style = {
     pb: 4
   };
 
-const OpenModal = ({_id, title, category}) => {
+const OpenModal = ({id, title, category}) => {
 
     const [open, setOpen] = useState(false)
     const handleOpen = () => setOpen(true)
@@ -35,7 +35,7 @@ const OpenModal = ({_id, title, category}) => {
         aria-describedby="modal-description"
         >
             <Box sx={style}>
-                <MovieForm recordID={_id} recordTitle={title} recordCategory={category} formTitle={'Movie Update'} btnText={'Update'}/>
+                <MovieForm recordID={id} recordTitle={title} recordCategory={category} formTitle={'Movie Update'} btnText={'Update'} closeForm={handleClose}/>
             </Box>
         </Modal>
         </>  
