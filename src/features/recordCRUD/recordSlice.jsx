@@ -28,6 +28,10 @@ export const recordsSlice = createSlice({
             const { newRecord } = action.payload
             state.records = [newRecord, ...state.records]
         },
+        deleteRecord: (state, action)=>{
+            const { recordID } = action.payload
+            state.records = state.records.filter(item => item._id !== recordID)
+        },
         updateRecord: ()=>{
         }
     },

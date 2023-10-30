@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { fetchRecords } from '../features/recordCRUD/recordSlice'
+import { fetchRecords, deleteRecord } from '../features/recordCRUD/recordSlice'
 
 import Card from '@mui/material/Card'
 import CardActions from '@mui/material/CardActions'
@@ -18,15 +18,16 @@ import axios from 'axios'
 const movieRecords = () => {
     const dispatch = useDispatch()
     const {records} = useSelector(store => store.recordSlice)
-    
+
     useEffect(()=>{
         dispatch(fetchRecords())
     },[])
 
     const handleDelete = async (id) =>{
         try{
-            await axios.delete(`/api/records/${id}`)
-            dispatch(fetchRecords())
+            const res = await axios.delete(`/api/records/${id}`)
+            console.log(id)
+            dispatch(deleteRecord({recordID: id}))
         }catch(err){
             return err.message
         }
