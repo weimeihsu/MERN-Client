@@ -28,10 +28,6 @@ export const recordsSlice = createSlice({
             const { newRecord } = action.payload
             state.records = [newRecord, ...state.records]
         },
-        // deleteRecord: (state, action)=>{
-        //     const { theRecord } = action.payload
-        //     state.records = state.records.filter(item=>item._id !== theRecord._id)
-        // },
         updateRecord: ()=>{
         }
     },
@@ -41,7 +37,6 @@ export const recordsSlice = createSlice({
             state.status='loading'
         })
         .addCase(fetchRecords.fulfilled, (state, action)=>{
-            console.log(action)
             state.status='succeeded'
             state.records=action.payload
         })
