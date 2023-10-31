@@ -10,10 +10,10 @@ export default defineConfig({
       '/api/records': 'http://localhost:8080/',
 
       // with options: http://localhost:5173/api/bar-> http://jsonplaceholder.typicode.com/bar
-      '/api': {
+      '/api-live': {
         target: 'https://mern-weimei-backend.onrender.com/',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ''),
+        rewrite: (path) => path.replace(/^\/api-live/, ''),
       },
     },
   }
