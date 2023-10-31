@@ -1,5 +1,4 @@
 {
-  "proxy": "https://mern-weimei-backend.onrender.com/",
   "name": "client",
   "private": true,
   "version": "0.0.0",

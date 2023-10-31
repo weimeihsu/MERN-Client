@@ -6,8 +6,14 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      "/api/records": "https://mern-weimei-backend.onrender.com/",
+      '/api/records': 'http://localhost:8080/',
+
+      // with options: http://localhost:5173/api/bar-> http://jsonplaceholder.typicode.com/bar
+      '/api': {
+        target: 'https://mern-weimei-backend.onrender.com/',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ''),
+      },
     },
-  },
- 
+  }
 })
