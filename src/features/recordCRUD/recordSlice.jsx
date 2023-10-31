@@ -14,7 +14,7 @@ const initialState = {
 const SERVER_URL = process.env.REACT_APP_SERVER_URL
 export const fetchRecords = createAsyncThunk('records/fetchRecords', async()=>{
     try{
-        const res = await axios.get('/api/records')
+        const res = await axios.get(`${SERVER_URL}/api/records`)
         return res.data // or [...res.data]
     }catch(err){
         return err.message
