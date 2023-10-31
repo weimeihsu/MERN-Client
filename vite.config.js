@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      "/api/records": "http://localhost:8080/",
+      "/api/records": "https://mern-weimei-backend.onrender.com/",
     },
   },
  
