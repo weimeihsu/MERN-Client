@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import axios from 'axios'
+import apiMovieRecords from '../../axois/apiMovieRecords'
 
 const initialState = {
     records:[],
@@ -11,10 +11,10 @@ const initialState = {
 // export const fetchRecords = createAsyncThunk('records/fetchRecords', ()=>{
 //     return fetch(FETCH_URL).then(res=>res.json()).catch(err=>err.message)
 // }) 
-const SERVER_URL = import.meta.env.VITE_REACT_APP_SERVER_URL
+
 export const fetchRecords = createAsyncThunk('records/fetchRecords', async()=>{
     try{
-        const res = await axios.get(`${SERVER_URL}/api/records`)
+        const res = await apiMovieRecords.get('/api/records')
         return res.data // or [...res.data]
     }catch(err){
         return err.message

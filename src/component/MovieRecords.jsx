@@ -13,7 +13,7 @@ import Typography from '@mui/material/Typography'
 import Chip from '@mui/material/Chip'
 
 import OpenModal from './OpenModal'
-import axios from 'axios'
+import apiMovieRecords from '../axois/apiMovieRecords'
 
 const movieRecords = () => {
     const dispatch = useDispatch()
@@ -25,8 +25,7 @@ const movieRecords = () => {
 
     const handleDelete = async (id) =>{
         try{
-            const res = await axios.delete(`/api/records/${id}`)
-            console.log(id)
+            const res = await apiMovieRecords.delete(`/api/records/${id}`)
             dispatch(deleteRecord({recordID: id}))
         }catch(err){
             return err.message

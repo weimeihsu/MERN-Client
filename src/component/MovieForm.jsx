@@ -10,7 +10,7 @@ import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
-import axios from 'axios'
+import apiMovieRecords from '../axois/apiMovieRecords'
 
 const MovieForm = ({recordID, recordTitle, recordCategory, formTitle, btnText, closeForm}) => {
     const dispatch = useDispatch()
@@ -31,37 +31,32 @@ const MovieForm = ({recordID, recordTitle, recordCategory, formTitle, btnText, c
     const handleSubmit = (e) => {
         e.preventDefault()
         // recordCreate({title, category})
-        recordID ? recordUpdate({title, category}) : recordCreate({title, category})                
+        const id = recordID 
+        id ? recordUpdate({title, category}) : recordCreate({title, category})  
+        console.log(id)           
     }
     // create record
     const recordCreate = async (record) => {
-        const res = await axios.post('/api/records', record)
-        const newRecord = await res.data
-        dispatch(addRecord({newRecord}))
-        setCategory('')
-        setTitle('')
+        try{
+            const res = await apiMovieRecords.post('/api/records', record)
+            const newRecord = await res.data
+            dispatch(addRecord({newRecord}))
+            setCategory('')
+            setTitle('')
+        }
+        catch(err){
+            err.message
+        }
     }
     // update record
-    const recordUpdate = async (record) => {
-
-        const res = await fetch(`/api/records/${id}`, {
-            method: 'PUT',
-            body: JSON.stringify(record),
-            headers: {
-                'Content-Type':'application/json'
-            }
-        })
-
-        // const theRecord = await res.json()
-        // if(!res.ok){
-        //     setError(theRecord.error)
-        // }
-        // if(res.ok){
-        //     setCategory('')
-        //     setTitle('')
-        //     setError(null)
-        //     // dispatch(updateRecord({theRecord}))
-        // }               
+    const recordUpdate = async (id, record) => {
+        try{
+            const res = await apiMovieRecords.patch(`/api/records/${id}`, record)
+            const theRecord = await res.data
+            console.log(theRecord)
+        }catch(err){
+            err.message
+        }         
     }
     return ( 
         <>
