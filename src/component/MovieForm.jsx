@@ -32,7 +32,8 @@ const MovieForm = ({recordID, recordTitle, recordCategory, formTitle, btnText, c
         e.preventDefault()
         // recordCreate({title, category})
         const id = recordID 
-        id ? recordUpdate({title, category}) : recordCreate({title, category})  
+        const record = {title, category}
+        id ? recordUpdate(id, record) : recordCreate(record)  
         console.log(id)           
     }
     // create record
@@ -50,10 +51,11 @@ const MovieForm = ({recordID, recordTitle, recordCategory, formTitle, btnText, c
     }
     // update record
     const recordUpdate = async (id, record) => {
+        
         try{
-            const res = await apiMovieRecords.patch(`/api/records/${id}`, record)
+            const res = await apiMovieRecords.put(`/api/records/${id}`, record)
             const theRecord = await res.data
-            console.log(theRecord)
+            dispatch(updateRecord(theRecord))
         }catch(err){
             err.message
         }         

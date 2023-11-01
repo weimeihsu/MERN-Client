@@ -33,6 +33,7 @@ export const recordsSlice = createSlice({
             state.records = state.records.filter(item => item._id !== recordID)
         },
         updateRecord: ()=>{
+            const { theRecord } = action.payload
         }
     },
     extraReducers(builder) {
