@@ -11,7 +11,7 @@ const initialState = {
 // export const fetchRecords = createAsyncThunk('records/fetchRecords', ()=>{
 //     return fetch(FETCH_URL).then(res=>res.json()).catch(err=>err.message)
 // }) 
-const SERVER_URL = process.env.REACT_APP_SERVER_URL
+const SERVER_URL = import.meta.env.VITE_REACT_APP_SERVER_URL
 export const fetchRecords = createAsyncThunk('records/fetchRecords', async()=>{
     try{
         const res = await axios.get(`${SERVER_URL}/api/records`)
