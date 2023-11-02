@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { addRecord, fetchRecords, updateRecord } from '../features/recordCRUD/recordSlice'
 import Box from '@mui/material/Box'
+import Grid from '@mui/material/Grid'
 import InputLabel from '@mui/material/InputLabel'
 import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl'
@@ -33,8 +34,7 @@ const MovieForm = ({recordID, recordTitle, recordCategory, formTitle, btnText, c
         // recordCreate({title, category})
         const id = recordID 
         const record = {title, category}
-        id ? recordUpdate(id, record) : recordCreate(record)  
-        console.log(id)           
+        id ? recordUpdate(id, record) : recordCreate(record)           
     }
     // create record
     const recordCreate = async (record) => {
@@ -50,12 +50,10 @@ const MovieForm = ({recordID, recordTitle, recordCategory, formTitle, btnText, c
         }
     }
     // update record
-    const recordUpdate = async (id, record) => {
-        
+    const recordUpdate = async (id, record) => { 
         try{
             const res = await apiMovieRecords.put(`/api/records/${id}`, record)
-            const theRecord = await res.data
-            dispatch(updateRecord(theRecord))
+            dispatch(updateRecord({theRecord:record, id}))
         }catch(err){
             err.message
         }         
@@ -64,35 +62,44 @@ const MovieForm = ({recordID, recordTitle, recordCategory, formTitle, btnText, c
         <>
         <h1>{formTitle}</h1>
         <form onSubmit={handleSubmit}>
+
+        <Grid sx={{ flexGrow: 1 }} container spacing={2}>
+            <Grid item>
             {recordID && 
-            <Box>
-            <h4>Current Data</h4>
-            <Typography>Movie ID:{recordID}</Typography>
-            <Typography>Moview Title:{recordTitle}</Typography>
-            <Typography>Movie Category:{recordCategory}</Typography>
-            </Box>}
-            
-                <TextField id="outlined-basic" label="Movie name" variant="outlined" size="small" sx={{mb:2}} fullWidth required onChange={changeTitle} value={title}/>
+                 <Stack spacing={2}>
+                    <h4>Current Data</h4>
+                    <p><Typography mr={2} sx={{fontWeight:'bold'}}>Movie ID:</Typography>{recordID}</p>
+                    <p><Typography mr={2} sx={{fontWeight:'bold'}}>Moview Title:</Typography>{recordTitle}</p>
+                    <p><Typography mr={2} sx={{fontWeight:'bold'}}>Movie Category:</Typography>{recordCategory}</p>
+                </Stack>
+            }
+            </Grid>
+            <Grid item>
+            <TextField id="movie-name" label="Movie name" variant="outlined" size="small" sx={{mb:2}} fullWidth required onChange={changeTitle} value={title}/>
                     <FormControl fullWidth size="small" sx={{mb:2}}>
                         <InputLabel id="movie-category">Category</InputLabel>
                         <Select
-                        labelId="movie-category"
-                        id="demo-simple-select"
+                        labelId="label-movie-category"
                         value={category}
                         label="Category"
                         onChange={changeCategory}  
                         >
                             {categories.map((categoryItem, idx)=>(
-                                <MenuItem key={idx} value={categoryItem}>{categoryItem}</MenuItem>
+                                <MenuItem name={categoryItem} key={idx} value={categoryItem}>{categoryItem}</MenuItem>
                             ))}
                         </Select>
                     </FormControl>
                 <Stack spacing={2} direction="row">
                     <Button variant="contained" type='submit'>{btnText}</Button>
-                    {recordID && <Button variant="outlined" type='cacenl' onClick={closeForm}>Cancel</Button> }
-                        
+                    {recordID && <Button variant="outlined" type='cacenl' onClick={closeForm}>Cancel</Button> }      
                 </Stack>
                 {error && <div>{error}</div>}
+            </Grid>
+        </Grid>
+
+            
+            
+                
         </form>
         </>
     );

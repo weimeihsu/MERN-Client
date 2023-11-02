@@ -32,8 +32,13 @@ export const recordsSlice = createSlice({
             const { recordID } = action.payload
             state.records = state.records.filter(item => item._id !== recordID)
         },
-        updateRecord: ()=>{
-            const { theRecord } = action.payload
+        updateRecord: (state, action)=>{
+            const { theRecord, id } = action.payload
+            const recordIdx = state.records.findIndex(item => item._id === id)
+            const updatedRecord = {...state.records[recordIdx], title:theRecord.title, category:theRecord.category}
+            const newArry = [...state.records] //copy records array
+            newArry[recordIdx] = updatedRecord
+            state.records = newArry
         }
     },
     extraReducers(builder) {
