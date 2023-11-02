@@ -54,6 +54,8 @@ const MovieForm = ({recordID, recordTitle, recordCategory, formTitle, btnText, c
         try{
             const res = await apiMovieRecords.put(`/api/records/${id}`, record)
             dispatch(updateRecord({theRecord:record, id}))
+            setCategory('')
+            setTitle('')
         }catch(err){
             err.message
         }         
