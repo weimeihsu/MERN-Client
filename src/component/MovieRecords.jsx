@@ -17,12 +17,12 @@ import apiMovieRecords from '../axois/apiMovieRecords'
 
 const movieRecords = () => {
     const dispatch = useDispatch()
-    const {records} = useSelector(store => store.recordSlice)
 
     useEffect(()=>{
         dispatch(fetchRecords())
     },[])
-
+    
+    const {records} = useSelector(store => store.recordSlice)
     const handleDelete = async (id) =>{
         try{
             const res = await apiMovieRecords.delete(`/api/records/${id}`)

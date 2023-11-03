@@ -9,8 +9,8 @@ const Routers = () => {
     return (
         <Routes>
             <Route index element={<HomePage/> } />
-            <Route path="movies" element={<Movies/> }/>
             <Route path="site-domain" element={<SiteDomain/>}/>
+            <Route path="movies" element={<Movies/> }/>
             <Route path="site-domain/:siteID/*" element={<SiteRoutes/>}/>
         </Routes>
     )
