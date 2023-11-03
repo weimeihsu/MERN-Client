@@ -56,6 +56,7 @@ const MovieForm = ({recordID, recordTitle, recordCategory, formTitle, btnText, c
             dispatch(updateRecord({theRecord:record, id}))
             setCategory('')
             setTitle('')
+            closeForm()
         }catch(err){
             err.message
         }         
@@ -70,9 +71,9 @@ const MovieForm = ({recordID, recordTitle, recordCategory, formTitle, btnText, c
             {recordID && 
                  <Stack spacing={2}>
                     <h4>Current Data</h4>
-                    <p><Typography mr={2} sx={{fontWeight:'bold'}}>Movie ID:</Typography>{recordID}</p>
-                    <p><Typography mr={2} sx={{fontWeight:'bold'}}>Moview Title:</Typography>{recordTitle}</p>
-                    <p><Typography mr={2} sx={{fontWeight:'bold'}}>Movie Category:</Typography>{recordCategory}</p>
+                    <div><Typography mr={2} sx={{fontWeight:'bold'}}>Movie ID:</Typography>{recordID}</div>
+                    <div><Typography mr={2} sx={{fontWeight:'bold'}}>Moview Title:</Typography>{recordTitle}</div>
+                    <div><Typography mr={2} sx={{fontWeight:'bold'}}>Movie Category:</Typography>{recordCategory}</div>
                 </Stack>
             }
             </Grid>
@@ -93,7 +94,7 @@ const MovieForm = ({recordID, recordTitle, recordCategory, formTitle, btnText, c
                     </FormControl>
                 <Stack spacing={2} direction="row">
                     <Button variant="contained" type='submit'>{btnText}</Button>
-                    {recordID && <Button variant="outlined" type='cacenl' onClick={closeForm}>Cancel</Button> }      
+                    {recordID && <Button variant="outlined" type='cancel' onClick={closeForm}>Cancel</Button> }      
                 </Stack>
                 {error && <div>{error}</div>}
             </Grid>
