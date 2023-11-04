@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { fetchRecords, deleteRecord } from '../features/recordCRUD/recordSlice'
+import { fetchRecords, deleteRecord } from '../features/recordSlice'
 
 import Card from '@mui/material/Card'
 import CardActions from '@mui/material/CardActions'
@@ -13,7 +13,7 @@ import Typography from '@mui/material/Typography'
 import Chip from '@mui/material/Chip'
 
 import OpenModal from './OpenModal'
-import apiMovieRecords from '../axois/apiMovieRecords'
+import api from '../axois/api'
 
 const movieRecords = () => {
     const dispatch = useDispatch()
@@ -25,7 +25,7 @@ const movieRecords = () => {
     const {records} = useSelector(store => store.recordSlice)
     const handleDelete = async (id) =>{
         try{
-            const res = await apiMovieRecords.delete(`/api/records/${id}`)
+            const res = await api.delete(`/api/records/${id}`)
             dispatch(deleteRecord({recordID: id}))
         }catch(err){
             return err.message

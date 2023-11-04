@@ -10,7 +10,7 @@ import ListItemText from '@mui/material/ListItemText'
 import Box from '@mui/material/Box'
 
 const AccountMenu = () => {
-    const {accountList} = useSelector(store=>store.navListSlice)
+    const {accountMenu} = useSelector(store=>store.navListSlice)
     const [anchorElUser, setAnchorElUser] = useState(null)
 
     const handleOpenUserMenu = (event) => {
@@ -43,7 +43,7 @@ const AccountMenu = () => {
             open={Boolean(anchorElUser)}
             onClose={handleCloseUserMenu}
             >
-            {accountList.map((accountItem, idx) => (
+            {accountMenu.map((accountItem, idx) => (
                 <NavLink to={accountItem.path} key={idx}>
                     <MenuItem onClick={handleCloseUserMenu}>
                         <ListItemText>{accountItem.name}</ListItemText>

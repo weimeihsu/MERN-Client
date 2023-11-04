@@ -10,7 +10,8 @@ import ListItemButton from '@mui/material/ListItemButton'
 import ListItemText from '@mui/material/ListItemText'
 import IconButton from '@mui/material/IconButton'
 import MenuIcon from '@mui/icons-material/Menu'
-import { getSelectedDomain } from '../features/list/navListSlice'
+import Button from '@mui/material/Button'
+import { getSelectedDomain } from '../features/navListSlice'
 
 const DomainList = ({toggleSitePanel}) => {
     const dispatch = useDispatch()
@@ -24,6 +25,7 @@ const DomainList = ({toggleSitePanel}) => {
          <MenuIcon />
         </IconButton>
         <h1>Domain Table</h1>
+        <Button variant="outlined">Check Out</Button>
           <List>
             {filteredDomainlist.map(recordItem => (
               <Link to={`${recordItem.sitename}/cdn/${recordItem.domainname}`} key={recordItem.id} onClick={() => getDomain(recordItem.domainname)}>

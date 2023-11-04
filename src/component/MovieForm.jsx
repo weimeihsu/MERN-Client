@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { addRecord, fetchRecords, updateRecord } from '../features/recordCRUD/recordSlice'
+import { addRecord, fetchRecords, updateRecord } from '../features/recordSlice'
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
 import InputLabel from '@mui/material/InputLabel'
@@ -11,7 +11,7 @@ import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
-import apiMovieRecords from '../axois/apiMovieRecords'
+import api from '../axois/api'
 
 const MovieForm = ({recordID, recordTitle, recordCategory, formTitle, btnText, closeForm}) => {
     const dispatch = useDispatch()
@@ -39,7 +39,7 @@ const MovieForm = ({recordID, recordTitle, recordCategory, formTitle, btnText, c
     // create record
     const recordCreate = async (record) => {
         try{
-            const res = await apiMovieRecords.post('/api/records', record)
+            const res = await api.post('/api/records', record)
             const newRecord = await res.data
             dispatch(addRecord({newRecord}))
             setCategory('')
@@ -52,7 +52,7 @@ const MovieForm = ({recordID, recordTitle, recordCategory, formTitle, btnText, c
     // update record
     const recordUpdate = async (id, record) => { 
         try{
-            const res = await apiMovieRecords.put(`/api/records/${id}`, record)
+            const res = await api.put(`/api/records/${id}`, record)
             dispatch(updateRecord({theRecord:record, id}))
             setCategory('')
             setTitle('')

@@ -4,17 +4,21 @@ const initialState = {
     mainMenu:[
         {id:1, path:'/', name:'Homepage'},
         {id:2, path:'/site-domain', name:'Site List'},
-        {id:3, path:'/movies', name:'Movies'}
+        {id:3, path:'/movies', name:'Movies'},
     ],
-    selectedMainMenuID: null,
+    checkOutPage:[
+        {id:1, path:'/checkout-success', name:'Checkout Success'},
+        {id:2, path:'/checkout-failed', name:'Checkout Failed'}
+    ],
+    accountMenu:[
+        {path:'/account', name:'Account'},
+        {path:'/lougout', name:'Logout'}
+    ],
     siteLevelMenu:[
         {id:1, path:'dns', name:'DNS'},
         {id:2, path:'cdn', name:'CDN Management'}
     ],
-    accountList:[
-        {path:'/account', name:'Account'},
-        {path:'/lougout', name:'Logout'}
-    ],
+    selectedMainMenuID: null,
     siteList:[
         {id:'site123', sitename:'example.com'}, 
         {id:'site456', sitename:'travel.com'}

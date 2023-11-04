@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { initState } from '../features/list/navListSlice'
+import { initState } from '../features/navListSlice'
 
 import Divider from '@mui/material/Divider'
 import Toolbar from '@mui/material/Toolbar'

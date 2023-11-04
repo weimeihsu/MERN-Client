@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
-import  navListStatenReducer  from '../features/list/navListSlice'
-import recordReducer from '../features/recordCRUD/recordSlice'
+import  navListReducer  from '../features/navListSlice'
+import recordReducer from '../features/recordSlice'
+import shopItemReducer from '../features/shopItemSlice'
 
 export const store = configureStore({
   reducer: {
-    navListSlice: navListStatenReducer,
-    recordSlice: recordReducer
+    navListSlice: navListReducer,
+    recordSlice: recordReducer,
+    shopItemSlice: shopItemReducer
   },
 })

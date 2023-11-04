@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { ThemeProvider } from '@mui/material/styles'
-import { getselectedSite, filter } from '../features/list/navListSlice'
+import { getselectedSite, filter } from '../features/navListSlice'
 import { theme } from '../theme'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
