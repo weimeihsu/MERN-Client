@@ -4,6 +4,11 @@ import api from '../axois/api'
 const initialState = {
     shopItems:[],
     filteredItems:[],
+    categories:[
+        {name:'book', isSelected:false},
+        {name:'pets', isSelected:false},
+        {name:'3C', isSelected:false},
+        {name:'stationery', isSelected:false}],
     status:'idle', //'idle' | 'loading' | 'succeded' | 'failed'
     error:null
 } 
@@ -49,7 +54,7 @@ export const shopItemSlice = createSlice({
         })
         .addCase(fetchShopItems.fulfilled, (state, action)=>{
             state.status='succeeded'
-            state.records=action.payload
+            state.shopItems=action.payload
         })
         .addCase(fetchShopItems.rejected, (state)=>{
             state.status='failed'
@@ -58,7 +63,7 @@ export const shopItemSlice = createSlice({
     }
 })
 
-export const { addRecord, deleteRecord, updateRecord } = shopItemSlice.actions
+export const { addRecord, deleteRecord, updateRecord, filter } = shopItemSlice.actions
 // export const { selectAllRecords } = state => state.recordsState.records
 // export const { getFetchStatus } = state => state.recordsState.status
 // export const { getFetchError } = state => state.recordsState.error

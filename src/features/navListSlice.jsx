@@ -5,6 +5,7 @@ const initialState = {
         {id:1, path:'/', name:'Homepage'},
         {id:2, path:'/site-domain', name:'Site List'},
         {id:3, path:'/movies', name:'Movies'},
+        {id:4, path:'/online-store', name:'Online Store'},
     ],
     checkOutPage:[
         {id:1, path:'/checkout-success', name:'Checkout Success'},
