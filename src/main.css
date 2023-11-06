@@ -7,5 +7,29 @@ a {
 }
 li a {
     text-decoration: none;
-    color: #4583bd;
+    color: #42a5f5;
+}
+.amount-container {
+    position: absolute;
+    top: -0.4rem;
+    right: -0.8rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    background: #ff5722;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.total-amount {
+    margin-bottom: 0;
+    font-size: 0.785rem;
+    font-weight: bold;
+    margin-top: 0;
+}
+.card-gap:not(:last-of-type) {
+    margin-bottom: 12px;
+}
+.card-gap{
+    margin-bottom: 0;
 }

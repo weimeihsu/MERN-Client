@@ -2,10 +2,11 @@ import { Routes, Route } from 'react-router-dom'
 import Movies from '../pages/Movies'
 import HomePage from '../pages/HomePage'
 import SiteDomain from '../pages/SiteDomain'
-import SiteRoutes from './SiteRoutes'
-import CheckOutFailed from '../pages/shoppingChart/CheckOutFailed'
-import CheckOutSuccess from '../pages/shoppingChart/CheckOutSuccess'
 import OnlineStore from '../pages/shoppingChart/OnlineStore'
+
+import SiteRoutes from './SiteRoutes'
+import CheckOutRoutes from './CheckOutRoutes'
+
 
 const Routers = () => {
     return (
@@ -15,8 +16,7 @@ const Routers = () => {
             <Route path="movies" element={<Movies/> }/>
             <Route path="site-domain/:siteID/*" element={<SiteRoutes/>}/>
             <Route path='online-store' element={<OnlineStore/>}/>
-            <Route path='checkout-success' element={<CheckOutSuccess/>}/>
-            <Route path='checkout-failed' element={<CheckOutFailed/>}/>
+            <Route path='online-store/*' element={<CheckOutRoutes/>}/>
         </Routes>
     )
 }

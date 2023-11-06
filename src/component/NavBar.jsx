@@ -3,7 +3,10 @@ import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
 import MenuIcon from '@mui/icons-material/Menu'
 import IconButton from '@mui/material/IconButton'
+import Stack from '@mui/material/Stack'
 import ProfileMenu from './ProfileMenu'
+import CheckOutBtn from './CheckOutBtn'
+
 
 import { styled } from '@mui/material/styles'
 const drawerWidth = 240;
@@ -40,9 +43,12 @@ const NavBar = ({toggleDrawer, open}) => {
                  <MenuIcon />
                 </IconButton>
                 <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
-                    Logo
+                    Exploring
                 </Typography>
-                <ProfileMenu/>
+                <Stack direction="row" spacing={2}>
+                  <CheckOutBtn/>
+                  <ProfileMenu/>
+                </Stack>
             </Toolbar>
         </Nav>
      );

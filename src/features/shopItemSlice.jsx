@@ -3,6 +3,15 @@ import api from '../axois/api'
 
 const initialState = {
     shopItems:[],
+    shopItemsLocal:[
+        {_id:1, name:'Harry potter', price:100, category:'book'},
+        {_id:2, name:'iPhone 15', price:1000, category:'3C'},
+        {_id:3, name:'Treats', price:120, category:'pets'},
+    ],
+    quantityInCart:33,
+    sum:100,
+    ItemsInCart:[],
+    amount:5,
     filteredItems:[],
     categories:[
         {name:'book', isSelected:false},
@@ -30,22 +39,32 @@ export const shopItemSlice = createSlice({
             const { shopItemID } = action.payload
             state.filteredItems = [...state.shopItems].filter(item => item.id === shopItemID)
         },
-        addRecord: (state, action)=>{
-            const { newRecord } = action.payload
-            state.records = [newRecord, ...state.records]
+        clearCart: (state, action) => {
+            state.ItemsInCart = []
         },
-        deleteRecord: (state, action)=>{
-            const { recordID } = action.payload
-            state.records = state.records.filter(item => item._id !== recordID)
+        addToCart: (state, action) => {
+            const { shopItem } = action.payload
+            
         },
-        updateRecord: (state, action)=>{
-            const { theRecord, id } = action.payload
-            const recordIdx = state.records.findIndex(item => item._id === id)
-            const updatedRecord = {...state.records[recordIdx], title:theRecord.title, category:theRecord.category}
-            const newArry = [...state.records] //copy records array
-            newArry[recordIdx] = updatedRecord
-            state.records = newArry
+        accumulateAmount: (state) => {
+            state.amount = state.ItemsInCart.length
         }
+        // addRecord: (state, action)=>{
+        //     const { newRecord } = action.payload
+        //     state.records = [newRecord, ...state.records]
+        // },
+        // deleteRecord: (state, action)=>{
+        //     const { recordID } = action.payload
+        //     state.records = state.records.filter(item => item._id !== recordID)
+        // },
+        // updateRecord: (state, action)=>{
+        //     const { theRecord, id } = action.payload
+        //     const recordIdx = state.records.findIndex(item => item._id === id)
+        //     const updatedRecord = {...state.records[recordIdx], title:theRecord.title, category:theRecord.category}
+        //     const newArry = [...state.records] //copy records array
+        //     newArry[recordIdx] = updatedRecord
+        //     state.records = newArry
+        // }
     },
     extraReducers(builder) {
         builder

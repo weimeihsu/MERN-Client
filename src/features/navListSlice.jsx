@@ -8,8 +8,9 @@ const initialState = {
         {id:4, path:'/online-store', name:'Online Store'},
     ],
     checkOutPage:[
-        {id:1, path:'/checkout-success', name:'Checkout Success'},
-        {id:2, path:'/checkout-failed', name:'Checkout Failed'}
+        {id:1, path:'/checkout', name:'Checkout'},
+        {id:2, path:'/checkout-success', name:'Checkout Success'},
+        {id:3, path:'/checkout-failed', name:'Checkout Failed'}
     ],
     accountMenu:[
         {path:'/account', name:'Account'},
