@@ -6,7 +6,7 @@ import Container from '@mui/material/Container'
 import Stack from '@mui/material/Stack'
 
 import CategoryChip from '../../component/CategoryChip'
-import ShopItemCard from '../../component/shopItemCard'
+import ShopItemCard from '../../component/ShopItemCard'
 const OnlineStore = () => {
     const dispatch = useDispatch()
 

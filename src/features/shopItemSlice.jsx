@@ -43,8 +43,10 @@ export const shopItemSlice = createSlice({
             state.ItemsInCart = []
         },
         addToCart: (state, action) => {
-            const { shopItem } = action.payload
-            
+            const { shopItem, count } = action.payload
+            const newShopItem ={...shopItem, shopItemCount: count}
+            console.log(newShopItem)
+            // shopItem.count=shopItemCount  
         },
         accumulateAmount: (state) => {
             state.amount = state.ItemsInCart.length
@@ -82,7 +84,7 @@ export const shopItemSlice = createSlice({
     }
 })
 
-export const { addRecord, deleteRecord, updateRecord, filter } = shopItemSlice.actions
+export const { addToCart, deleteRecord, updateRecord, filter } = shopItemSlice.actions
 // export const { selectAllRecords } = state => state.recordsState.records
 // export const { getFetchStatus } = state => state.recordsState.status
 // export const { getFetchError } = state => state.recordsState.error

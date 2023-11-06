@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { addToCart } from '../features/shopItemSlice'
 import Typography from '@mui/material/Typography'
 import Card from '@mui/material/Card'
 import Chip from '@mui/material/Chip'
@@ -8,16 +10,25 @@ import AddIcon from '@mui/icons-material/Add'
 import RemoveIcon from '@mui/icons-material/Remove'
 import CardActions from '@mui/material/CardActions'
 import CardContent from '@mui/material/CardContent'
+import Snackbar from '@mui/material/Snackbar'
 import { Stack } from '@mui/material'
 
 const ShopItemCard = (item) => {
-    const [count, setCount] = useState(0)
-    const incrementCounter = () => setCount(count + 1)
-    const decrementCounter = () => setCount(count - 1)
 
-    const handleAddToCart = (item) => {
-        const itemAmount = count
-        console.log(itemAmount, item)
+    const dispatch = useDispatch()
+    const [count, setCount] = useState(0)
+    const [openSnackbar, setOpenSnackbar] = useState(false)
+    const incrementCounter = () => setCount(count + 1)
+    const decrementCounter = () => {
+        if(count > 0){setCount(count - 1)}
+    }
+    const handleClose = () => {
+        setOpenSnackbar(false)
+    }
+    const handleAddToCart = (shopItem, count) => {
+        dispatch(addToCart({shopItem, count}))
+        setCount(0)
+        setOpenSnackbar(true)
     }
     return (
         <Card className='card-gap' sx={{ display: 'flex', backgroundColor: '#badcd6' }} elevation={0}>
@@ -34,7 +45,13 @@ const ShopItemCard = (item) => {
                         <IconButton size="small" variant="outlined" onClick={incrementCounter}><AddIcon fontSize="inherit"/></IconButton>
                     </Stack>
 
-                    <Button size="small" variant="contained" color="secondary" onClick={()=>handleAddToCart(item)}>Add to Cart</Button>
+                    <Button size="small" variant="contained" color="secondary" onClick={()=>handleAddToCart(item, count)}>Add to Cart</Button>
+                    <Snackbar
+                        open={openSnackbar}
+                        autoHideDuration={1000}
+                        onClose={handleClose}
+                        message="Item(s) Added!"
+                    />
                 </Stack>
             </CardActions>
         </Card>
