@@ -10,7 +10,13 @@ const initialState = {
     ],
     quantityInCart:33,
     sum:100,
-    ItemsInCart:[],
+    itemsInCart:[{
+        _id:'afaeç23',
+        category:'book',
+        name:'Harry Potter',
+        price: 100,
+        count:2
+    }],
     amount:5,
     filteredItems:[],
     categories:[
