@@ -5,13 +5,15 @@ import Typography from '@mui/material/Typography'
 import Card from '@mui/material/Card'
 import Chip from '@mui/material/Chip'
 import Button from '@mui/material/Button'
-import IconButton from '@mui/material/IconButton'
-import AddIcon from '@mui/icons-material/Add'
-import RemoveIcon from '@mui/icons-material/Remove'
 import CardActions from '@mui/material/CardActions'
 import CardContent from '@mui/material/CardContent'
 import Snackbar from '@mui/material/Snackbar'
-import { Stack } from '@mui/material'
+import Stack from '@mui/material/Stack'
+import MuiAlert from '@mui/material/Alert'
+
+const Alert = forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  })
 
 const ShopItemCard = (item) => {
 
