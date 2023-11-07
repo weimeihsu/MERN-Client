@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, forwardRef } from 'react'
 import { useDispatch } from 'react-redux'
 import { addToCart } from '../features/shopItemSlice'
 import Typography from '@mui/material/Typography'
@@ -25,10 +25,7 @@ const ShopItemCard = (item) => {
         horizontal: 'center'
     })
     const {open, vertical, horizontal} = snackBarState
-    const incrementCounter = () => setCount(count + 1)
-    const decrementCounter = () => {
-        if(count > 0){setCount(count - 1)}
-    }
+    
     const handleClose = () => {
         setSnackbarState({...snackBarState, open: false})
     }
@@ -55,8 +52,9 @@ const ShopItemCard = (item) => {
                         key={vertical + horizontal}
                         autoHideDuration={1000}
                         onClose={handleClose}
-                        message="Item Added!"
-                    />
+                    >
+                        <Alert severity="success">This is a success message!</Alert>
+                    </Snackbar>
                 </Stack>
             </CardActions>
         </Card>
