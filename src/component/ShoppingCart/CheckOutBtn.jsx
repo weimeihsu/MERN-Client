@@ -1,11 +1,13 @@
+import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 import IconButton from '@mui/material/IconButton'
 
 const CheckOutBtn = () => {
+    const navigate = useNavigate()
     const { amount } = useSelector(store=>store.shopItemSlice)
     const handleCheckOut = () => {
-        console.log('checkout')
+        navigate('/online-store/checkout')
     }
     return ( 
     <>

@@ -5,7 +5,7 @@ import MenuIcon from '@mui/icons-material/Menu'
 import IconButton from '@mui/material/IconButton'
 import Stack from '@mui/material/Stack'
 import ProfileMenu from './ProfileMenu'
-import CheckOutBtn from './CheckOutBtn'
+import CheckOutBtn from '../component/ShoppingCart/CheckOutBtn'
 
 
 import { styled } from '@mui/material/styles'

@@ -5,8 +5,8 @@ import { fetchShopItems } from '../../features/shopItemSlice'
 import Container from '@mui/material/Container'
 import Stack from '@mui/material/Stack'
 
-import CategoryChip from '../../component/CategoryChip'
-import ShopItemCard from '../../component/ShopItemCard'
+import CategoryChip from '../../component/ShoppingCart/CategoryChip'
+import ShopItemCard from '../../component/ShoppingCart/ShopItemCard'
 const OnlineStore = () => {
     const dispatch = useDispatch()
 

@@ -4,10 +4,11 @@ import api from '../axois/api'
 const initialState = {
     shopItems:[],
     shopItemsLocal:[
-        {_id:1, name:'Harry potter', price:100, category:'book'},
-        {_id:2, name:'iPhone 15', price:1000, category:'3C'},
-        {_id:3, name:'Treats', price:120, category:'pets'},
+        {_id:1, name:'Harry potter', price:100, category:'book', inventory:3},
+        {_id:2, name:'iPhone 15', price:1000, category:'3C', inventory:12},
+        {_id:3, name:'Treats', price:120, category:'pets', inventory:0},
     ],
+    countList:[1,2,3,4,5,6,7,8,9,10],
     quantityInCart:33,
     sum:100,
     itemsInCart:[{
