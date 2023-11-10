@@ -15,7 +15,6 @@ const OnlineStore = () => {
     // },[])
     const { shopItems, shopItemsLocal, categories } = useSelector(store => store.shopItemSlice)
     const [filter, setFilter] = useState(categories)
-
     return ( 
         <Container>
             <h1>Online Store</h1>

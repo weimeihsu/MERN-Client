@@ -21,9 +21,10 @@ const Alert = forwardRef(function Alert(props, ref) {
 const ShopItemCard = (item) => {
 
     const dispatch = useDispatch()
-    const [count, setCount] = useState(1)
+    const [buyCount, setBuyCount] = useState(1)
+    
     const handleChange = (e) => {
-        setCount(e.target.value)
+        setBuyCount(e.target.value)
     }
     const [snackBarState, setSnackbarState] = useState({
         open:false,
@@ -35,11 +36,18 @@ const ShopItemCard = (item) => {
     const handleClose = () => {
         setSnackbarState({...snackBarState, open: false})
     }
-    const handleAddToCart = (shopItem, count, newSnackState) => {
-        dispatch(addToCart({shopItem, count}))
-        setCount(0)
+    const handleAddToCart = (shopItem, newSnackState) => {
+        const theItem = {
+            _id: shopItem._id,
+            name: shopItem.name,
+            price: shopItem.price, 
+            inventory: 2
+        }
+        dispatch(addToCart({shopItem:theItem}))
+        setBuyCount(1)
         setSnackbarState({...newSnackState, open: true})
     }
+   
     return (
         <Card className='card-gap' sx={{ display: 'flex', backgroundColor: '#badcd6' }} elevation={0}>
             <CardContent sx={{ flexGrow:1}}>   
@@ -50,8 +58,8 @@ const ShopItemCard = (item) => {
             <CardActions>
                 <Stack spacing={2} alignItems="flex-end">
                     <Typography variant="h6">${item.price}</Typography>
-                    <CountSelect count={count} handleChange={handleChange}/>
-                    <Button size="small" variant="contained" color="secondary" onClick={()=>handleAddToCart(item, count, { vertical: 'top', horizontal: 'center' })}>Add to Cart</Button>
+                    <CountSelect buyCount={buyCount} handleChange={handleChange} />
+                    <Button size="small" variant="contained" color="secondary" onClick={()=>handleAddToCart(item, { vertical: 'top', horizontal: 'center' })}>Add to Cart</Button>
                     <Snackbar
                         anchorOrigin={{ vertical, horizontal }}
                         open={open}

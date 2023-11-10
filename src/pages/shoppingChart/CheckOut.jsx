@@ -1,6 +1,6 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { addToCart } from '../../features/shopItemSlice'
+import { addToCart, increment, decrement, deleteCartItem } from '../../features/shopItemSlice'
 import Typography from '@mui/material/Typography'
 import Card from '@mui/material/Card'
 import Button from '@mui/material/Button'
@@ -11,33 +11,33 @@ import CardContent from '@mui/material/CardContent'
 import Stack from '@mui/material/Stack'
 
 const CheckOut = () => {
-    const { itemsInCart } = useSelector(store => store.shopItemSlice)
+    const { currentCart } = useSelector(store => store.shopItemSlice)
     const dispatch = useDispatch()
-    const [count, setCount] = useState(0)
-    const incrementCounter = () => {
-        setCount(count + 1)
+    
+    const incrementCounter = (item) => {
+        dispatch(increment({count:item.quantity, id:item._id}))
     }
-    const decrementCounter = () => {
-        if(count > 1){
-            setCount(count - 1)}
+    const decrementCounter = (item) => {
+        dispatch(decrement({count:item.quantity, id:item._id}))
     }
-
-    const RevomeFromCart = (shopItem) => {
-       console.log(shopItem+'item removed')
+    const RevomeFromCart = (item) => {
+        dispatch(deleteCartItem({id:item._id}))
     }
+    
     return (
         <>
-         {itemsInCart && itemsInCart.map(item=>(
+         {currentCart && currentCart.map(item=>(
             <Card className='card-gap' elevation={0} key={item._id}>
             <CardContent sx={{width:'100%'}}> 
             <Stack spacing={2} direction="row" justifyContent="space-between">
                 <Typography variant="h5" component="div">{item.name}</Typography>
                 <Typography variant="h6">${item.price}</Typography>
+                
                 <Stack direction="row" spacing={2} alignItems="center">
-                    <IconButton size="small" variant="outlined" disabled={count === 1} onClick={decrementCounter}><RemoveIcon fontSize="inherit"/></IconButton>
-                    <p>{count}</p>
-                    <IconButton size="small" variant="outlined" onClick={incrementCounter}><AddIcon fontSize="inherit"/></IconButton>
-                    <Button size="small" variant="outlined" color="secondary" onClick={()=>RevomeFromCart(item, count)}>Remove</Button>
+                    <IconButton size="small" variant="outlined" disabled={item.quantity === 1} onClick={()=>decrementCounter(item)}><RemoveIcon fontSize="inherit"/></IconButton>
+                    <p>{item.quantity}</p>
+                    <IconButton size="small" variant="outlined" onClick={()=>incrementCounter(item)}><AddIcon fontSize="inherit"/></IconButton>
+                    <Button size="small" variant="outlined" color="secondary" onClick={()=>RevomeFromCart(item)}>Remove</Button>
                 </Stack>
             </Stack>  
             </CardContent>
