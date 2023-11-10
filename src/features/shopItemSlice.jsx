@@ -76,7 +76,7 @@ export const shopItemSlice = createSlice({
             const { shopItem } = action.payload
             const inCartId = state.currentCart.find(item=>item._id===shopItem._id)
             if(inCartId === undefined){
-                state.records = [...state.currentCart, shopItem]
+                state.currentCart = [...state.currentCart, shopItem]
             }else{
                 state.currentCart = state.currentCart.map(
                     item => item._id === shopItem._id ?
