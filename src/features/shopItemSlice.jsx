@@ -9,11 +9,10 @@ const initialState = {
         {_id:'afae', name:'Treats', price:120, category:'pets', inventory:0},
     ],
     currentCart:[
-        {_id:'afae23', name:'Harry potter',price: 100, quantity:2},
-        {_id:'afae',name:'Treats',price: 120, quantity:4}
+        
     ],
     countList:[1,2,3,4,5],
-    quantityInCart:5,
+    quantityInCart:null,
     totalCost:100,
     // inventoryToList:[[1,2,3],[1,2],[]],
     filteredItems:[],
