@@ -6,7 +6,6 @@ import Container from '@mui/material/Container'
 
 const Movies = () => {
     return ( 
-        <>
         <Container>
             <Box sx={{ flexGrow: 1 }}>
                 <Grid container spacing={4}>
@@ -20,7 +19,6 @@ const Movies = () => {
                 </Grid>
             </Box>
         </Container>
-        </>
      );
 }
  

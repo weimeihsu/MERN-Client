@@ -1,10 +1,12 @@
 import MuxPlayer from '@mux/mux-player-react'
 import Container from '@mui/material/Container'
+import TagsInputs from '../component/TagsInput';
 const MuxVideo = () => {
   return ( 
     <Container>
     <h1>Mux Video Player</h1>
-    <MuxPlayer
+    <TagsInputs/>
+    {/* <MuxPlayer
       streamType="on-demand"
       playbackId="UQwm9kwBtupE5W5IY001qSJqV01TpxuJOWkhY1T5FjSGE"
       metadata={{
@@ -12,7 +14,7 @@ const MuxVideo = () => {
         video_title: "Test video title",
         viewer_user_id: "user-id-007",
       }}
-    />
+    /> */}
     </Container>
    );
 }

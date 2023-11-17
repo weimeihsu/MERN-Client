@@ -13,10 +13,8 @@ import Stack from '@mui/material/Stack'
 import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl'
 import Select from '@mui/material/Select'
-import TextField from '@mui/material/TextField'
 import MuiAlert from '@mui/material/Alert'
-
-import CountSelect from './CountSelect'
+import Box from '@mui/material/Box'
 
 const Alert = forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -74,8 +72,8 @@ const ShopItemCard = (item) => {
             <CardActions>
                 <Stack spacing={2} alignItems="flex-end">
                     <Typography variant="h6">${item.price}</Typography>
-                    <form onSubmit={handleSubmit}>
-                    <FormControl sx={{ m: 1, minWidth: 80 }} size="small">
+                    <Box component="form" onSubmit={handleSubmit}>
+                    <FormControl sx={{  minWidth: 80 }} size="small">
                         <Select
                         value={buyCount}
                         onChange={handleChange}
@@ -87,7 +85,7 @@ const ShopItemCard = (item) => {
                         </Select>
                     </FormControl>
                     <Button onClick={()=>handleAddToCart({ vertical: 'top', horizontal: 'center' })} type='submit' size="small" variant="contained" color="secondary">Add to Cart</Button>
-                    </form>
+                    </Box>
                     <Snackbar
                         anchorOrigin={{ vertical, horizontal }}
                         open={open}

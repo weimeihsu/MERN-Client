@@ -62,6 +62,11 @@ export const theme = createTheme({
                     }
                 }
             ]
+        },
+        MuiFormControl:{
+            styleOverrides:{
+                root: { margin: '0px' }
+            }
         }
         
     }
