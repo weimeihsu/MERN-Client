@@ -11,10 +11,21 @@ export const colorToken = {
         main: '#ff9100',
         light:'#ffa733',
         dark:'#b26500'
-    }
+    },
+    
 }
-
 export const theme = createTheme({ 
+    typography: {
+        h5:{
+            fontSize:'1.5rem',
+        },
+        h6:{
+            fontSize:'1rem',
+        },
+        subtitle1: {
+            fontSize: '0.875rem',
+          },
+    },
     palette: {
         primary: {
             main: colorToken.primary.main,
@@ -24,8 +35,8 @@ export const theme = createTheme({
         },
         secondary:{
             main: colorToken.secondary.main,
-            light:colorToken.secondary.light,
-            dark:colorToken.secondary.dark
+            light: colorToken.secondary.light,
+            dark: colorToken.secondary.dark
         }
     },
     components:{
@@ -33,6 +44,8 @@ export const theme = createTheme({
             styleOverrides: {
                 root:{
                     borderRadius:4,
+                    color: colorToken.primary.dark,
+                    padding: '2px 16px',
                     '&:hover': {
                         backgroundColor: colorToken.primary.main,
                         color: 'white',
@@ -46,6 +59,13 @@ export const theme = createTheme({
                         }
                       }  
                 },
+            }
+        },
+        MuiMenuItem:{
+            styleOverrides:{
+                root:{
+                    color: colorToken.primary.dark,
+                }
             }
         },
         MuiCardActions: {

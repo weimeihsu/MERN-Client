@@ -1,7 +1,7 @@
 import { NavLink, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { useState } from 'react'
-import { backToMain } from '../features/navListSlice'
+// import { backToMain } from '../features/navListSlice'
 
 import Divider from '@mui/material/Divider'
 import Toolbar from '@mui/material/Toolbar'
@@ -23,7 +23,7 @@ const SiteLevelMenu = ({selectedSiteObj}) => {
     setSelectedID(id)
     }
     const handleBackToMain = () => {
-      dispatch(backToMain())
+      // dispatch(backToMain())
       navigate("./sitelist")
     }
     return ( 

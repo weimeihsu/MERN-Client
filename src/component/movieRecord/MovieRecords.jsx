@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { fetchRecords, deleteRecord } from '../features/recordSlice'
+import { fetchRecords, deleteRecord } from '../../features/recordSlice'
 
 import Card from '@mui/material/Card'
 import CardActions from '@mui/material/CardActions'
@@ -13,7 +13,7 @@ import Typography from '@mui/material/Typography'
 import Chip from '@mui/material/Chip'
 
 import OpenModal from './OpenModal'
-import api from '../axois/api'
+import api from '../../axois/api'
 
 const movieRecords = () => {
     const dispatch = useDispatch()

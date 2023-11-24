@@ -18,7 +18,7 @@ const Routers = () => {
             <Route path='muxvdo' element={<MuxVideo/>}/>
             <Route path="site-domain/:siteID/*" element={<SiteRoutes/>}/>
             <Route path='online-store' element={<OnlineStore/>}/>
-            <Route path='online-store/*' element={<CheckOutRoutes/>}/>
+            <Route path='checkout/*' element={<CheckOutRoutes/>}/>
         </Routes>
     )
 }

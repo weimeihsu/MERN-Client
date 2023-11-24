@@ -7,7 +7,7 @@ import CheckOutSuccess from '../pages/shoppingChart/CheckOutSuccess'
 const CheckOutRoutes = () => {
     return ( 
         <Routes>
-            <Route path="checkout" element={<CheckOut/>}/>
+            <Route index element={<CheckOut/>}/>
             <Route path="checkout-failed" element={<CheckOutFailed/> } />
             <Route path="checkout-success" element={<CheckOutSuccess/> } />   
         </Routes>

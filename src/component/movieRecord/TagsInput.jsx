@@ -1,9 +1,12 @@
-import Box from '@mui/material/Box'
+
 import FormControl from '@mui/material/FormControl'
 import InputLabel from '@mui/material/InputLabel'
 import OutlinedInput from '@mui/material/OutlinedInput'
 import FormHelperText from '@mui/material/FormHelperText'
 import Chip from '@mui/material/Chip'
+import IconButton from '@mui/material/IconButton'
+import DeleteIcon from '@mui/icons-material/Delete'
+import CreateIcon from '@mui/icons-material/Create'
 import Stack from '@mui/material/Stack'
 import { useState } from 'react'
 
@@ -25,11 +28,19 @@ const TagsInputs = () => {
     }
     return ( 
         <>
-        <Stack direction="row" spacing={1}>
             {category.map((item,idx)=>(
-                <Chip key={idx} label={item} onDelete={()=>handleDelete(idx)} />
+                <Stack key={idx} direction="row" justifyContent="space-between">
+                    <Chip label={item}/>
+                    <Stack direction="row" spacing={1}>
+                        <IconButton aria-label="delete" size="small">
+                        <DeleteIcon fontSize="inherit" />
+                        </IconButton>
+                        <IconButton aria-label="createIcon" size="small">
+                        <CreateIcon fontSize="inherit" />
+                        </IconButton>
+                    </Stack>
+                </Stack>
             ))} 
-        </Stack>
         
         <FormControl size="small" sx={{marginTop:1}}>
             {/* <InputLabel htmlFor="component-outlined">Category</InputLabel> */}

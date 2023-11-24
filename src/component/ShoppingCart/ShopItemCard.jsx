@@ -1,6 +1,6 @@
 import { useState, forwardRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { addToCart } from '../../features/shopItemSlice'
+import { addToCart, sumCost } from '../../features/shopItemSlice'
 
 import Typography from '@mui/material/Typography'
 import Card from '@mui/material/Card'
@@ -34,9 +34,11 @@ const ShopItemCard = (item) => {
             _id: selectedItem._id,
             name: selectedItem.name,
             price: selectedItem.price, 
-            quantity: buyCount 
+            quantity: buyCount,
+            subCost: selectedItem.price*buyCount
         }
         dispatch(addToCart({shopItem:theItem}))
+        dispatch(sumCost())
         setBuyCount(1)
     }
     
@@ -51,26 +53,17 @@ const ShopItemCard = (item) => {
         setSnackbarState({...snackBarState, open: false})
     }
     const handleAddToCart = (newSnackState) => {
-        // const theItem = {
-        //     _id: shopItem._id,
-        //     name: shopItem.name,
-        //     price: shopItem.price, 
-        //     quantity: buyCount
-        // }
-        // dispatch(addToCart({shopItem:theItem}))
-        
         setSnackbarState({...newSnackState, open: true})
     }
    
     return (
         <Card className='card-gap' sx={{ display: 'flex', backgroundColor: '#badcd6' }} elevation={0}>
             <CardContent sx={{ flexGrow:1}}>   
-                <Typography variant="h5" component="div">{item.name}</Typography>
-                <Chip size="small" label={item.category}/>
-                
+                <Typography variant="h6" sx={{fontWeight: 'bold'}} >{item.name}</Typography>
+                <Chip size="small" label={item.category}/>  
             </CardContent>
             <CardActions>
-                <Stack spacing={2} alignItems="flex-end">
+                <Stack spacing={2} >
                     <Typography variant="h6">${item.price}</Typography>
                     <Box component="form" onSubmit={handleSubmit}>
                     <FormControl sx={{  minWidth: 80 }} size="small">
@@ -84,7 +77,7 @@ const ShopItemCard = (item) => {
                         ))}
                         </Select>
                     </FormControl>
-                    <Button onClick={()=>handleAddToCart({ vertical: 'top', horizontal: 'center' })} type='submit' size="small" variant="contained" color="secondary">Add to Cart</Button>
+                    <Button onClick={()=>handleAddToCart({ vertical: 'top', horizontal: 'center' })} sx={{marginLeft:1}} type='submit' size="small" variant="contained" color="secondary">Add to Cart</Button>
                     </Box>
                     <Snackbar
                         anchorOrigin={{ vertical, horizontal }}

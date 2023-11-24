@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { addRecord, fetchRecords, updateRecord } from '../features/recordSlice'
+import { addRecord, fetchRecords, updateRecord } from '../../features/recordSlice'
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
 import InputLabel from '@mui/material/InputLabel'
@@ -11,7 +11,7 @@ import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
-import api from '../axois/api'
+import api from '../../axois/api'
 
 const MovieForm = ({recordID, recordTitle, recordCategory, formTitle, btnText, closeForm}) => {
     const dispatch = useDispatch()
@@ -98,11 +98,7 @@ const MovieForm = ({recordID, recordTitle, recordCategory, formTitle, btnText, c
                 </Stack>
                 {error && <div>{error}</div>}
             </Grid>
-        </Grid>
-
-            
-            
-                
+        </Grid>  
         </form>
         </>
     );

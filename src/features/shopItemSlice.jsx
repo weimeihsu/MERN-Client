@@ -8,11 +8,10 @@ const initialState = {
         {_id:'2', name:'iPhone 15', price:1000, category:'3C', inventory:12},
         {_id:'afae', name:'Treats', price:120, category:'pets', inventory:0},
     ],
-    currentCart:[
-        
-    ],
+    currentCart:[],
     countList:[1,2,3,4,5],
     quantityInCart:null,
+    subCost:30,
     totalCost:100,
     // inventoryToList:[[1,2,3],[1,2],[]],
     filteredItems:[],
@@ -34,11 +33,11 @@ export const fetchShopItems = createAsyncThunk('shopItems/fetchShopItems', async
     }
 })
 // const numbers = arrayRange(1, item.inventory, 1)
-export const arrayRange = (start, stop, step) =>
-    Array.from(
-    { length: (stop - start) / step + 1 },
-    ( value, index ) => start + index * step
-)
+// export const arrayRange = (start, stop, step) =>
+//     Array.from(
+//     { length: (stop - start) / step + 1 },
+//     ( value, index ) => start + index * step
+// )
 export const shopItemSlice = createSlice({
     name:'shopItems',
     initialState,
@@ -47,22 +46,34 @@ export const shopItemSlice = createSlice({
             state.quantityInCart = [...state.currentCart].reduce((n, {quantity})=> n + quantity, 0)
         },
         increment:(state, action)=>{
-            const { count, id } = action.payload
+            const { count, id, subcost } = action.payload
             // const { theRecord, id } = action.payload
             const itemIdx = state.currentCart.findIndex(item => item._id === id)
-            const updatedItem = {...state.currentCart[itemIdx], quantity:count+1}
+            const updatedItem = {...state.currentCart[itemIdx], quantity:count+1, subCost:subcost}
             const newArry = [...state.currentCart] //copy records array
             newArry[itemIdx] = updatedItem
             state.currentCart = newArry
+
+            const sum = newArry.reduce((accumulator, object) => {
+                return accumulator + object.subCost;
+              }, 0)
+            
+            state.totalCost = sum
         },
         decrement:(state, action)=>{
-            const { count, id } = action.payload
+            const { count, id, subcost } = action.payload
             // const { theRecord, id } = action.payload
             const itemIdx = state.currentCart.findIndex(item => item._id === id)
-            const updatedItem = {...state.currentCart[itemIdx], quantity:count-1}
+            const updatedItem = {...state.currentCart[itemIdx], quantity:count-1, subCost:subcost}
             const newArry = [...state.currentCart] //copy records array
             newArry[itemIdx] = updatedItem
-            state.currentCart = newArry
+            state.currentCart = newArry   
+        },
+        sumCost: (state)=>{
+            const newArry = [...state.currentCart]
+            state.totalCost = newArry.reduce((accumulator, object) => {
+                return accumulator + object.subCost;
+              }, 0)
         },
         filter: (state, action) => {
             const { shopItemID } = action.payload
@@ -79,19 +90,11 @@ export const shopItemSlice = createSlice({
             }else{
                 state.currentCart = state.currentCart.map(
                     item => item._id === shopItem._id ?
-                    {...item, quantity: item.quantity + 1} :
+                    {...item, quantity: item.quantity + shopItem.quantity, subCost: item.subCost+shopItem.subCost} :
                     item
                 )
             }
-            // const newShopItem ={...shopItem, buyCount: buyCount}
-            // state.currentCart=state.currentCart.push(newShopItem)
-            
         },
-       
-        // addRecord: (state, action)=>{
-        //     const { newRecord } = action.payload
-        //     state.records = [newRecord, ...state.records]
-        // },
         deleteCartItem: (state, action)=>{
             const { id } = action.payload
             state.currentCart = state.currentCart.filter(item => item._id !== id)
@@ -121,7 +124,7 @@ export const shopItemSlice = createSlice({
     }
 })
 
-export const { addToCart, filter, increment, decrement, deleteCartItem, updateTotalQty } = shopItemSlice.actions
+export const { addToCart, filter, increment, decrement, deleteCartItem, updateTotalQty, sumCost } = shopItemSlice.actions
 // export const { selectAllRecords } = state => state.recordsState.records
 // export const { getFetchStatus } = state => state.recordsState.status
 // export const { getFetchError } = state => state.recordsState.error
