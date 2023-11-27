@@ -33,14 +33,29 @@ const CheckOut = () => {
         dispatch(deleteCartItem({id:item._id}))
         dispatch(sumCost())
     }
-    const handlePayment = () =>{
-        console.log('pay')
+    const handlePayment = async () => {
+        console.log(currentCart)
+        await fetch('http://localhost:8080/checkout', {
+            method: "POST",
+            headers:{
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({currentCart})
+        }).then(res=>{
+            if(res.ok)return res.json()
+            
+        }).then(({url})=>{
+            window.location = url
+        })
     }
     
     return (
-        <Container>
-            <Button size="small" variant="contained">
-            <Link to="/online-store">Continue Shopping</Link></Button>
+        <Container sx={{p:2, backgroundColor:'grey'}}>
+            <Stack spacing={2} direction="row" justifyContent="space-between">
+                <Typography variant="h5">Check Out</Typography>
+               
+                
+            </Stack>
          {currentCart && currentCart.map(item=>(
             <Card className='card-gap' elevation={0} key={item._id}>
             <CardContent sx={{width:'100%'}}> 
@@ -62,8 +77,11 @@ const CheckOut = () => {
         ))}
         <Divider/>
         <Stack direction="row" alignItems="center" justifyContent="space-between" spacing={2} m={2}>
+            <Button size="small" variant="contained">
+                <Link to="/online-store">Continue Shopping</Link>
+            </Button>
             <Typography variant="subtitle1">Total Cost :</Typography>
-            <Typography variant="subtitle1" sx={{fontWeight:'bold'}}>{totalCost}</Typography>
+            <Typography variant="subtitle1" sx={{fontWeight:'bold'}}>${totalCost}</Typography>
             <Button size="small" variant="contained" onClick={handlePayment}>Next</Button>
         </Stack> 
         </Container>

@@ -1,12 +1,14 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import api from '../axois/api'
-
+//  Cat Treats 1 Pack = price_1OGyYdGpkDAKt64pvsGLtsz3
+//  iPhone 15 = price_1OGyY3GpkDAKt64pV6V5OZxU
+//  Harry Potter = price_1OGyVwGpkDAKt64pSiyDBo7W
 const initialState = {
     shopItems:[],
     shopItemsLocal:[
-        {_id:'afae23', name:'Harry potter', price:100, category:'book', inventory:3},
-        {_id:'2', name:'iPhone 15', price:1000, category:'3C', inventory:12},
-        {_id:'afae', name:'Treats', price:120, category:'pets', inventory:0},
+        {_id:'price_1OGyVwGpkDAKt64pSiyDBo7W', name:'Harry potter', price:100, category:'book', inventory:3},
+        {_id:'price_1OGyY3GpkDAKt64pV6V5OZxU', name:'iPhone 15', price:799, category:'3C', inventory:12},
+        {_id:'price_1OGyYdGpkDAKt64pvsGLtsz3', name:'Cat Treats', price:120, category:'pets', inventory:0},
     ],
     currentCart:[],
     countList:[1,2,3,4,5],
