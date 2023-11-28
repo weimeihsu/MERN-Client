@@ -11,6 +11,7 @@ const initialState = {
         {_id:'price_1OGyYdGpkDAKt64pvsGLtsz3', name:'Cat Treats', price:120, category:'pets', inventory:0},
     ],
     currentCart:[],
+    // properties: _id, name, price, quantity, subCost
     countList:[1,2,3,4,5],
     quantityInCart:null,
     subCost:30,

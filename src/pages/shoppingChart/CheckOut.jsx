@@ -12,6 +12,7 @@ import RemoveIcon from '@mui/icons-material/Remove'
 import CardContent from '@mui/material/CardContent'
 import Stack from '@mui/material/Stack'
 import Divider from '@mui/material/Divider'
+import api from '../../axois/api'
 
 const CheckOut = () => {
     const { currentCart, totalCost } = useSelector(store => store.shopItemSlice)
@@ -33,28 +34,23 @@ const CheckOut = () => {
         dispatch(deleteCartItem({id:item._id}))
         dispatch(sumCost())
     }
-    const handlePayment = async () => {
+    const handleCheckOut = async () => {
         console.log(currentCart)
-        await fetch('http://localhost:8080/checkout', {
-            method: "POST",
-            headers:{
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({currentCart})
-        }).then(res=>{
-            if(res.ok)return res.json()
-            
-        }).then(({url})=>{
-            window.location = url
-        })
+        try{
+            const result = await api.post('/api/checkout', currentCart)
+            // console.log(result) 
+            if(result.data.url){
+                window.location.href=result.data.url
+            }
+        }catch(err){
+            err.message
+        }
     }
     
     return (
         <Container sx={{p:2, backgroundColor:'grey'}}>
             <Stack spacing={2} direction="row" justifyContent="space-between">
                 <Typography variant="h5">Check Out</Typography>
-               
-                
             </Stack>
          {currentCart && currentCart.map(item=>(
             <Card className='card-gap' elevation={0} key={item._id}>
@@ -82,7 +78,7 @@ const CheckOut = () => {
             </Button>
             <Typography variant="subtitle1">Total Cost :</Typography>
             <Typography variant="subtitle1" sx={{fontWeight:'bold'}}>${totalCost}</Typography>
-            <Button size="small" variant="contained" onClick={handlePayment}>Next</Button>
+            <Button size="small" variant="contained" onClick={handleCheckOut}>Next</Button>
         </Stack> 
         </Container>
     );
