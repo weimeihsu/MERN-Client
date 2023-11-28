@@ -68,12 +68,12 @@ export const theme = createTheme({
                 }
             }
         },
-        MuiCardActions: {
+        MuiCardActions:{
             styleOverrides:{
                 root: { padding: '16px' }
             }
         },
-        MuiIconButton: {
+        MuiIconButton:{
             variants: [
                 {
                     props: { variant: 'outlined' },

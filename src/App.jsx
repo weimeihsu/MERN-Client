@@ -5,6 +5,7 @@ import { useLocation } from 'react-router-dom'
 import Box from '@mui/material/Box'
 import { styled, ThemeProvider } from '@mui/material/styles'
 import { theme } from './theme'
+import Main from './customStyle/mainBody'
 
 import NavBar from './component/NavBar'
 import LeftDrawer from './component/LeftDrawer'
@@ -12,22 +13,22 @@ import LeftDrawer from './component/LeftDrawer'
 
 const drawerWidth = 240;
 
-const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })
-  (({ theme, open }) => ({
-  flexGrow: 1,
-  transition: theme.transitions.create('margin', {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  marginLeft: `-${drawerWidth}px`,
-  ...(open && {
-      transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-    marginLeft: 0,
-  }),
-}));
+// const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })
+//   (({ theme, open }) => ({
+//   flexGrow: 1,
+//   transition: theme.transitions.create('margin', {
+//     easing: theme.transitions.easing.sharp,
+//     duration: theme.transitions.duration.leavingScreen,
+//   }),
+//   marginLeft: `-${drawerWidth}px`,
+//   ...(open && {
+//       transition: theme.transitions.create('margin', {
+//       easing: theme.transitions.easing.easeOut,
+//       duration: theme.transitions.duration.enteringScreen,
+//     }),
+//     marginLeft: 0,
+//   }),
+// }));
 
 const App = () => {
   const location = useLocation()

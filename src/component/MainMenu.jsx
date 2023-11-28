@@ -41,7 +41,7 @@ const MainMenu = () => {
             {mainMenu.map(navitem => (
               <Link to={navitem.path} key={navitem.id}>
                 <ListItem disablePadding>
-                  <ListItemButton selected={selected === navitem.path} onClick={()=>handlesSelected(navitem.id)} >
+                  <ListItemButton selected={selected === navitem.id} onClick={()=>handlesSelected(navitem.id)} >
                       <ListItemText primary={navitem.name} />
                   </ListItemButton>
                 </ListItem>

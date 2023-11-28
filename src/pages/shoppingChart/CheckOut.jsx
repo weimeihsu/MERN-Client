@@ -50,7 +50,7 @@ const CheckOut = () => {
     return (
         <Container sx={{p:2, backgroundColor:'grey'}}>
             <Stack spacing={2} direction="row" justifyContent="space-between">
-                <Typography variant="h5">Check Out</Typography>
+                <h1>Check Out</h1>
             </Stack>
          {currentCart && currentCart.map(item=>(
             <Card className='card-gap' elevation={0} key={item._id}>
@@ -73,8 +73,8 @@ const CheckOut = () => {
         ))}
         <Divider/>
         <Stack direction="row" alignItems="center" justifyContent="space-between" spacing={2} m={2}>
-            <Button size="small" variant="contained">
-                <Link to="/online-store">Continue Shopping</Link>
+            <Button size="small" variant="contained" href="/online-store">
+                Continue Shopping
             </Button>
             <Typography variant="subtitle1">Total Cost :</Typography>
             <Typography variant="subtitle1" sx={{fontWeight:'bold'}}>${totalCost}</Typography>

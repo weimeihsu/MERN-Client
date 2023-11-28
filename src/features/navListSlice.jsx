@@ -5,8 +5,9 @@ const initialState = {
         {id:1, path:'/', name:'Homepage'},
         {id:2, path:'/site-domain', name:'Site List'},
         {id:3, path:'/movies', name:'Movies'},
-        {id:4, path:'/muxvdo', name:'Mux Video'},
+        {id:4, path:'/movie-editor', name:'Movie Editor'},
         {id:5, path:'/online-store', name:'Online Store'},
+        {id:6, path:'/store-editor', name:'Store Editor'},
     ],
     checkOutPage:[
         {id:1, path:'/checkout', name:'Checkout'},

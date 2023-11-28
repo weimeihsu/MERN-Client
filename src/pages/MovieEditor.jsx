@@ -4,7 +4,7 @@ import Box from '@mui/material/Box'
 import TagsInputs from '../component/movieRecord/TagsInput'
 import MovieRecords from '../component/movieRecord/MovieRecords'
 
-const MuxVideo = () => {
+const MovieEditor = () => {
   return ( 
     <Container>
         <Box sx={{ flexGrow: 1 }}>
@@ -14,7 +14,7 @@ const MuxVideo = () => {
                   <TagsInputs/>
                 </Grid>
                 <Grid item xs={6}>
-                  <h1>Current Moview List</h1>
+                  <h1>Current MovieList</h1>
                   {/* <MovieRecords/> */}
                 </Grid>
             </Grid>
@@ -23,4 +23,4 @@ const MuxVideo = () => {
    );
 }
  
-export default MuxVideo;
+export default MovieEditor;
