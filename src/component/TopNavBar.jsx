@@ -45,7 +45,7 @@ const TopNavBar = ({toggleDrawer, open}) => {
                 <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
                     Exploring
                 </Typography>
-                <Stack direction="row" spacing={2}>
+                <Stack direction="row" spacing={3}>
                   <CheckOutBtn/>
                   <ProfileMenu/>
                 </Stack>

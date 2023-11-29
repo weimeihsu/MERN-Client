@@ -64,7 +64,7 @@ const MovieForm = ({recordID, recordTitle, recordCategory, formTitle, btnText, c
     return ( 
         <>
         <h1>{formTitle}</h1>
-        <form onSubmit={handleSubmit}>
+        <Box component="form" onSubmit={handleSubmit}>
 
         <Grid sx={{ flexGrow: 1 }} container spacing={2}>
         {recordID && 
@@ -99,7 +99,7 @@ const MovieForm = ({recordID, recordTitle, recordCategory, formTitle, btnText, c
                 {error && <div>{error}</div>}
             </Grid>
         </Grid>  
-        </form>
+        </Box>
         </>
     );
 }
