@@ -1,17 +1,9 @@
 import Routers from './routers/Routers'
-import { useState } from 'react'
-import { useLocation } from 'react-router-dom'
-
-import Box from '@mui/material/Box'
-import { styled, ThemeProvider } from '@mui/material/styles'
-import { theme } from './theme'
-import Main from './customStyle/mainBody'
-
-import NavBar from './component/NavBar'
-import LeftDrawer from './component/LeftDrawer'
+import { RouterProvider } from 'react-router-dom'
 
 
-const drawerWidth = 240;
+
+
 
 // const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })
 //   (({ theme, open }) => ({
@@ -31,27 +23,10 @@ const drawerWidth = 240;
 // }));
 
 const App = () => {
-  const location = useLocation()
-  const [open, setOpen] = useState(true);
-  const toggleDrawer = () => {
-    setOpen(!open);
-  }
-  const hideMenu =() =>{
-    const { pathname } = location
-    return !pathname.includes("/checkout")
-  }
   return (
-    <ThemeProvider theme={theme}>
-    <Box sx={{ display: 'flex' }}>
-      { hideMenu() && [
-        <LeftDrawer key={1} drawerWidth={drawerWidth} toggleDrawer={toggleDrawer} open={open}/>, <NavBar key={2} toggleDrawer={toggleDrawer} open={open}/>
-      ]}
-      <Main open={open} sx={{paddingTop: hideMenu() ? theme.spacing(8): null}}>
-          <Routers/>
-      </Main>
-    </Box>
-    </ThemeProvider>
+      <RouterProvider router={Routers}/>
   )
 }
 
 export default App
+

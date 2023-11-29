@@ -1,10 +1,9 @@
 import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
 import { increment, decrement, deleteCartItem, sumCost } from '../../features/shopItemSlice'
 import Typography from '@mui/material/Typography'
 import Card from '@mui/material/Card'
-import Container from '@mui/material/Container'
 import Button from '@mui/material/Button'
 import IconButton from '@mui/material/IconButton'
 import AddIcon from '@mui/icons-material/Add'
@@ -12,11 +11,13 @@ import RemoveIcon from '@mui/icons-material/Remove'
 import CardContent from '@mui/material/CardContent'
 import Stack from '@mui/material/Stack'
 import Divider from '@mui/material/Divider'
+import Grid from '@mui/material/Grid'
 import api from '../../axois/api'
 
 const CheckOut = () => {
     const { currentCart, totalCost } = useSelector(store => store.shopItemSlice)
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     
     const incrementCounter = (item) => {
         dispatch(increment({count:item.quantity, 
@@ -46,9 +47,13 @@ const CheckOut = () => {
             err.message
         }
     }
+    const backToStore = () => {
+        navigate('/online-store')
+    }
     
     return (
-        <Container sx={{p:2, backgroundColor:'grey'}}>
+        <Grid container sx={{p:2}}>
+            <Grid item xs={8}>
             <Stack spacing={2} direction="row" justifyContent="space-between">
                 <h1>Check Out</h1>
             </Stack>
@@ -73,14 +78,15 @@ const CheckOut = () => {
         ))}
         <Divider/>
         <Stack direction="row" alignItems="center" justifyContent="space-between" spacing={2} m={2}>
-            <Button size="small" variant="contained" href="/online-store">
+            <Button size="small" variant="contained" onClick={backToStore}>
                 Continue Shopping
             </Button>
             <Typography variant="subtitle1">Total Cost :</Typography>
             <Typography variant="subtitle1" sx={{fontWeight:'bold'}}>${totalCost}</Typography>
             <Button size="small" variant="contained" onClick={handleCheckOut}>Next</Button>
         </Stack> 
-        </Container>
+            </Grid>
+        </Grid>
     );
 }
  

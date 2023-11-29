@@ -14,7 +14,7 @@ export const colorToken = {
     },
     
 }
-export const theme = createTheme({ 
+export const mainTheme = createTheme({ 
     typography: {
         h5:{
             fontSize:'1.5rem',
