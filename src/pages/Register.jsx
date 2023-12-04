@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
@@ -10,8 +9,7 @@ import IconButton from '@mui/material/IconButton'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 
 
-const SignUp = () => {
-    const navigate = useNavigate()
+const Register = () => {
     const [ email, setEmail ] = useState()
     const [ password, setPassword ] = useState()
     const changeEmail = (e) => {
@@ -20,11 +18,8 @@ const SignUp = () => {
     const changePassword = (e) => {
         setPassword(e.target.value)
     }
-    const goToCreate = () => {
-        navigate('/register')
-    }
-    const backToHome = () => {
-        navigate('/homepage')
+    const backToHome = (e) =>{
+        console.log('go back home')
     }
     return ( 
         <Grid container
@@ -41,7 +36,7 @@ const SignUp = () => {
                 >
                     <ArrowBackIcon />
                 </IconButton>
-                <h1>Sign In</h1>
+                <h1>Create an Account</h1>
             </Stack>
             <Box
             component="form"
@@ -52,13 +47,13 @@ const SignUp = () => {
                 <Stack direction='column' spacing={2}>
                     <TextField size="small" id="email" label="Outlined" variant="outlined" value={email} onChange={changeEmail}/>
                     <TextField size="small" id="password" label="Outlined" variant="outlined" value={password} onChange={changePassword}/>
-                    <Button variant="contained" type='submit'>Sign In</Button>
+                    <Button variant="contained" type='submit'>Create an account</Button>
                     <Divider/>
-                    <Button onClick={goToCreate}>Create an account</Button>
+                    <Button>Sign In</Button>
                 </Stack>
             </Box>
         </Grid>
      );
 }
  
-export default SignUp
+export default Register

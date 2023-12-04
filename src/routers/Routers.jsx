@@ -1,4 +1,4 @@
-import { Routes, Route, createBrowserRouter,
+import { Route, createBrowserRouter,
     createRoutesFromElements, } from 'react-router-dom'
 import RootLayout from '../layout/RootLayout'
 import CheckOutLayout from '../layout/CheckOutLayout'
@@ -17,6 +17,7 @@ import CheckOutSuccess from '../pages/shoppingChart/CheckOutSuccess'
 import Movies from '../pages/Movies'
 import MovieEditor from '../pages/MovieEditor'
 import SignUp from '../pages/SignUp'
+import Register from '../pages/Register'
 
 const Routers = createBrowserRouter(
     createRoutesFromElements(
@@ -36,7 +37,8 @@ const Routers = createBrowserRouter(
                 <Route path="checkout-failed" element={<CheckOutFailed/> } />
                 <Route path="checkout-success" element={<CheckOutSuccess/> } />  
             </Route>
-            <Route path="SignUp" element={<SignUp/> }/>
+            <Route path="signup" element={<SignUp/> }/>
+            <Route path="register" element={<Register/> }/>
         </Route>
     )
 )

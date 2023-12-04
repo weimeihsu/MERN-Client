@@ -9,6 +9,7 @@ const initialState = {
         {id:5, path:'/online-store', name:'Online Store'},
         {id:6, path:'/store-editor', name:'Store Editor'},
         {id:7, path:'/signup', name:'Sign Up'},
+        {id:8, path:'/register', name:'Register'}
     ],
     checkOutPage:[
         {id:1, path:'/checkout', name:'Checkout'},
