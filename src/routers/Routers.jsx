@@ -16,8 +16,8 @@ import CheckOutSuccess from '../pages/shoppingChart/CheckOutSuccess'
 
 import Movies from '../pages/Movies'
 import MovieEditor from '../pages/MovieEditor'
+import LogIn from '../pages/LogIn'
 import SignUp from '../pages/SignUp'
-import Register from '../pages/Register'
 
 const Routers = createBrowserRouter(
     createRoutesFromElements(
@@ -37,8 +37,8 @@ const Routers = createBrowserRouter(
                 <Route path="checkout-failed" element={<CheckOutFailed/> } />
                 <Route path="checkout-success" element={<CheckOutSuccess/> } />  
             </Route>
+            <Route path="login" element={<LogIn/> }/>
             <Route path="signup" element={<SignUp/> }/>
-            <Route path="register" element={<Register/> }/>
         </Route>
     )
 )

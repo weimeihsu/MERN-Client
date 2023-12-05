@@ -66,8 +66,9 @@ const ShopItemCard = (item) => {
                 <Stack spacing={2} >
                     <Typography variant="h6">${item.price}</Typography>
                     <Box component="form" onSubmit={handleSubmit}>
-                    <FormControl sx={{  minWidth: 80 }} size="small">
+                    <FormControl sx={{ minWidth: 80 }} size='small'>
                         <Select
+                        sx={{height:'32px' }}
                         value={buyCount}
                         onChange={handleChange}
                         displayEmpty

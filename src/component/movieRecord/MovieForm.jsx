@@ -78,8 +78,8 @@ const MovieForm = ({recordID, recordTitle, recordCategory, formTitle, btnText, c
             </Grid>
          }
             <Grid item>
-            <TextField id="movie-name" label="Movie name" variant="outlined" size="small" sx={{mb:2}} fullWidth required onChange={changeTitle} value={title}/>
-                    <FormControl fullWidth size="small" sx={{mb:2}}>
+            <TextField id="movie-name" label="Movie name" variant="outlined" size="small" sx={{mb:2}} fullWidth onChange={changeTitle} value={title}/>
+                    <FormControl fullWidth required size="small" sx={{mb:2}}>
                         <InputLabel id="movie-category">Category</InputLabel>
                         <Select
                         labelId="label-movie-category"

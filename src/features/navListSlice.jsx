@@ -8,17 +8,20 @@ const initialState = {
         {id:4, path:'/movie-editor', name:'Movie Editor'},
         {id:5, path:'/online-store', name:'Online Store'},
         {id:6, path:'/store-editor', name:'Store Editor'},
-        {id:7, path:'/signup', name:'Sign Up'},
-        {id:8, path:'/register', name:'Register'}
+       
     ],
     checkOutPage:[
         {id:1, path:'/checkout', name:'Checkout'},
         {id:2, path:'/checkout-success', name:'Checkout Success'},
         {id:3, path:'/checkout-failed', name:'Checkout Failed'}
     ],
-    accountMenu:[
-        {path:'/profile', name:'Profile'},
-        {path:'/lougout', name:'Logout'}
+    appBar:[
+        {id:1, path:'/login', name:'Log In'},
+        {id:2, path:'/signup', name:'Sign Up'},
+    ],
+    profileMenu:[
+        {id:3, path:'/profile', name:'Profile'},
+        {id:4, path:'/lougout', name:'Logout'}
     ],
     siteLevelMenu:[
         {id:1, path:'dns', name:'DNS'},

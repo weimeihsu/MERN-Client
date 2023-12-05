@@ -83,6 +83,30 @@ export const mainTheme = createTheme({
                 }
             ]
         },
+        MuiButton:{
+            styleOverrides:{
+                root:{
+                    textTransform: 'capitalize'
+                }
+            }
+        },
+        MuiAppBar:{
+            styleOverrides:{
+                colorPrimary:{
+                    // backgroundColor:'transparent'
+                }
+            }
+        },
+        MuiSelect:{
+            styleOverrides:{
+                select:{
+                    // padding: '4px 14px'
+                },
+                root:{
+                    // padding:'4px 14px'
+                }
+            }
+        },
         MuiFormControl:{
             styleOverrides:{
                 root: { margin: '0px' }

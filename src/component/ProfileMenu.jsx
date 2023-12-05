@@ -10,7 +10,7 @@ import ListItemText from '@mui/material/ListItemText'
 import Box from '@mui/material/Box'
 
 const AccountMenu = () => {
-    const {accountMenu} = useSelector(store=>store.navListSlice)
+    const { profileMenu } = useSelector(store=>store.navListSlice)
     const [anchorElUser, setAnchorElUser] = useState(null)
 
     const handleOpenUserMenu = (event) => {
@@ -22,7 +22,7 @@ const AccountMenu = () => {
       }
     return ( 
         <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Account">
+            <Tooltip title="Profile">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0, color: 'white' }} size="large">
                     <AccountCircle/>
                 </IconButton>
@@ -43,7 +43,7 @@ const AccountMenu = () => {
             open={Boolean(anchorElUser)}
             onClose={handleCloseUserMenu}
             >
-            {accountMenu.map((accountItem, idx) => (
+            {profileMenu.map((accountItem, idx) => (
                 <NavLink to={accountItem.path} key={idx}>
                     <MenuItem onClick={handleCloseUserMenu}>
                         <ListItemText>{accountItem.name}</ListItemText>

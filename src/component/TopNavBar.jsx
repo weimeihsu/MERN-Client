@@ -6,6 +6,7 @@ import IconButton from '@mui/material/IconButton'
 import Stack from '@mui/material/Stack'
 import ProfileMenu from './ProfileMenu'
 import CheckOutBtn from './ShoppingCart/CheckOutBtn'
+import Button from '@mui/material/Button'
 
 
 import { styled } from '@mui/material/styles'
@@ -31,7 +32,7 @@ import { styled } from '@mui/material/styles'
 const TopNavBar = ({toggleDrawer, open}) => {
   
     return ( 
-        <AppBar position="fixed" open={open} sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
+        <AppBar position="fixed" open={open} sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }} elevation={0}>
             <Toolbar>
                 <IconButton
                 color="inherit"
@@ -45,9 +46,11 @@ const TopNavBar = ({toggleDrawer, open}) => {
                 <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
                     Exploring
                 </Typography>
-                <Stack direction="row" spacing={3}>
+                <Stack direction="row" alignItems="center" spacing={3}>
                   <CheckOutBtn/>
-                  <ProfileMenu/>
+                  {/* <ProfileMenu/> */}
+                  <Button color="inherit" href='/signup'>Signup</Button>
+                  <Button color="inherit" href='/login' variant='outlined'>Login</Button>
                 </Stack>
             </Toolbar>
         </AppBar>
