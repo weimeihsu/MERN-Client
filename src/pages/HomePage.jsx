@@ -1,6 +1,7 @@
+import { useState } from 'react'
+import api from '../axois/api'
 import Container from '@mui/material/Container'
 import Box from '@mui/material/Box'
-import Grid from '@mui/material/Grid'
 import Stack from '@mui/material/Stack'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
@@ -9,33 +10,51 @@ import InputLabel from '@mui/material/InputLabel'
 import Select from '@mui/material/Select'
 import MenuItem from '@mui/material/MenuItem'
 import Typography from '@mui/material/Typography'
-import { useState } from 'react'
+import Grid from '@mui/material/Grid'
+import CircularProgress from '@mui/material/CircularProgress'
+import Card from '@mui/material/Card'
+import CardMedia from '@mui/material/CardMedia'
 
 const HomePage = () => {
-     const [ imgSize, setImgSize ] = useState('small')
-     const [ promt, setPromt ] = useState()
-     const imgSizes = [ 'small', 'medium']
+     const [ size, setSize ] = useState('')
+     const [ prompt, setPrompt ] = useState('')
+     const [ imgUrl, setImgUrl ] = useState('')
+     const [ laoding, setLoading ] = useState(false)
+     const imgSizes = [ 'small', 'medium' ]
+     
      const changeImageSize = (e) =>{
-          setImgSize(e.target.value)
+          setSize(e.target.value)
      }
-     const changePromt = (e) =>{
-          setPromt(e.target.value)
+     const changePrompt = (e) =>{
+          setPrompt(e.target.value)
      }
-     const handleSubmit = async (e)=>{
+     // const showSpinner = () =>{
+     //      setLoading(true)
+     // }
+     const handleSubmit = (e)=>{
           e.preventDefault()
-          const reqImg = {imgSize, promt} 
-          console.log(reqImg)
+          const imgValue = { size, prompt }
+          generateImageRequest(imgValue)
+     }
+     const generateImageRequest = async (imgValue) =>{
           try{
-               const result = await api.post('api/openai/genimage', reqImg)
+               const res = await api.post('/api/openai/genimage', imgValue)
+               const resImgUrl = await res.data.data
+               setImgUrl(resImgUrl)
+
+               // if(!res.ok){
+               //      throw new Error(res.status)
+               // }
            }
            catch(err){
                err.message
            }
      }
+     
      return (
-          <Box sx={{ flexGrow: 1 }}>
-          <Grid container spacing={8}>
-               <Typography variant='h5'>Open AI Image</Typography>
+          <Grid container
+          direction="row"
+          alignItems="center" >
                <Box
                component="form"
                sx={{'& > :not(style)': { m: 1, minWidth: 320 }}}
@@ -43,12 +62,13 @@ const HomePage = () => {
                onSubmit={handleSubmit}
                >
                     <Stack direction='column' spacing={2}>
-                         <TextField required size="small" id="promt" label="promt" variant="outlined" value={promt} onChange={changePromt}/>
+                    <Typography variant='h5'>AI Generated Photo</Typography>
+                         <TextField required size="small" id="prompt" label="prompt" variant="outlined" value={prompt} onChange={changePrompt}/>
                          <FormControl fullWidth required sx={{mb:2}} size='small'>
                               <InputLabel id="img-size">Image Size</InputLabel>
                               <Select
                               labelId="label-img-size"
-                              value={imgSize}
+                              value={size}
                               label="Image-Size"
                               onChange={changeImageSize}  
                               >
@@ -60,8 +80,18 @@ const HomePage = () => {
                          <Button variant="contained" type='submit'>Generate</Button>
                     </Stack>
                </Box> 
+               <Stack direction='column' spacing={2}  alignItems="center">
+                    {imgUrl ? <Card>
+                    <CardMedia
+                         component="img"
+                         height="256"
+                         image={imgUrl}
+                         alt="ai image"
+                         />
+                   </Card> : <Typography variant='subtitle1'>Describe and Click on "Generate"</Typography>}
+               {laoding && <CircularProgress />}
+               </Stack>
           </Grid>
-          </Box>
      );
 }
  
