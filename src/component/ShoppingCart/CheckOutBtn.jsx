@@ -1,7 +1,7 @@
 import { useNavigate , Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from 'react'
-import { updateTotalQty } from '../../features/shopItemSlice'
+import { updateTotalQty } from '../../slices/shopItemSlice'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 import IconButton from '@mui/material/IconButton'
 

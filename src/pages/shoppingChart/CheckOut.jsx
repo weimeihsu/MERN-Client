@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { increment, decrement, deleteCartItem, sumCost } from '../../features/shopItemSlice'
+import { increment, decrement, deleteCartItem, sumCost } from '../../slices/shopItemSlice'
 import Typography from '@mui/material/Typography'
 import Card from '@mui/material/Card'
 import Button from '@mui/material/Button'

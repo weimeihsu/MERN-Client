@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { fetchShopItems } from '../../features/shopItemSlice'
+import { fetchShopItems } from '../../slices/shopItemSlice'
 
 import Container from '@mui/material/Container'
 import Stack from '@mui/material/Stack'

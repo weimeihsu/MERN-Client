@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
@@ -7,6 +8,7 @@ import Grid from '@mui/material/Grid'
 import Divider from '@mui/material/Divider'
 import Typography from '@mui/material/Typography'
 import Toolbar from '@mui/material/Toolbar'
+import Logo from '../component/Logo'
 
 
 const LogIn = () => {
@@ -23,7 +25,7 @@ const LogIn = () => {
         <>
         <header>
             <Toolbar>
-                <Button href='/' variant='text'>Exploring</Button>
+                <Link to="/"><Logo/></Link>
             </Toolbar>
         </header>
         <Grid container

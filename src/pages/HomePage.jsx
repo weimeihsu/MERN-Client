@@ -20,7 +20,7 @@ const HomePage = () => {
      const [ prompt, setPrompt ] = useState('')
      const [ imgUrl, setImgUrl ] = useState('')
      const [ laoding, setLoading ] = useState(false)
-     const imgSizes = [ 'small', 'medium' ]
+     const imgSizes = [ 'small', 'medium', 'portrait' ]
      
      const changeImageSize = (e) =>{
           setSize(e.target.value)
@@ -34,17 +34,22 @@ const HomePage = () => {
      const handleSubmit = (e)=>{
           e.preventDefault()
           const imgValue = { size, prompt }
+          setImgUrl('')
           generateImageRequest(imgValue)
+          setPrompt('')
+          setSize('')
      }
      const generateImageRequest = async (imgValue) =>{
           try{
+               setLoading(true)
                const res = await api.post('/api/openai/genimage', imgValue)
                const resImgUrl = await res.data.data
+               setLoading(false)
                setImgUrl(resImgUrl)
 
-               if(!res.ok){
-                    throw new Error(res.status)   
-               }return
+               // if(!res.ok){
+               //      throw new Error(res.status)   
+               // }
            }
            catch(err){
                err.message
@@ -54,15 +59,18 @@ const HomePage = () => {
      return (
           <Grid container
           direction="row"
-          alignItems="center">
-               <Box
+          alignItems="flex-start"
+          spacing={2}
+          sx={{ marginTop: '0'}}
+          >
+               <Grid item
+               xs={12} md={6}
                component="form"
-               sx={{'& > :not(style)': { m: 4, minWidth: 320 }}}
                autoComplete="off"
                onSubmit={handleSubmit}
                >
                     <Stack direction='column' spacing={2}>
-                    <Typography variant='h5'>AI Generated Photo</Typography>
+                    <Typography variant='h5'>OpenAI Generated Photo</Typography>
                          <TextField required size="small" id="prompt" label="prompt" variant="outlined" value={prompt} onChange={changePrompt}/>
                          <FormControl fullWidth required sx={{mb:2}} size='small'>
                               <InputLabel id="img-size">Image Size</InputLabel>
@@ -79,8 +87,8 @@ const HomePage = () => {
                          </FormControl>
                          <Button variant="contained" type='submit'>Generate</Button>
                     </Stack>
-               </Box> 
-               <Stack direction='column' spacing={2}  alignItems="center">
+               </Grid> 
+               <Grid item xs={12} md={6} alignItems="center" sx={{flexGrow:1}}>
                     {imgUrl ? <Card>
                     <CardMedia
                          component="img"
@@ -88,9 +96,11 @@ const HomePage = () => {
                          image={imgUrl}
                          alt="ai image"
                          />
-                   </Card> : <Box sx={{p:8, border:'1px solid #ccc'}}><Typography variant='subtitle1'>Describe and Click on "Generate"</Typography></Box>}
-               {laoding && <CircularProgress />}
-               </Stack>
+                   </Card> : <Box sx={{p:8, backgroundColor:'#f5f5f5', borderRadius:'4px', display: 'flex', justifyContent: 'center'}}>
+                   {laoding ? <CircularProgress /> : <Typography variant='subtitle1'>Describe the photo in the "prompt" and click on the "Generate"</Typography>}
+                    </Box>}
+               
+               </Grid>
           </Grid>
      );
 }

@@ -1,6 +1,6 @@
 import { useState, forwardRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { addToCart, sumCost } from '../../features/shopItemSlice'
+import { addToCart, sumCost } from '../../slices/shopItemSlice'
 
 import Typography from '@mui/material/Typography'
 import Card from '@mui/material/Card'

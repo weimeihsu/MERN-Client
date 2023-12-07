@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { initStateSiteDomain } from '../features/navListSlice'
+import { initStateSiteDomain } from '../slices/navListSlice'
 import { useLocation } from 'react-router-dom'
 
 import Divider from '@mui/material/Divider'
