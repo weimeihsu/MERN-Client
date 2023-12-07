@@ -42,9 +42,9 @@ const HomePage = () => {
                const resImgUrl = await res.data.data
                setImgUrl(resImgUrl)
 
-               // if(!res.ok){
-               //      throw new Error(res.status)
-               // }
+               if(!res.ok){
+                    throw new Error(res.status)   
+               }return
            }
            catch(err){
                err.message
@@ -54,10 +54,10 @@ const HomePage = () => {
      return (
           <Grid container
           direction="row"
-          alignItems="center" >
+          alignItems="center">
                <Box
                component="form"
-               sx={{'& > :not(style)': { m: 1, minWidth: 320 }}}
+               sx={{'& > :not(style)': { m: 4, minWidth: 320 }}}
                autoComplete="off"
                onSubmit={handleSubmit}
                >
@@ -88,7 +88,7 @@ const HomePage = () => {
                          image={imgUrl}
                          alt="ai image"
                          />
-                   </Card> : <Typography variant='subtitle1'>Describe and Click on "Generate"</Typography>}
+                   </Card> : <Box sx={{p:8, border:'1px solid #ccc'}}><Typography variant='subtitle1'>Describe and Click on "Generate"</Typography></Box>}
                {laoding && <CircularProgress />}
                </Stack>
           </Grid>
