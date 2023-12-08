@@ -1,8 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect, useState } from 'react'
-import { ThemeProvider } from '@mui/material/styles'
 import { getselectedSite, filter } from '../../slices/navListSlice'
-import { mainTheme } from '../../mainTheme'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
 import ListItemButton from '@mui/material/ListItemButton'
@@ -26,8 +24,6 @@ const SiteList = () => {
   }
 
     return ( 
-      <ThemeProvider theme={mainTheme}>
-        <h1>Sitelist</h1>
         <List>
             {siteList.map(navitem => (
                 <ListItem key={navitem.id} disablePadding>
@@ -40,7 +36,6 @@ const SiteList = () => {
               </ListItem>
             ))}
         </List>
-      </ThemeProvider>
      );
 }
  

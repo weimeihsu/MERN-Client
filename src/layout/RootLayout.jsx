@@ -5,6 +5,7 @@ import { CustomMain, MainHeader} from '../customStyle/CustomComponent'
 import LeftDrawer from '../component/LeftDrawer'
 import { ThemeProvider } from '@mui/material/styles'
 import { mainTheme } from '../mainTheme'
+import Box from '@mui/material/Box'
 import { styled } from '@mui/material/styles'
 
 // const drawerWidth = 240
@@ -32,10 +33,10 @@ const RootLayout = () => {
     }
 
     const location = useLocation()
-    const hideMenu =() =>{
-        const { pathname } = location
-        return !pathname.includes("/checkout")
-    }
+    // const hideMenu =() =>{
+    //     const { pathname } = location
+    //     return !pathname.includes("/checkout")
+    // }
     const drawerWidth = 240
     return ( 
         <ThemeProvider theme={mainTheme}>
@@ -43,7 +44,10 @@ const RootLayout = () => {
             <LeftDrawer drawerWidth={drawerWidth} toggleDrawer={toggleDrawer} open={open}/>
         <CustomMain open={!open}>
             <MainHeader/>
-            <Outlet/>
+            <Box sx={{height:'12px'}}/>
+            <Box sx={{ flexGrow: 1, m:2}}>
+                <Outlet/>
+            </Box>
         </CustomMain>
         </ThemeProvider>
      );

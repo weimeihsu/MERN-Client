@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import api from '../axois/api'
-import Container from '@mui/material/Container'
 import Box from '@mui/material/Box'
 import Stack from '@mui/material/Stack'
 import TextField from '@mui/material/TextField'
@@ -61,7 +60,6 @@ const HomePage = () => {
           direction="row"
           alignItems="flex-start"
           spacing={2}
-          sx={{ marginTop: '0'}}
           >
                <Grid item
                xs={12} md={6}
@@ -88,7 +86,7 @@ const HomePage = () => {
                          <Button variant="contained" type='submit'>Generate</Button>
                     </Stack>
                </Grid> 
-               <Grid item xs={12} md={6} alignItems="center" sx={{flexGrow:1}}>
+               <Grid item xs={12} md={6} alignItems="center" >
                     {imgUrl ? <Card>
                     <CardMedia
                          component="img"

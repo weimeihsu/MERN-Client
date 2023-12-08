@@ -8,6 +8,7 @@ const initialState = {
         {id:4, path:'/movie-editor', name:'Movie Editor'},
         {id:5, path:'/online-store', name:'Online Store'},
         {id:6, path:'/store-editor', name:'Store Editor'},
+        {id:7, path:'/try-layout', name:'Try Layout'},
        
     ],
     checkOutPage:[

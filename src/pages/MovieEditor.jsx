@@ -1,25 +1,24 @@
 import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
-import Box from '@mui/material/Box'
 import TagsInputs from '../component/movieRecord/TagsInput'
+import Typography from '@mui/material/Typography'
 import MovieRecords from '../component/movieRecord/MovieRecords'
 
 const MovieEditor = () => {
   return ( 
-    <Container>
-        <Box sx={{ flexGrow: 1 }}>
-            <Grid container spacing={4}>
-                <Grid item xs={6}>
-                  <h1>Movie Tags Create and Update</h1>
-                  <TagsInputs/>
-                </Grid>
-                <Grid item xs={6}>
-                  <h1>Current MovieList</h1>
-                  {/* <MovieRecords/> */}
-                </Grid>
-            </Grid>
-        </Box>
-    </Container>
+    <Grid container
+    direction="row"
+    alignItems="flex-start"
+    spacing={2}>
+        <Grid item xs={6}>
+          <Typography variant='h5'>Movie Tags Create and Update</Typography>
+          <TagsInputs/>
+        </Grid>
+        <Grid item xs={6}>
+          <Typography variant='h5'>Current MovieList</Typography>
+          {/* <MovieRecords/> */}
+        </Grid>  
+    </Grid>
    );
 }
  

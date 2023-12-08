@@ -18,6 +18,7 @@ import Movies from '../pages/Movies'
 import MovieEditor from '../pages/MovieEditor'
 import LogIn from '../pages/LogIn'
 import SignUp from '../pages/SignUp'
+import TryLayout from '../pages/TryLayout'
 
 const Routers = createBrowserRouter(
     createRoutesFromElements(
@@ -31,6 +32,7 @@ const Routers = createBrowserRouter(
                 </Route>
                 <Route path='online-store' element={<OnlineStore/>}/>
                 <Route path='store-editor' element={<StoreEditor/>}/>
+                <Route path='try-layout' element={<TryLayout/>}/>
             </Route>
             <Route path='checkout' element={<CheckOutLayout/>}>
                 <Route index element={<CheckOut/>}/>

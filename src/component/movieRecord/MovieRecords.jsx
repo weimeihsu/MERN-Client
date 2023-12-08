@@ -34,10 +34,9 @@ const movieRecords = () => {
     return ( 
         <>
          {records && records.map(recordItem=>(
-            <Card key={recordItem._id} variant="outlined" sx={{mb:2, display:'flex', justifyContent:'space-between'}} >
-                <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+            <Card key={recordItem._id} variant="outlined" sx={{mb:1, display:'flex', justifyContent:'space-between'}} >
                 <CardContent>
-                    <Typography variant="h5">
+                    <Typography variant="h6">
                         {recordItem.title}
                     </Typography>
                     <Chip label={recordItem.category} size="small" sx={{mr:1}}/>
@@ -45,15 +44,13 @@ const movieRecords = () => {
                         {recordItem.createdAt}
                     </Typography>
                 </CardContent>
-                </Box>
-                <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+
                 <CardActions sx={{p:2}}>
                     <IconButton size="small" aria-label="delete" onClick={() => handleDelete(recordItem._id)}>
                         <DeleteIcon fontSize="inherit"/>
                     </IconButton>
                     <OpenModal key={recordItem._id} id={recordItem._id} title={recordItem.title} category={recordItem.category}/>
-                </CardActions>
-                </Box>  
+                </CardActions> 
             </Card>
         ))} 
         </>

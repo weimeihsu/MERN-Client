@@ -33,9 +33,7 @@ const SignUp = () => {
         direction="column"
         justifyContent="center"
         alignItems="center">
-            
                 <Typography variant="h5">Sign Up</Typography>
-            
             <Box
             component="form"
             sx={{'& > :not(style)': { m: 1, minWidth: 320 }}}

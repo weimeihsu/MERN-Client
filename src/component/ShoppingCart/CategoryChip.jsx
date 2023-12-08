@@ -17,7 +17,7 @@ const CategoryChip = (item) => {
 
     return ( 
         <>
-        <Chip label={item.name} variant={colored ? 'filled':'outlined'} color='primary' onClick={toggleColor}></Chip>
+        <Chip label={item.name} variant={colored ? 'filled':'outlined'} color='primary' onClick={toggleColor} size='small'></Chip>
         </>
      );
 }

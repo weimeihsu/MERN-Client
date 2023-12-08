@@ -63,14 +63,14 @@ const MovieForm = ({recordID, recordTitle, recordCategory, formTitle, btnText, c
     }
     return ( 
         <>
-        <h1>{formTitle}</h1>
+        <Typography variant='h5'>{formTitle}</Typography>
         <Box component="form" onSubmit={handleSubmit}>
 
         <Grid sx={{ flexGrow: 1 }} container spacing={2}>
         {recordID && 
             <Grid item>
                  <Stack spacing={2}>
-                    <h4>Current Data</h4>
+                    <Typography>Current Data</Typography>
                     <div><Typography mr={2} sx={{fontWeight:'bold'}}>Movie ID:</Typography>{recordID}</div>
                     <div><Typography mr={2} sx={{fontWeight:'bold'}}>Moview Title:</Typography>{recordTitle}</div>
                     <div><Typography mr={2} sx={{fontWeight:'bold'}}>Movie Category:</Typography>{recordCategory}</div>

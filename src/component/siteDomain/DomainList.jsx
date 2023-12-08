@@ -10,6 +10,7 @@ import ListItemButton from '@mui/material/ListItemButton'
 import ListItemText from '@mui/material/ListItemText'
 import IconButton from '@mui/material/IconButton'
 import MenuIcon from '@mui/icons-material/Menu'
+import Typography from '@mui/material/Typography'
 
 import { getSelectedDomain } from '../../slices/navListSlice'
 
@@ -24,11 +25,11 @@ const DomainList = ({toggleSitePanel}) => {
         <IconButton aria-label="toggle" onClick={toggleSitePanel}>
          <MenuIcon />
         </IconButton>
-        <h1>Domain Table</h1>
+        <Typography variant="h5">Domain Table</Typography>
           <List>
             {filteredDomainlist.map(recordItem => (
               <Link to={`${recordItem.sitename}/${recordItem.domainname}`} key={recordItem.id} onClick={() => getDomain(recordItem.domainname)}>
-                <ListItem>
+                <ListItem sx={{padding:'4px 0'}}>
                 <ListItemButton sx={{border: '1px solid lightBlue',borderRadius: 1 }}>
                   <ListItemText primary={recordItem.domainname} />
                   <Chip label={recordItem.sitename} size="small" sx={{m:1}}/>
