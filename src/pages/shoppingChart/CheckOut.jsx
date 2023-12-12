@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { increment, decrement, deleteCartItem, sumCost } from '../../slices/shopItemSlice'
 import Typography from '@mui/material/Typography'
@@ -17,7 +17,6 @@ import api from '../../axois/api'
 const CheckOut = () => {
     const { currentCart, totalCost } = useSelector(store => store.shopItemSlice)
     const dispatch = useDispatch()
-    const navigate = useNavigate()
     
     const incrementCounter = (item) => {
         dispatch(increment({count:item.quantity, 
@@ -36,7 +35,6 @@ const CheckOut = () => {
         dispatch(sumCost())
     }
     const handleCheckOut = async () => {
-        console.log(currentCart)
         try{
             const result = await api.post('/api/checkout', currentCart)
             // console.log(result) 
@@ -46,9 +44,6 @@ const CheckOut = () => {
         }catch(err){
             err.message
         }
-    }
-    const backToStore = () => {
-        navigate('/online-store')
     }
     
     return (
@@ -78,9 +73,11 @@ const CheckOut = () => {
         ))}
         <Divider/>
         <Stack direction="row" alignItems="center" justifyContent="space-between" spacing={2} m={2}>
-            <Button size="small" variant="contained" onClick={backToStore}>
-                Continue Shopping
-            </Button>
+            <Link to='/online-store'>
+                <Button size="small" variant="contained" >
+                    Continue Shopping
+                </Button>
+            </Link>
             <Typography variant="subtitle1">Total Cost :</Typography>
             <Typography variant="subtitle1" sx={{fontWeight:'bold'}}>${totalCost}</Typography>
             <Button size="small" variant="contained" onClick={handleCheckOut}>Next</Button>

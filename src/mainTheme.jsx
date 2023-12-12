@@ -24,7 +24,10 @@ export const mainTheme = createTheme({
         },
         subtitle1: {
             fontSize: '0.875rem',
-          },
+        },
+        body1:{
+            fontSize:'0.875rem'
+        }
     },
     palette: {
         primary: {
@@ -86,14 +89,14 @@ export const mainTheme = createTheme({
         MuiButton:{
             styleOverrides:{
                 root:{
-                    textTransform: 'capitalize'
+                    textTransform: 'none',
                 }
             }
         },
         MuiAppBar:{
             styleOverrides:{
-                colorPrimary:{
-                    // backgroundColor:'transparent'
+                root:{
+                    // backgroundColor:'white'
                 }
             }
         },

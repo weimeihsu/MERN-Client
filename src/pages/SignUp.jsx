@@ -45,7 +45,9 @@ const SignUp = () => {
                     <TextField size="small" id="password" label="password" variant="outlined" value={password} onChange={changePassword}/>
                     <Button variant="contained" type='submit'>Sign Up</Button>
                     <Divider/>
-                    <Button href='/login'>Log In</Button>
+                        <Link to='/login'>
+                        <Button>Log In</Button>
+                        </Link> 
                 </Stack>
             </Box>
         </Grid>

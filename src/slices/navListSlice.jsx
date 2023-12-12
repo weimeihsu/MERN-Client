@@ -16,14 +16,6 @@ const initialState = {
         {id:2, path:'/checkout-success', name:'Checkout Success'},
         {id:3, path:'/checkout-failed', name:'Checkout Failed'}
     ],
-    appBar:[
-        {id:1, path:'/login', name:'Log In'},
-        {id:2, path:'/signup', name:'Sign Up'},
-    ],
-    profileMenu:[
-        {id:3, path:'/profile', name:'Profile'},
-        {id:4, path:'/lougout', name:'Logout'}
-    ],
     siteLevelMenu:[
         {id:1, path:'dns', name:'DNS'},
         {id:2, path:'cdn', name:'CDN Management'}
@@ -59,6 +51,10 @@ export const navListSlice = createSlice({
             state.selectedSiteName = selectedSiteName
             state.selectedSiteID = selectedSiteID 
         },
+        iniMainID: (state, action)=>{
+            state.selectedMainMenuID = null
+            console.log(state.selectedMainMenuID)
+        },
         getSelectedDomain: (state, action) => {
             const { selectedDomain } = action.payload
             state.selectedDomainName = selectedDomain
@@ -78,5 +74,5 @@ export const navListSlice = createSlice({
     }
 })
 
-export const { getselectedSite, filter, initStateSiteDomain, getSelectedDomain } = navListSlice.actions
+export const { getselectedSite, filter, initStateSiteDomain, getSelectedDomain, iniMainID } = navListSlice.actions
 export default navListSlice.reducer
