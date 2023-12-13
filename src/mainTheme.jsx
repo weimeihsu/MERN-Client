@@ -10,7 +10,8 @@ export const colorToken = {
     secondary:{
         main: '#ff9100',
         light:'#ffa733',
-        dark:'#b26500'
+        dark:'#b26500',
+        contrastText:'#000'
     },
     
 }

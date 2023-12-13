@@ -15,11 +15,10 @@ const SiteList = () => {
     setSelected(selectedSiteName),[]
   })
   const dispatch = useDispatch()
-  const handleSelectedSite = (id, sitename) =>{
+  const handleSelectedSite = (sitename) =>{
     setSelected(sitename)
     dispatch(getselectedSite(
-      { selectedSiteName:sitename,
-        selectedSiteID:id }))
+      { selectedSiteName:sitename}))
     dispatch(filter({selectedSiteName:sitename})) 
   }
 
@@ -27,7 +26,7 @@ const SiteList = () => {
         <List>
             {siteList.map(navitem => (
                 <ListItem key={navitem.id} disablePadding>
-                <ListItemButton selected={selected === navitem.sitename} onClick={()=>handleSelectedSite(navitem.id, navitem.sitename)} 
+                <ListItemButton selected={selected === navitem.sitename} onClick={()=>handleSelectedSite(navitem.sitename)} 
                 >
                   {/* <Link to={`${navitem.id}`} > */}
                     <ListItemText primary={navitem.sitename} />

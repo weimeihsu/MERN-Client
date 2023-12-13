@@ -12,12 +12,18 @@ import IconButton from '@mui/material/IconButton'
 import MenuIcon from '@mui/icons-material/Menu'
 import Typography from '@mui/material/Typography'
 
-import { getSelectedDomain } from '../../slices/navListSlice'
+import { getSelectedDomain, initDomains } from '../../slices/navListSlice'
 
 const DomainList = ({toggleSitePanel}) => {
     const dispatch = useDispatch()
-    const { domainList, filteredDomainlist } = useSelector(store=>store.navListSlice)
+    const { filteredDomains } = useSelector(store=>store.navListSlice)
+    const [ selected, setSelected ] = useState('')
+
+    useEffect(()=>{
+      dispatch(initDomains())
+    },[])
     const getDomain = (domainname) => {
+      setSelected(domainname)
       dispatch(getSelectedDomain({selectedDomain:domainname}))
     }
     return ( 
@@ -26,11 +32,27 @@ const DomainList = ({toggleSitePanel}) => {
          <MenuIcon />
         </IconButton>
         <Typography variant="h5">Domain Table</Typography>
-          <List>
-            {filteredDomainlist.map(recordItem => (
+          <List color='secondary'>
+            {filteredDomains.map(recordItem => (
               <Link to={`${recordItem.sitename}/${recordItem.domainname}`} key={recordItem.id} onClick={() => getDomain(recordItem.domainname)}>
                 <ListItem sx={{padding:'4px 0'}}>
-                <ListItemButton sx={{border: '1px solid lightBlue',borderRadius: 1 }}>
+                <ListItemButton selected={selected === recordItem.domainname}
+                sx={{border: '1px solid ',
+                borderColor: 'secondary.light',
+                borderRadius: 1,
+                '&:hover': {
+                  backgroundColor: 'secondary.light',
+                  color:'secondary.contrastText'
+                },
+                '&.Mui-selected, && .Mui-selected:hover': {
+                  backgroundColor: 'secondary.light',
+                  color:'secondary.contrastText',
+                  '&:hover':{
+                      backgroundColor: 'secondary.light',
+                      color:'secondary.contrastText'
+                  }
+                }  
+                 }}>
                   <ListItemText primary={recordItem.domainname} />
                   <Chip label={recordItem.sitename} size="small" sx={{m:1}}/>
                   <IconButton size="small" aria-label="delete" onClick={() => handleRemove(recordItem.id)}>

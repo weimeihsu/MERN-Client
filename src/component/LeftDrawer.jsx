@@ -1,6 +1,4 @@
-import { useSelector } from 'react-redux'
 import Drawer from '@mui/material/Drawer'
-
 import MainMenu from './MainMenu'
 
 
@@ -9,22 +7,19 @@ const LeftDrawer = ({drawerWidth, open}) => {
         <Drawer
         sx={{
           width: drawerWidth,
-          
           flexShrink: 0,
           '& .MuiDrawer-paper': {
             width: drawerWidth,
             border:'none',
             boxSizing: 'border-box',
             '& .MuiList-padding':{
-              padding:'12px'
-            }
-          },
-          
+              padding:3
+            }},
         }}
         variant="persistent"
         anchor="left"
         open={open}>
-          <MainMenu />
+          <MainMenu/>
         </Drawer>
      );
 }

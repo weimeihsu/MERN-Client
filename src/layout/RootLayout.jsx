@@ -1,12 +1,12 @@
 import { useState } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import TopNavBar from '../component/TopNavBar'
 import { CustomMain, MainHeader} from '../customStyle/CustomComponent'
 import LeftDrawer from '../component/LeftDrawer'
 import { ThemeProvider } from '@mui/material/styles'
 import { mainTheme } from '../mainTheme'
 import Box from '@mui/material/Box'
-import { styled } from '@mui/material/styles'
 
 // const drawerWidth = 240
 // const CustomMain = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })
@@ -27,12 +27,12 @@ import { styled } from '@mui/material/styles'
 // }));
 
 const RootLayout = () => {
+
     const [open, setOpen] = useState(true);
     const toggleDrawer = () => {
     setOpen(!open);
     }
 
-    const location = useLocation()
     // const hideMenu =() =>{
     //     const { pathname } = location
     //     return !pathname.includes("/checkout")
@@ -41,10 +41,10 @@ const RootLayout = () => {
     return ( 
         <ThemeProvider theme={mainTheme}>
             <TopNavBar toggleDrawer={toggleDrawer} />
-            <LeftDrawer drawerWidth={drawerWidth} toggleDrawer={toggleDrawer} open={open}/>
+            <LeftDrawer drawerWidth={drawerWidth} toggleDrawer={toggleDrawer} open={open} />
         <CustomMain open={!open}>
             <MainHeader/>
-            <Box sx={{height:'12px'}}/>
+            <Box sx={{ height:'12px'}}/>
             <Box sx={{ flexGrow: 1, m:2}}>
                 <Outlet/>
             </Box>

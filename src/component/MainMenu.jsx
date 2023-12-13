@@ -1,9 +1,8 @@
 import { useSelector, useDispatch } from 'react-redux'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { initStateSiteDomain } from '../slices/navListSlice'
+import { initSites } from '../slices/navListSlice'
 
-import Divider from '@mui/material/Divider'
 import Toolbar from '@mui/material/Toolbar'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
@@ -12,12 +11,12 @@ import ListItemText from '@mui/material/ListItemText'
 
 const MainMenu = () => {
     const dispatch = useDispatch()
-    const { mainMenu, selectedMainMenuID } = useSelector(store=>store.navListSlice)
-    const [ selected, setSelected ] = useState(selectedMainMenuID)
-    
+    const { mainMenu } = useSelector(store=>store.navListSlice)
+    const [ selected, setSelected ] = useState('')
+
     const handlesSelected = (id) =>{
       setSelected(id)
-      dispatch(initStateSiteDomain())
+      dispatch(initSites())
     }
  
     return ( 
@@ -31,8 +30,6 @@ const MainMenu = () => {
             }}
           >
         </Toolbar>
-        
-        <Divider />
 
         <List>
             {mainMenu.map(navitem => (

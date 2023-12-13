@@ -8,8 +8,7 @@ const initialState = {
         {id:4, path:'/movie-editor', name:'Movie Editor'},
         {id:5, path:'/online-store', name:'Online Store'},
         {id:6, path:'/store-editor', name:'Store Editor'},
-        {id:7, path:'/try-layout', name:'Try Layout'},
-       
+        {id:7, path:'/try-layout', name:'Try Layout'}
     ],
     checkOutPage:[
         {id:1, path:'/checkout', name:'Checkout'},
@@ -20,7 +19,7 @@ const initialState = {
         {id:1, path:'dns', name:'DNS'},
         {id:2, path:'cdn', name:'CDN Management'}
     ],
-    selectedMainMenuID: null,
+    selectedPage: null,
     siteList:[
         {id:'site123', sitename:'example.com'}, 
         {id:'site456', sitename:'travel.com'}
@@ -31,14 +30,8 @@ const initialState = {
         {id:'3', sitename:'travel.com', domainname:'domain.travel.com'},
         {id:'4', sitename:'travel.com', domainname:'cname.travel.com'}
     ],
-    filteredDomainlist:[
-        {id:'1', sitename:'example.com', domainname:'domain.example.com'},
-        {id:'2', sitename:'example.com', domainname:'cname.example.com'},
-        {id:'3', sitename:'travel.com', domainname:'domain.travel.com'},
-        {id:'4', sitename:'travel.com', domainname:'cname.travel.com'}
-    ],
+    filteredDomains:[],
     selectedSiteName: null,
-    selectedSiteID: null,
     selectedDomainName: null
 }
 
@@ -47,13 +40,9 @@ export const navListSlice = createSlice({
     initialState,
     reducers:{
         getselectedSite: (state, action)=>{
-            const { selectedSiteName, selectedSiteID } = action.payload
+            const { selectedSiteName } = action.payload
             state.selectedSiteName = selectedSiteName
-            state.selectedSiteID = selectedSiteID 
-        },
-        iniMainID: (state, action)=>{
-            state.selectedMainMenuID = null
-            console.log(state.selectedMainMenuID)
+            // state.selectedSiteID = selectedSiteID 
         },
         getSelectedDomain: (state, action) => {
             const { selectedDomain } = action.payload
@@ -61,18 +50,23 @@ export const navListSlice = createSlice({
         },
         filter: (state, action) => {
             // const { selectedSiteName } = action.payload
-            state.filteredDomainlist = [...state.domainList].filter(domain => domain.sitename === state.selectedSiteName)
+            state.filteredDomains = [...state.domainList].filter(domain => domain.sitename === state.selectedSiteName)
         },
-        initStateSiteDomain: (state, action) => {
-            state.filteredDomainlist = [...state.domainList]
+        initPage: (state, action) => {
+            state.selectedPage = null
+        },
+        initDomains: (state, action) => {
+            state.filteredDomains=[...state.domainList]
+        },
+        initSites: (state, action) => {
             state.selectedSiteName = null
         },
-        getDomainArray: (state, action)=>{
+        getDomainArray: (state, action) => {
             const { newArray } = state.siteList.domains
             state.rows.push(newArray)
         }
     }
 })
 
-export const { getselectedSite, filter, initStateSiteDomain, getSelectedDomain, iniMainID } = navListSlice.actions
+export const { getselectedSite, filter, initSites, getSelectedDomain, initDomains } = navListSlice.actions
 export default navListSlice.reducer

@@ -48,7 +48,7 @@ const TopNavBar = ({toggleDrawer, open}) => {
                 <Stack direction="row" alignItems="center" spacing={3}>
                   <CheckOutBtn/>
                   {userInfo ? (
-                    <ProfileMenu user={userInfo.email}/>
+                    <ProfileMenu user={userInfo.email} />
                   ):(
                     <>
                         <Link to='/signup'>

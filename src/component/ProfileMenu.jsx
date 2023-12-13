@@ -2,7 +2,6 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLogoutMutation } from '../slices/userApiSlice'
-import { iniMainID } from '../slices/navListSlice'
 import { logOut } from '../slices/authSlice'
 import AccountCircle from '@mui/icons-material/AccountCircle'
 import Menu from '@mui/material/Menu'
@@ -15,7 +14,6 @@ const AccountMenu = ({user}) => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const [ logoutApiCall ] = useLogoutMutation()
-    const { profileMenu } = useSelector(store=>store.navListSlice)
     const [anchorElUser, setAnchorElUser] = useState(null)
 
     const handleOpenUserMenu = (event) => {
@@ -26,7 +24,6 @@ const AccountMenu = ({user}) => {
       }
     const toProfile = ()=>{
         navigate('/user-profile')
-        dispatch(iniMainID())
         setAnchorElUser(null)
     }
     const handleLogOut = async () => {
