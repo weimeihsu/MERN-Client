@@ -1,20 +1,20 @@
-import { NavLink, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { useLogoutMutation } from '../slices/userApiSlice'
 import { logOut } from '../slices/authSlice'
+
 import AccountCircle from '@mui/icons-material/AccountCircle'
 import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
 import ListItemText from '@mui/material/ListItemText'
 import Box from '@mui/material/Box'
-import { Button } from '@mui/material'
+import Button from '@mui/material/Button'
 
-const AccountMenu = ({user}) => {
+const ProfileMenu = ({user, toProfile}) => {
     const dispatch = useDispatch()
-    const navigate = useNavigate()
+    
     const [ logoutApiCall ] = useLogoutMutation()
-    const [anchorElUser, setAnchorElUser] = useState(null)
+    const [ anchorElUser, setAnchorElUser ] = useState(null)
 
     const handleOpenUserMenu = (event) => {
         setAnchorElUser(event.currentTarget)
@@ -22,10 +22,11 @@ const AccountMenu = ({user}) => {
       const handleCloseUserMenu = (event) => {
         setAnchorElUser(null)
       }
-    const toProfile = ()=>{
-        navigate('/user-profile')
-        setAnchorElUser(null)
-    }
+    // const toProfile = ()=>{
+    //     navigate('/user-profile')
+    //     selected=false
+    //     setAnchorElUser(null)
+    // }
     const handleLogOut = async () => {
         try {
             await logoutApiCall().unwrap()
@@ -37,8 +38,8 @@ const AccountMenu = ({user}) => {
         setAnchorElUser(null)
     }
     return ( 
-        <Box sx={{ flexGrow: 0 }}>
-            <Button startIcon={<AccountCircle />} onClick={handleOpenUserMenu} size="medium" color="secondary">
+        <Box sx={{ padding:2 }}>
+            <Button fullWidth startIcon={<AccountCircle />} onClick={handleOpenUserMenu} size="medium" color="secondary">
             {user}
             </Button>
             <Menu
@@ -51,16 +52,16 @@ const AccountMenu = ({user}) => {
             }}
             keepMounted
             transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
+                vertical: 'bottom',
+                horizontal: 'left',
             }}
             open={Boolean(anchorElUser)}
             onClose={handleCloseUserMenu}
             >   
-                <MenuItem onClick={toProfile} sx={{paddingRight:12 }}>
+                <MenuItem onClick={toProfile} sx={{ paddingRight:4 }}>
                     <ListItemText>Profile</ListItemText>
                 </MenuItem>
-                <MenuItem onClick={handleLogOut} sx={{paddingRight:12 }}>
+                <MenuItem onClick={handleLogOut} sx={{ paddingRight:4 }}>
                     <ListItemText>Log Out</ListItemText>
                 </MenuItem>
             </Menu>
@@ -68,4 +69,4 @@ const AccountMenu = ({user}) => {
      );
 }
  
-export default AccountMenu;
+export default ProfileMenu;
