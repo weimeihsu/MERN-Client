@@ -1,5 +1,5 @@
 import { apiSlice } from './apiSlice'
-const USERS_URL = '/api/users'
+const USERS_URL = '/api/records'
 // this serves the same purpose of axios crud function
 export const userApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({

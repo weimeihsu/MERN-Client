@@ -21,14 +21,14 @@ const initialState = {
         {id:2, path:'cdn', name:'CDN Management'}
     ],
     siteList:[
-        {id:'site123', sitename:'example.com'}, 
-        {id:'site456', sitename:'travel.com'}
+        {_id:'site123', sitename:'example.com'}, 
+        {_id:'site456', sitename:'travel.com'}
     ],
     domainList:[
-        {id:'1', sitename:'example.com', domainname:'domain.example.com'},
-        {id:'2', sitename:'example.com', domainname:'cname.example.com'},
-        {id:'3', sitename:'travel.com', domainname:'domain.travel.com'},
-        {id:'4', sitename:'travel.com', domainname:'cname.travel.com'}
+        {_id:'1', sitename:'example.com', domainname:'domain.example.com'},
+        {_id:'2', sitename:'example.com', domainname:'cname.example.com'},
+        {_id:'3', sitename:'travel.com', domainname:'domain.travel.com'},
+        {_id:'4', sitename:'travel.com', domainname:'cname.travel.com'}
     ],
     filteredDomains:[],
     selectedSiteName: null,

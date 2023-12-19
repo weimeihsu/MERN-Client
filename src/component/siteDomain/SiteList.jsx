@@ -25,7 +25,7 @@ const SiteList = () => {
     return ( 
         <List>
             {siteList.map(navitem => (
-                <ListItem key={navitem.id} disablePadding>
+                <ListItem key={navitem._id} disablePadding>
                 <ListItemButton selected={selected === navitem.sitename} onClick={()=>handleSelectedSite(navitem.sitename)} 
                 >
                   {/* <Link to={`${navitem.id}`} > */}

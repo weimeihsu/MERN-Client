@@ -13,7 +13,6 @@ import Typography from '@mui/material/Typography'
 import Toolbar from '@mui/material/Toolbar'
 import Logo from '../component/Logo'
 
-
 const LogIn = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()

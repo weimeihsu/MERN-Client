@@ -1,21 +1,15 @@
 import { apiSlice } from './apiSlice'
-const USERS_URL = '/api/users'
+const DOMAIN_URL = '/api/domains'
 // this serves the same purpose of axios crud function
-export const userApiSlice = apiSlice.injectEndpoints({
+export const domainApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
-        login: builder.mutation({
+        getDomains: builder.mutation({
             query: (data) =>({
-                url: `${USERS_URL}/auth`,
+                url: `${DOMAIN_URL}/domains`,
                 method: 'POST',
                 body: data
             })
         }),
-        logout: builder.mutation({
-            query: (data)=>({
-                url:`${USERS_URL}/logout`,
-                method:'POST'
-            })
-        })
     })
 })
 

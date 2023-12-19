@@ -17,7 +17,7 @@ const authSlice = createSlice({
             state.userInfo = null
             localStorage.removeItem('userInfo')
         }
-    }
+    },
 })
 
 export const { setCredentials, logOut } = authSlice.actions

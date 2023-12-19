@@ -52,7 +52,6 @@ const SignUp = () => {
             </Box>
         </Grid>
         </>
-       
      );
 }
  

@@ -8,7 +8,6 @@ const initialState = {
     error:null
   } 
 
-
 export const fetchRecords = createAsyncThunk('records/fetchRecords', async()=>{
     try{
         const res = await api.get('/api/records')

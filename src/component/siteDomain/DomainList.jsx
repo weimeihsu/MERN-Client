@@ -55,7 +55,7 @@ const DomainList = ({toggleSitePanel}) => {
                  }}>
                   <ListItemText primary={recordItem.domainname} />
                   <Chip label={recordItem.sitename} size="small" sx={{m:1}}/>
-                  <IconButton size="small" aria-label="delete" onClick={() => handleRemove(recordItem.id)}>
+                  <IconButton size="small" aria-label="delete" onClick={() => handleRemove(recordItem._id)}>
                     <DeleteIcon fontSize="inherit"/>
                   </IconButton>
                 </ListItemButton>
