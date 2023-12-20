@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useGetDOmainsQuery } from '../../slices/domainApiSlice'
 import { Link } from 'react-router-dom'
 import DeleteIcon from '@mui/icons-material/Delete'
 import Chip from '@mui/material/Chip'
@@ -16,16 +17,26 @@ import { getSelectedDomain, initDomains } from '../../slices/navListSlice'
 
 const DomainList = ({toggleSitePanel}) => {
     const dispatch = useDispatch()
+    // const { data: domains, isLoading, isSuccess, isError, error} = useGetDOmainsQuery()
     const { filteredDomains } = useSelector(store=>store.navListSlice)
     const [ selected, setSelected ] = useState('')
 
     useEffect(()=>{
       dispatch(initDomains())
     },[])
+
     const getDomain = (domainname) => {
       setSelected(domainname)
       dispatch(getSelectedDomain({selectedDomain:domainname}))
     }
+    // let content
+    // if(isLoading){
+    //   content = <Typography variant='h5'>Loading...</Typography>
+    // }else if(isSuccess){
+    //   content=JSON.stringify(domains)
+    // }else if(isError){
+    //   content=<Typography variant='h5'>{error}</Typography>
+    // }
     return ( 
         <>
         <IconButton aria-label="toggle" onClick={toggleSitePanel}>
