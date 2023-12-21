@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit'
-import  navListReducer  from '../slices/navListSlice'
+import navListReducer from '../slices/navListSlice'
 import recordReducer from '../slices/recordSlice'
 import shopItemReducer from '../slices/shopItemSlice'
 import authReducer from '../slices/authSlice'
-import { apiSlice } from '../slices/apiSlice'
+import apiSlice from '../slices/apiSlice'
 
 export const store = configureStore({
   reducer: {

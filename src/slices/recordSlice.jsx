@@ -40,7 +40,7 @@ export const recordsSlice = createSlice({
     extraReducers(builder) {
         builder
         .addCase(fetchRecords.pending, (state, action)=>{
-            state.status='loading'
+            state.status='loading' 
         })
         .addCase(fetchRecords.fulfilled, (state, action)=>{
             state.status='succeeded'
