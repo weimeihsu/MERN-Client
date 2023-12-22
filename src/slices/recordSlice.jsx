@@ -6,16 +6,13 @@ const initialState = {
     categories:['Action','Drama','Fiction','Fantasy','Animation'],
     status:'idle', //'idle' | 'loading' | 'succeded' | 'failed'
     error:null
-  } 
+} 
 
 export const fetchRecords = createAsyncThunk('records/fetchRecords', async()=>{
-    try{
-        const res = await api.get('/api/records')
-        return res.data // or [...res.data]
-    }catch(err){
-        return err.message
-    }
+    const res = await api.get('/api/records')
+    return res.data // or [...res.data]
 })
+
 export const recordsSlice = createSlice({
     name:'records',
     initialState,
