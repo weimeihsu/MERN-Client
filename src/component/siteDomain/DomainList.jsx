@@ -45,7 +45,7 @@ const DomainList = ({toggleSitePanel}) => {
         <Typography variant="h5">Domain Table</Typography>
           <List color='secondary'>
             {filteredDomains.map(recordItem => (
-              <Link to={`${recordItem.sitename}/${recordItem.domainname}`} key={recordItem.id} onClick={() => getDomain(recordItem.domainname)}>
+              <Link to={`${recordItem.sitename}/${recordItem.domainname}`} key={recordItem._id} onClick={() => getDomain(recordItem.domainname)}>
                 <ListItem sx={{padding:'4px 0'}}>
                 <ListItemButton selected={selected === recordItem.domainname}
                 sx={{border: '1px solid ',

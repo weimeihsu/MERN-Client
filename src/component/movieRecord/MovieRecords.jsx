@@ -7,8 +7,6 @@ import CardActions from '@mui/material/CardActions'
 import CardContent from '@mui/material/CardContent'
 import IconButton from '@mui/material/IconButton'
 import DeleteIcon from '@mui/icons-material/Delete'
-import Box from '@mui/material/Box'
-
 import Typography from '@mui/material/Typography'
 import Chip from '@mui/material/Chip'
 
