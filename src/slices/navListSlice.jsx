@@ -31,8 +31,8 @@ const initialState = {
         {_id:'4', sitename:'travel.com', domainname:'cname.travel.com'}
     ],
     filteredDomains:[],
-    selectedSiteName: null,
-    selectedDomainName: null
+    selectedSiteName: localStorage.getItem('site') ? JSON.parse(localStorage.getItem('site')) : null,
+    selectedDomainName: localStorage.getItem('domain') ? JSON.parse(localStorage.getItem('domain')) : null,
 }
 
 export const navListSlice = createSlice({
@@ -40,23 +40,28 @@ export const navListSlice = createSlice({
     initialState,
     reducers:{
         getSelectedSite: (state, action)=>{
-            const { selectedSiteName } = action.payload
-            state.selectedSiteName = selectedSiteName
-            // state.selectedSiteID = selectedSiteID 
+            // const { selectedSiteName } = action.payload
+            // state.selectedSiteName = selectedSiteName
+            state.selectedSiteName = action.payload
+            localStorage.setItem('site', JSON.stringify(action.payload))
         },
         getSelectedDomain: (state, action) => {
-            const { selectedDomain } = action.payload
-            state.selectedDomainName = selectedDomain
+            // const { selectedDomain } = action.payload
+            // state.selectedDomainName = selectedDomain
+            state.selectedDomainName = action.payload
+            localStorage.setItem('domain', JSON.stringify(action.payload))
+            console.log(state.selectedDomainName)
         },
         filter: (state, action) => {
-            // const { selectedSiteName } = action.payload
-            state.filteredDomains = [...state.domainList].filter(domain => domain.sitename === state.selectedSiteName)
+            const { site } = action.payload
+            // const site = state.selectedSiteName.unwrap()
+            state.filteredDomains = [...state.domainList].filter(item => item.sitename === site)
         },
         initValue: (state, action) => {
             state.selectedValue = ''
         },
         initDomains: (state, action) => {
-            state.filteredDomains=[...state.domainList]
+            state.filteredDomains = [...state.domainList]
         },
         initSites: (state, action) => {
             state.selectedSiteName = null

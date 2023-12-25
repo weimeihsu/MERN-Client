@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useLogoutMutation } from '../slices/userApiSlice'
-import { logOut } from '../slices/authSlice'
+import { clearCredentials } from '../slices/authSlice'
 
 import AccountCircle from '@mui/icons-material/AccountCircle'
 import Menu from '@mui/material/Menu'
@@ -30,7 +30,7 @@ const ProfileMenu = ({user, toProfile}) => {
     const handleLogOut = async () => {
         try {
             await logoutApiCall().unwrap()
-            dispatch(logOut())
+            dispatch(clearCredentials())
             navigate('/')
         } catch(err){
             console.log(err.message)

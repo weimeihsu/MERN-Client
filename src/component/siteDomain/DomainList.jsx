@@ -24,9 +24,9 @@ const DomainList = ({toggleSitePanel}) => {
       dispatch(initDomains())
     },[])
 
-    const getDomain = (domainname) => {
-      setSelected(domainname)
-      dispatch(getSelectedDomain({selectedDomain:domainname}))
+    const getDomain = (domain) => {
+      setSelected(domain)
+      dispatch(getSelectedDomain({domain}))
     }
     // let content
     // if(isLoading){

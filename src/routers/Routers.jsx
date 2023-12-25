@@ -35,15 +35,14 @@ const Routers = createBrowserRouter(
                 <Route path='store-editor' element={<StoreEditor/>}/>
                 <Route path='try-layout' element={<TryLayout/>}/>
                 <Route path="user-profile" element={<UserProfile/> }/>
-                <Route path="login" element={<LogIn/> }/>
-                <Route path="signup" element={<SignUp/> }/>
             </Route>
             <Route path='checkout' element={<CheckOutLayout/>}>
                 <Route index element={<CheckOut/>}/>
                 <Route path="checkout-failed" element={<CheckOutFailed/> } />
                 <Route path="checkout-success" element={<CheckOutSuccess/> } />  
             </Route>
-            
+            <Route path="login" element={<LogIn/> }/>
+            <Route path="signup" element={<SignUp/> }/>
         </Route>
     )
 )

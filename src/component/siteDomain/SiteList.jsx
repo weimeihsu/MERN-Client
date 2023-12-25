@@ -8,18 +8,18 @@ import ListItemText from '@mui/material/ListItemText'
 
 
 const SiteList = () => {
-  const { siteList, selectedSiteName } = useSelector(store=>store.navListSlice)
-  const [ selected, setSelected ] = useState(selectedSiteName)
-  
-  useEffect(()=>{
-    setSelected(selectedSiteName),[]
-  })
   const dispatch = useDispatch()
-  const handleSelectedSite = (sitename) =>{
-    setSelected(sitename)
-    dispatch(getSelectedSite(
-      { selectedSiteName:sitename}))
-    dispatch(filter({selectedSiteName:sitename})) 
+  const { siteList } = useSelector(store=>store.navListSlice)
+  const [ selected, setSelected ] = useState('')
+  
+  // useEffect(()=>{
+  //   setSelected(selectedSiteName),[]
+  // })
+  
+  const handleSelectedSite = (site) =>{
+    setSelected(site)
+    dispatch(getSelectedSite({ site }))
+    dispatch(filter({site})) 
   }
 
     return ( 
