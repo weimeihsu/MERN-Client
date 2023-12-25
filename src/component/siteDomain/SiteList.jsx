@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect, useState } from 'react'
-import { getselectedSite, filter } from '../../slices/navListSlice'
+import { getSelectedSite, filter } from '../../slices/navListSlice'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
 import ListItemButton from '@mui/material/ListItemButton'
@@ -17,7 +17,7 @@ const SiteList = () => {
   const dispatch = useDispatch()
   const handleSelectedSite = (sitename) =>{
     setSelected(sitename)
-    dispatch(getselectedSite(
+    dispatch(getSelectedSite(
       { selectedSiteName:sitename}))
     dispatch(filter({selectedSiteName:sitename})) 
   }

@@ -37,4 +37,4 @@ export const domainApiSlice = apiSlice.injectEndpoints({
 })
 
 // useLoginMutation has its naming convention
-export const { useGetDOmainsQuery, useAddDomainMutation } = domainApiSlice
+export const { useGetDomainsQuery, useAddDomainMutation } = domainApiSlice

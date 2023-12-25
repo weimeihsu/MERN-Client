@@ -6,3 +6,5 @@ export const apiSlice = createApi({
     endpoints: (builder)=>({})
 })
 
+
+export default apiSlice

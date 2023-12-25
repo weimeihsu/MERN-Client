@@ -39,7 +39,7 @@ export const navListSlice = createSlice({
     name:'navlist',
     initialState,
     reducers:{
-        getselectedSite: (state, action)=>{
+        getSelectedSite: (state, action)=>{
             const { selectedSiteName } = action.payload
             state.selectedSiteName = selectedSiteName
             // state.selectedSiteID = selectedSiteID 
@@ -68,5 +68,5 @@ export const navListSlice = createSlice({
     }
 })
 
-export const { getselectedSite, filter, getSelectedDomain, initSites, initDomains } = navListSlice.actions
+export const { getSelectedSite, filter, getSelectedDomain, initSites, initDomains } = navListSlice.actions
 export default navListSlice.reducer

@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useGetDOmainsQuery } from '../../slices/domainApiSlice'
 import { Link } from 'react-router-dom'
 import DeleteIcon from '@mui/icons-material/Delete'
 import Chip from '@mui/material/Chip'
