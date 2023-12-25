@@ -20,6 +20,7 @@ export const recordsSlice = createSlice({
         addRecord: (state, action)=>{
             const { newRecord } = action.payload
             state.records = [newRecord, ...state.records]
+            // state.records.push(newRecord)
         },
         deleteRecord: (state, action)=>{
             const { recordID } = action.payload
