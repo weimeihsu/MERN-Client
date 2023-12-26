@@ -29,7 +29,9 @@ const Routers = createBrowserRouter(
                 <Route path="movies" element={<Movies/> }/>
                 <Route path='movie-editor' element={<MovieEditor/>}/>
                 <Route path='site-domain' element={<SiteDomainLayout/>}>
-                    <Route path=':siteID/:domainID' element={<DnsRecords/>}/>
+                    <Route path=':siteID'>
+                        <Route path=':domainID' element={<DnsRecords/>}/>
+                    </Route>
                 </Route>
                 <Route path='online-store' element={<OnlineStore/>}/>
                 <Route path='store-editor' element={<StoreEditor/>}/>

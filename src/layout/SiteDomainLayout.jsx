@@ -9,7 +9,7 @@ import DomainList from '../component/siteDomain/DomainList'
 import SiteList from '../component/siteDomain/SiteList'
 
 const SiteDomainLayout = () => {
-    const { domainID } = useParams()
+    
     const [isOpen, setIsOpen] = useState(true)
     const toggleSitePanel = () =>{
         setIsOpen(isOpen => !isOpen)
@@ -26,14 +26,10 @@ const SiteDomainLayout = () => {
                     <Box sx={{ backgroundColor: 'primary.light', p:2 }} height="100vh"><SiteList/></Box>
                 </Collapse>
             </Grid>
-            <Grid item sx={{ flexGrow : domainID ? null : 1}}>
-                <Box sx={{ p:2 }} ><DomainList toggleSitePanel={toggleSitePanel}/></Box>
+            <Grid item  sx={{ p:2, flexGrow:1 }} >
+                <DomainList toggleSitePanel={toggleSitePanel}/>
             </Grid>
-            {domainID ? (
-            <Grid item >
-                <Outlet/>
-            </Grid>) : (<></>) 
-            }
+            <Grid><Outlet/></Grid>
         </Grid>
      );
 }

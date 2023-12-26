@@ -53,7 +53,8 @@ const MovieForm = ({recordID, recordTitle, recordCategory, formTitle, btnText, c
     const recordUpdate = async (id, record) => { 
         try{
             const res = await api.put(`/api/records/${id}`, record)
-            dispatch(updateRecord({theRecord:record, id}))
+            const theRecord = await res.data
+            dispatch(updateRecord({theRecord, record}))
             setCategory('')
             setTitle('')
             closeForm()
@@ -62,9 +63,9 @@ const MovieForm = ({recordID, recordTitle, recordCategory, formTitle, btnText, c
         }         
     }
     return ( 
-        <>
+        <Box sx={{ paddingTop: recordID ? 4 : 0}}>
         <Typography variant='h5'>{formTitle}</Typography>
-        <Box component="form" onSubmit={handleSubmit}>
+        <Box component="form" onSubmit={handleSubmit} sx={{paddingTop:2}}>
 
         <Grid sx={{ flexGrow: 1 }} container spacing={2}>
         {recordID && 
@@ -94,13 +95,13 @@ const MovieForm = ({recordID, recordTitle, recordCategory, formTitle, btnText, c
                     </FormControl>
                 <Stack spacing={2} direction="row">
                     <Button variant="contained" type='submit'>{btnText}</Button>
-                    {recordID && <Button variant="outlined" type='cancel' onClick={closeForm}>Cancel</Button> }      
+                    {recordID && <Button variant="outlined" type='button' onClick={closeForm}>Cancel</Button>}      
                 </Stack>
                 {error && <div>{error}</div>}
             </Grid>
         </Grid>  
         </Box>
-        </>
+        </Box>
     );
 }
 

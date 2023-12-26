@@ -3,9 +3,9 @@ import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
 import ClearIcon from '@mui/icons-material/Clear'
 import IconButton from '@mui/material/IconButton'
-import { useState } from 'react'
 
 const DnsRecords = () => {
+    const { siteID } = useParams()
     const { domainID } = useParams()
     const clearDomain = () =>{
       console.log(domainID)
@@ -22,6 +22,7 @@ const DnsRecords = () => {
             </IconButton>
             <Grid item >
             <Typography variant="h5">DNS records</Typography>
+            <Typography variant="body1">{ siteID }</Typography>
             <Typography variant="body1">{ domainID }</Typography>
             </Grid>
         </Grid>  
