@@ -1,40 +1,44 @@
 import { useSelector, useDispatch } from 'react-redux'
-import { Outlet, useParams } from 'react-router-dom'
-import { useState } from 'react'
-import { setSelectedSite, filter } from '../../slices/siteDomainSlice'
+import { useState, useEffect } from 'react'
+import { fetchSites, getSiteName, filter, clearDomain } from '../../slices/siteDomainSlice'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
 import ListItemButton from '@mui/material/ListItemButton'
 import ListItemText from '@mui/material/ListItemText'
+import Typography from '@mui/material/Typography'
 
 const SiteList = () => {
   const dispatch = useDispatch()
   const { sites } = useSelector(store => store.siteDomainSlice)
   const [ selected, setSelected ] = useState('')
+
+  useEffect(()=>{
+    dispatch(fetchSites())},[])
   
-  // useEffect(()=>{
-  //   setSelected(selectedSiteName),[]
-  // })
-  
-  const handleSelectedSite = (site) =>{
+  const getSite = (site) =>{
     setSelected(site)
-    dispatch(setSelectedSite({ site }))
-    dispatch(filter({site})) 
+    dispatch(getSiteName({site}))
+    dispatch(filter({site}))
+    dispatch(clearDomain()) 
   }
 
     return ( 
-      <List>
-          {sites.map(navitem => (
-              <ListItem key={navitem._id} disablePadding>
-              <ListItemButton selected={selected === navitem.sitename} onClick={()=>handleSelectedSite(navitem.sitename)} 
-              >
-                {/* <Link to={`${navitem.id}`} > */}
-                  <ListItemText primary={navitem.sitename} />
-                {/* </Link>   */}
-              </ListItemButton>
-            </ListItem>
-          ))}
-      </List>
+      <>
+        <Typography variant="h5">Sites</Typography>
+        <List>
+            {sites.map(navitem => (
+                <ListItem key={navitem._id} disablePadding>
+                <ListItemButton selected={selected === navitem.sitename} onClick={()=>getSite(navitem.sitename)} 
+                >
+                  {/* <Link to={`${navitem.id}`} > */}
+                    <ListItemText primary={navitem.sitename} />
+                  {/* </Link>   */}
+                </ListItemButton>
+              </ListItem>
+            ))}
+        </List>
+      </>
+     
      );
 }
  

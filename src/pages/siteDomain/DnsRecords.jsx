@@ -1,8 +1,6 @@
 import { useParams } from 'react-router-dom'
 import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
-import ClearIcon from '@mui/icons-material/Clear'
-import IconButton from '@mui/material/IconButton'
 
 const DnsRecords = () => {
     const { siteID } = useParams()
@@ -17,9 +15,6 @@ const DnsRecords = () => {
           spacing={2}
           sx={{p:4}}  
           >
-            <IconButton onClick={clearDomain}> 
-              <ClearIcon />
-            </IconButton>
             <Grid item >
             <Typography variant="h5">DNS records</Typography>
             <Typography variant="body1">{ siteID }</Typography>

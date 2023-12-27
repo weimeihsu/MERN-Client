@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
     mainMenu:[
         {id:1, path:'/', name:'Homepage'},
-        {id:2, path:'/site-domain', name:'Site List'},
+        {id:2, path:'/site-domain', name:'Sites Domains'},
         {id:3, path:'/movies', name:'Movies'},
         {id:4, path:'/movie-editor', name:'Movie Editor'},
         {id:5, path:'/online-store', name:'Online Store'},

@@ -1,5 +1,6 @@
-import { Outlet, useParams } from 'react-router-dom'
+import { Outlet } from 'react-router-dom'
 import { useState } from 'react'
+import { useSelector } from 'react-redux'
 
 import Collapse from '@mui/material/Collapse'
 import Grid from '@mui/material/Grid'
@@ -9,7 +10,7 @@ import DomainList from '../component/siteDomain/DomainList'
 import SiteList from '../component/siteDomain/SiteList'
 
 const SiteDomainLayout = () => {
-    
+    const { selectedDomainName } = useSelector(store=>store.siteDomainSlice)
     const [isOpen, setIsOpen] = useState(true)
     const toggleSitePanel = () =>{
         setIsOpen(isOpen => !isOpen)
@@ -29,7 +30,7 @@ const SiteDomainLayout = () => {
             <Grid item  sx={{ p:2, flexGrow:1 }} >
                 <DomainList toggleSitePanel={toggleSitePanel}/>
             </Grid>
-            <Grid><Outlet/></Grid>
+            {selectedDomainName && <Grid><Outlet/></Grid>}
         </Grid>
      );
 }

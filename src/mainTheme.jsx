@@ -13,6 +13,11 @@ export const colorToken = {
         dark:'#b26500',
         contrastText:'#000'
     },
+    neutral:{
+        main: '#9e9e9e',
+        light: '#eeeeee',
+        dark:'#424242'
+    }
     
 }
 export const mainTheme = createTheme({ 
@@ -41,7 +46,12 @@ export const mainTheme = createTheme({
             main: colorToken.secondary.main,
             light: colorToken.secondary.light,
             dark: colorToken.secondary.dark
-        }
+        },
+        neutral:{
+            main: colorToken.neutral.main,
+            light: colorToken.neutral.light,
+            dark: colorToken.neutral.dark
+        }   
     },
     components:{
         MuiListItemButton: {

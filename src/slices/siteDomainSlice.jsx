@@ -9,8 +9,8 @@ const initialState = {
     fetchDomainsStatus:'idle', //'idle' | 'loading' | 'succeded' | 'failed'
     fetchSitesError: null,
     fetchDomainsError: null,
-    selectedSiteName: localStorage.getItem('site') ? JSON.parse(localStorage.getItem('site')) : null,
-    selectedDomainName: localStorage.getItem('domain') ? JSON.parse(localStorage.getItem('domain')) : null,
+    selectedSiteName: null,
+    selectedDomainName: null,
 } 
 
 export const fetchSites = createAsyncThunk('records/fetchSites', async()=>{
@@ -35,22 +35,21 @@ export const siteDomainSlice = createSlice({
             // const site = state.selectedSiteName.unwrap()
             state.filteredDomains = [...state.domains].filter(item => item.sitename === site)
         },
-        setSelectedSite: (state, action)=>{
-            // const { selectedSiteName } = action.payload
-            // state.selectedSiteName = selectedSiteName
-            state.selectedSiteName = action.payload
-            localStorage.setItem('site', JSON.stringify(action.payload))
+        getSiteName: (state, action)=>{
+            const { site } = action.payload
+            state.selectedSiteName = site
+            // state.selectedSiteName = action.payload
+            // localStorage.setItem('site', JSON.stringify(action.payload))
+            
         },
         setSelectedDomain: (state, action) => {
-            // const { selectedDomain } = action.payload
-            // state.selectedDomainName = selectedDomain
-            state.selectedDomainName = action.payload
-            localStorage.setItem('domain', JSON.stringify(action.payload))
+            const { domain } = action.payload
+            state.selectedDomainName = domain
         },
         clearSite: (state, action) => {
             state.selectedSiteName = null
         },
-        initDomain: (state, action) => {
+        clearDomain: (state, action) => {
             state.selectedDomainName = null
         }
     },
@@ -82,6 +81,8 @@ export const siteDomainSlice = createSlice({
     }
 })
 
-export const { filter, setSelectedSite, setSelectedDomain, clearSite } = siteDomainSlice.actions
+export const { filter, getSiteName, setSelectedDomain, clearSite, clearDomain } = siteDomainSlice.actions
+
+export const selectDomainsBySite = (state, site) => state.siteDomainSlice.domains.filter(item=> item.sitename === site)
 
 export default siteDomainSlice.reducer
