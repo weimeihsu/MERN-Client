@@ -5,7 +5,6 @@ import './main.css'
 import { CssBaseline } from '@mui/material'
 import { store } from './app/store'
 import { Provider } from 'react-redux'
-import { fetchSites, fetchDomains } from './slices/siteDomainSlice.jsx'
 
 // store.dispatch(fetchSites())
 // store.dispatch(fetchDomains())

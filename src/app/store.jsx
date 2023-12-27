@@ -4,7 +4,7 @@ import siteDomainReducer from '../slices/siteDomainSlice'
 import recordReducer from '../slices/recordSlice'
 import shopItemReducer from '../slices/shopItemSlice'
 import authReducer from '../slices/authSlice'
-import apiSlice from '../slices/apiSlice'
+import { apiSlice } from '../slices/apiSlice'
 
 export const store = configureStore({
   reducer: {

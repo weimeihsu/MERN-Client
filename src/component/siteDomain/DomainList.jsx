@@ -16,6 +16,7 @@ import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 
 import { fetchDomains, setSelectedDomain } from '../../slices/siteDomainSlice'
+import { useGetDomainsQuery } from '../../slices/domainApiSlice'
 const DomainList = ({toggleSitePanel}) => {
     const { siteID } = useParams()
     const { domainID } = useParams()
@@ -42,14 +43,23 @@ const DomainList = ({toggleSitePanel}) => {
       setNewDomain('')
     }
 
-    // let content
-    // if(isLoading){
-    //   content = <Typography variant='h5'>Loading...</Typography>
-    // }else if(isSuccess){
-    //   content=JSON.stringify(domains)
-    // }else if(isError){
-    //   content=<Typography variant='h5'>{error}</Typography>
-    // }
+    const {
+      data,
+      isLoading,
+      isSuccess,
+      isError,
+      error
+    } = useGetDomainsQuery()
+
+    let content
+    if(isLoading){
+      content = <Typography variant='h5'>Loading...</Typography>
+    }else if(isSuccess){
+      content = JSON.stringify(data)
+    }else if(isError){
+      content = <Typography variant='h5'>{error}</Typography>
+    }
+
     return ( 
         <>
           <IconButton aria-label="toggle" onClick={toggleSitePanel}>
@@ -69,7 +79,7 @@ const DomainList = ({toggleSitePanel}) => {
               </Stack>
             </Box>
             
-            {/* <Typography variant="subtitle1">{domainID}</Typography> */}
+            <Box>{content}</Box>
             <List color='secondary'>
               {filteredDomains.map(recordItem => (
                 <Link to={`${recordItem.sitename}/${recordItem.domainname}`} key={recordItem._id}>
