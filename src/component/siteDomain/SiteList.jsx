@@ -9,7 +9,7 @@ import Typography from '@mui/material/Typography'
 
 const SiteList = () => {
   const dispatch = useDispatch()
-  const { sites } = useSelector(store => store.siteDomainSlice)
+  const { sites } = useSelector(state => state.siteDomainSlice)
   const [ selected, setSelected ] = useState('')
 
   useEffect(()=>{

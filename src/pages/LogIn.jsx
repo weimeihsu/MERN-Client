@@ -21,7 +21,7 @@ const LogIn = () => {
     const [ email, setEmail ] = useState('')
     const [ password, setPassword ] = useState('')
     const changeEmail = (e) => {
-        setEmail(e.target.value);
+        setEmail(e.target.value)
     }
     const changePassword = (e) => {
         setPassword(e.target.value)

@@ -30,7 +30,7 @@ const SiteDomainLayout = () => {
             <Grid item  sx={{ p:2, flexGrow:1 }} >
                 <DomainList toggleSitePanel={toggleSitePanel}/>
             </Grid>
-            {selectedDomainName && <Grid><Outlet/></Grid>}
+            <Grid item><Outlet/></Grid>
         </Grid>
      );
 }
