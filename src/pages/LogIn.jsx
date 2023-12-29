@@ -12,6 +12,7 @@ import Divider from '@mui/material/Divider'
 import Typography from '@mui/material/Typography'
 import Toolbar from '@mui/material/Toolbar'
 import Logo from '../component/Logo'
+import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 
 const LogIn = () => {
     const dispatch = useDispatch()
@@ -45,9 +46,12 @@ const LogIn = () => {
     return ( 
         <>
         <header>
+        <Link to="/">
             <Toolbar>
-                <Link to="/"><Logo/></Link>
+                <ArrowBackIcon />
+                <Logo/>
             </Toolbar>
+        </Link>
         </header>
         <Grid container
         direction="column"

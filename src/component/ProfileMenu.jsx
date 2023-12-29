@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import { useLogoutMutation } from '../slices/userApiSlice'
 import { clearCredentials } from '../slices/authSlice'
 
@@ -12,7 +13,7 @@ import Button from '@mui/material/Button'
 
 const ProfileMenu = ({user, toProfile}) => {
     const dispatch = useDispatch()
-    
+    const navigate = useNavigate()
     const [ logoutApiCall ] = useLogoutMutation()
     const [ anchorElUser, setAnchorElUser ] = useState(null)
 

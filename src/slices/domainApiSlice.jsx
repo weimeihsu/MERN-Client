@@ -1,11 +1,22 @@
+import { createSlice, createEntityAdapter } from '@reduxjs/toolkit'
 import { apiSlice } from './apiSlice'
 // const API_URL = '/api'
+
+export const domainAdapter = createEntityAdapter()
+export const domainSelectors = domainAdapter.getSelectors(state=>state.domains)
+export const initialState = domainAdapter.getInitialState()
+
+const domainSlice = createSlice({
+    name: 'domains',
+    initialState,
+    reducers: {}
+})
 // this serves the same purpose of axios crud function
 export const domainApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         getDomains: builder.query({
             query: () => '/api/domains',
-            // transformResponse: res=> res.data,
+            // transformResponse: res => res.data,
             providesTags:['Domains']
         }),
         // getDomainsBySite: builder.query({
@@ -43,3 +54,5 @@ export const domainApiSlice = apiSlice.injectEndpoints({
 
 // useLoginMutation has its naming convention
 export const { useGetDomainsQuery, useGetDomainsBySiteQuery, useAddDomainMutation, useUpdateDomainMutation, useDeleteDomainMutation } = domainApiSlice
+
+export default domainSlice.reducer

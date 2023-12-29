@@ -52,17 +52,11 @@ const MainMenu = () => {
             ))}
         </List>
        
-            {userInfo ? (<ProfileMenu user={userInfo.email} toProfile={toProfile}/>):(
-              <Stack sx={{backgroundColor:'primary.light', position: 'fixed', bottom: 0, width:'240px'}} direction="row" justifyContent="center" spacing={2} divider={<Divider orientation="vertical" flexItem/>}>
-                  <Link to='/signup'>
-                      <Button color='secondary' fullWidth>Signup</Button>
-                  </Link>
-                  
-                  <Link to='/login'>
-                      <Button color="secondary" fullWidth>Login</Button>
-                  </Link>
-              </Stack>
-            )}
+        {userInfo ? (<ProfileMenu user={userInfo.email} toProfile={toProfile}/>):(
+            <Link to='/login'>
+                <Button color="secondary" fullWidth variant='outlined'>Login / Signup</Button>
+            </Link>
+        )}
       </>  
      );
 }

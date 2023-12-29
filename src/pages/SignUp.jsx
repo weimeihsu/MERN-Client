@@ -9,6 +9,7 @@ import Divider from '@mui/material/Divider'
 import Typography from '@mui/material/Typography'
 import Toolbar from '@mui/material/Toolbar'
 import Logo from '../component/Logo'
+import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import { useSelector, useDispatch } from 'react-redux'
 import { useRegisterMutation } from '../slices/userApiSlice'
 import { setCredentials } from '../slices/authSlice'
@@ -49,9 +50,12 @@ const SignUp = () => {
         <>
         <Box sx={{ flexGrow: 1 }}>
         <header>
+        <Link to="/">
             <Toolbar>
-                <Link to="/"><Logo/></Link>
+                <ArrowBackIcon />
+                <Logo/>
             </Toolbar>
+        </Link>
         </header>
         </Box>
         <Grid container

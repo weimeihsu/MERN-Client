@@ -1,13 +1,9 @@
 import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchShopItems } from '../../slices/shopItemSlice'
-
-import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
 import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
-import Box from '@mui/material/Box'
-
 import CategoryChip from '../../component/ShoppingCart/CategoryChip'
 import ShopItemCard from '../../component/ShoppingCart/ShopItemCard'
 const OnlineStore = () => {

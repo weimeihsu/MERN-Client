@@ -2,7 +2,6 @@ import Grid from '@mui/material/Grid'
 
 import MovieForm from '../component/movieRecord/MovieForm'
 import MovieRecords from '../component/movieRecord/MovieRecords'
-import Container from '@mui/material/Container'
 import Typography from '@mui/material/Typography'
 
 const Movies = () => {

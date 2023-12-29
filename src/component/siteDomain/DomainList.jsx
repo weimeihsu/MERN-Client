@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useParams,useNavigate } from 'react-router-dom'
 
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
@@ -19,12 +19,13 @@ import { fetchDomains, setSelectedDomain } from '../../slices/siteDomainSlice'
 import { useGetDomainsQuery, useGetDomainsBySiteQuery, useAddDomainMutation, useDeleteDomainMutation } from '../../slices/domainApiSlice'
 
 const DomainList = ({toggleSitePanel}) => {
-  const dispatch = useDispatch()
+    const dispatch = useDispatch()
     const [ selected, setSelected ] = useState('')
     const [ newDomain, setNewDomain ] = useState('')
-    const canSave = Boolean(newDomain)
-
+    
     const { filteredDomains, selectedSiteName } = useSelector(state=>state.siteDomainSlice)
+    const canSave = Boolean(newDomain)
+    const canAdd = Boolean(selectedSiteName)
 
     const {
       data:domains,
@@ -44,21 +45,19 @@ const DomainList = ({toggleSitePanel}) => {
       setSelected(domain)
       dispatch(setSelectedDomain({domain}))
     }
-    const handleSubmit = async (e) =>{
+    const handleSubmit = (e) =>{
       e.preventDefault()
-
       try{
-        const res = await addDomain({domainname:newDomain + '.' + selectedSiteName, sitename:selectedSiteName}).unwrap()
-        // console.log(res)
+        const res = addDomain({domainname:newDomain + '.' + selectedSiteName, sitename:selectedSiteName}).unwrap
         // dispatch(setCredentials({...res}))
         }catch(err){
             console.log(err?.data?.message || err.error)
         }
       setNewDomain('')
     }
-    const handleDelete = (id) => {
+    const handleDelete = (e, id) => {
+      e.preventDefault()
       deleteDomain({id})
-      console.log(id)
     }
     const clearInput = () =>{
       setNewDomain('')
@@ -70,28 +69,22 @@ const DomainList = ({toggleSitePanel}) => {
             <MenuIcon />
           </IconButton>
             <Typography variant="h5">Domains</Typography>
-            <Box
-              component="form"
-              noValidate
-              autoComplete="off"
-              sx={{mt:3}}
-              onSubmit={handleSubmit}>
-              <Stack spacing={1} direction="row" alignItems="center" useFlexGap flexWrap="wrap">
-                <TextField id="domain" label="Domain" variant="outlined" size="small" value={newDomain} onChange={changeNewDomain}/>
+              <Stack spacing={1} direction="row" alignItems="center" useFlexGap flexWrap="wrap" sx={{mt:2}}>
+                <TextField id="domain" label="Domain" variant="outlined" size="small" value={newDomain} onChange={changeNewDomain} disabled={!canAdd}/>
                 {selectedSiteName && <Typography variant="subtitle1" color="neutral.main">.{selectedSiteName}</Typography>}
                 {newDomain && <Button variant="text" disabled={!canSave} sx={{ml:2}} onClick={clearInput}>Clear</Button>}
-                <Button variant="contained" disabled={!canSave} type='submit'>Add</Button>
+                <Button variant="contained" disabled={!canSave} type='submit' onClick={handleSubmit}>Add</Button>
               </Stack>
-            </Box>
+
             
             {error ? (
               <Typography>Oh no, there was an error</Typography>
             ) : isLoading ? (
               <Typography>Loading...</Typography>
             ) : domains ? (
-              <List color='secondary'>
+              <List color='secondary' >
               {domains.map(recordItem => (
-                <Link to={`${recordItem.sitename}/${recordItem.domainname}`} key={recordItem._id}>
+                <Link key={recordItem._id} to={`${recordItem.sitename}/${recordItem.domainname}`} >
                   <ListItem sx={{padding:'4px 0'}}>
                   <ListItemButton
                   onClick={()=>getDomain(recordItem.domainname)}
@@ -113,8 +106,8 @@ const DomainList = ({toggleSitePanel}) => {
                   }  
                   }}>
                     <ListItemText primary={recordItem.domainname} />
-                    
-                    <IconButton size="small" aria-label="delete" onClick={() => handleDelete(recordItem._id)}>
+
+                    <IconButton size="small" aria-label="delete" onClick={(e) => handleDelete(e, recordItem._id)}>
                       <DeleteIcon fontSize="inherit"/>
                     </IconButton>
                   </ListItemButton>
