@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import api from '../axois/api'
 
+
 const initialState = {
     sites:[],
     domains:[],

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useParams,useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
@@ -9,14 +9,13 @@ import ListItemText from '@mui/material/ListItemText'
 import IconButton from '@mui/material/IconButton'
 import MenuIcon from '@mui/icons-material/Menu'
 import Typography from '@mui/material/Typography'
-import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
 import DeleteIcon from '@mui/icons-material/Delete'
 import Stack from '@mui/material/Stack'
 import Button from '@mui/material/Button'
 
 import { fetchDomains, setSelectedDomain } from '../../slices/siteDomainSlice'
-import { useGetDomainsQuery, useGetDomainsBySiteQuery, useAddDomainMutation, useDeleteDomainMutation } from '../../slices/domainApiSlice'
+import { useGetDomainsQuery, useAddDomainMutation, useDeleteDomainMutation } from '../../slices/domainApiSlice'
 
 const DomainList = ({toggleSitePanel}) => {
     const dispatch = useDispatch()
@@ -35,6 +34,7 @@ const DomainList = ({toggleSitePanel}) => {
     
     const [ addDomain ] = useAddDomainMutation() 
     const [ deleteDomain ] = useDeleteDomainMutation() 
+
     useEffect(()=>{
       dispatch(fetchDomains())},[])
 

@@ -1,10 +1,10 @@
-import { createSlice, createEntityAdapter } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 import { apiSlice } from './apiSlice'
 // const API_URL = '/api'
 
-export const domainAdapter = createEntityAdapter()
-export const domainSelectors = domainAdapter.getSelectors(state=>state.domains)
-export const initialState = domainAdapter.getInitialState()
+const initialState = {
+    filteredDomains:[],
+}
 
 const domainSlice = createSlice({
     name: 'domains',
