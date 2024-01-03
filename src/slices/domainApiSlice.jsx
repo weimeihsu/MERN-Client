@@ -1,16 +1,7 @@
-import { createSlice } from '@reduxjs/toolkit'
 import { apiSlice } from './apiSlice'
 // const API_URL = '/api'
 
-const initialState = {
-    filteredDomains:[],
-}
 
-const domainSlice = createSlice({
-    name: 'domains',
-    initialState,
-    reducers: {}
-})
 // this serves the same purpose of axios crud function
 export const domainApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
@@ -54,5 +45,3 @@ export const domainApiSlice = apiSlice.injectEndpoints({
 
 // useLoginMutation has its naming convention
 export const { useGetDomainsQuery, useGetDomainsBySiteQuery, useAddDomainMutation, useUpdateDomainMutation, useDeleteDomainMutation } = domainApiSlice
-
-export default domainSlice.reducer

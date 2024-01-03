@@ -72,7 +72,7 @@ export const siteDomainSlice = createSlice({
         })
         .addCase(fetchDomains.fulfilled, (state, action)=>{
             state.fetchDomainsStatus='succeeded'
-            state.domains=action.payload
+            // state.domains=action.payload
             state.filteredDomains=action.payload
         })
         .addCase(fetchDomains.rejected, (state)=>{
