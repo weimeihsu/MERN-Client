@@ -1,44 +1,44 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { useState, useEffect } from 'react'
-import { fetchSites, getSiteName, filter, clearDomain } from '../../slices/siteDomainSlice'
+import { getSiteName, filter, clearDomain } from '../../slices/siteDomainSlice'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
 import ListItemButton from '@mui/material/ListItemButton'
 import ListItemText from '@mui/material/ListItemText'
 import Typography from '@mui/material/Typography'
+import { useGetSitesQuery } from '../../slices/domainApiSlice'
+import { setCategoryTerm } from '../../slices/domainFilterSlice'
 
 const SiteList = () => {
   const dispatch = useDispatch()
-  const { sites } = useSelector(state => state.siteDomainSlice)
+  // const { sites } = useSelector(state => state.siteDomainSlice)
   const [ selected, setSelected ] = useState('')
 
-  useEffect(()=>{
-    dispatch(fetchSites())},[])
+  // useEffect(()=>{
+  //   dispatch(fetchSites())},[])
   
   const getSite = (site) =>{
     setSelected(site)
-    dispatch(getSiteName({site}))
-    dispatch(filter({site}))
+    dispatch(setCategoryTerm(site))
     dispatch(clearDomain()) 
   }
+
+  const {data:sitess, isLoading, error } = useGetSitesQuery()
 
     return ( 
       <>
         <Typography variant="h5">Sites</Typography>
-        <List>
-            {sites.map(navitem => (
-                <ListItem key={navitem._id} disablePadding>
-                <ListItemButton selected={selected === navitem.sitename} onClick={()=>getSite(navitem.sitename)} 
-                >
-                  {/* <Link to={`${navitem.id}`} > */}
-                    <ListItemText primary={navitem.sitename} />
-                  {/* </Link>   */}
-                </ListItemButton>
-              </ListItem>
-            ))}
-        </List>
+        {error ? (<Typography>Oh no, there was an error</Typography>
+        ) : isLoading ? ( <Typography>Loading...</Typography>
+        ) : sitess ? (<List>{
+          sitess.map(item=>(
+            <ListItem key={item._id} disablePadding>
+              <ListItemButton selected={selected === item.sitename} onClick={()=>getSite(item.sitename)}>
+                 <ListItemText primary={item.sitename} />
+              </ListItemButton>
+            </ListItem>
+          ))}</List>) : null }
       </>
-     
      );
 }
  

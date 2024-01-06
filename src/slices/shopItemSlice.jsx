@@ -42,7 +42,7 @@ export const fetchShopItems = createAsyncThunk('shopItems/fetchShopItems', async
 //     ( value, index ) => start + index * step
 // )
 export const shopItemSlice = createSlice({
-    name:'shopItems',
+    name:'shopItemSlice',
     initialState,
     reducers:{
         updateTotalQty:(state)=>{

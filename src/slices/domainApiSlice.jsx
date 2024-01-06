@@ -1,23 +1,32 @@
 import { apiSlice } from './apiSlice'
-// const API_URL = '/api'
+const API_URL = '/api/domains'
 
 
 // this serves the same purpose of axios crud function
 export const domainApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         getDomains: builder.query({
-            query: () => '/api/domains',
+            query: ({searchTerm, categoryTerm}) => {
+                if(searchTerm){
+                    return `${API_URL}/search?q=${searchTerm}`
+                }
+                if(categoryTerm){
+                    return `${API_URL}/categroy?sitename=${categoryTerm}`
+                }
+                return `${API_URL}`
+                // /api/domains?limit=10
+            },
             // transformResponse: res => res.data,
             providesTags:['Domains']
         }),
-        // getDomainsBySite: builder.query({
-        //     query: (site) => `/api/domains/${site}`,
-        //     // transformResponse: res=> res.data,
+        // getDomains: builder.query({
+        //     query: () => '/api/domains',
+        //     // transformResponse: res => res.data,
         //     providesTags:['Domains']
         // }),
         addDomain: builder.mutation({
             query: (domain) => ({
-                url: `/api/domains`,
+                url: `${API_URL}`,
                 method: "POST",
                 body: domain
             }),
@@ -26,7 +35,7 @@ export const domainApiSlice = apiSlice.injectEndpoints({
         }),
         updateDomain: builder.mutation({
             query: (domain) => ({
-                url: `/api/domains/${domain._id}`,
+                url: `${API_URL}/domain/${domain._id}`,
                 method: "PATCH",
                 body: domain
             }),
@@ -34,14 +43,18 @@ export const domainApiSlice = apiSlice.injectEndpoints({
         }),
         deleteDomain: builder.mutation({
             query: ({id}) => ({
-                url: `/api/domains/${id}`,
+                url: `${API_URL}/domain/${id}`,
                 method: "DELETE",
                 body: id
             }),
             invalidatesTags:['Domains']
         }),
+        getSites: builder.query({
+            query: ()=>'/api/sites',
+            providesTags:['Sites']
+        })
     })
 })
 
 // useLoginMutation has its naming convention
-export const { useGetDomainsQuery, useGetDomainsBySiteQuery, useAddDomainMutation, useUpdateDomainMutation, useDeleteDomainMutation } = domainApiSlice
+export const { useGetDomainsQuery, useAddDomainMutation, useUpdateDomainMutation, useDeleteDomainMutation, useGetSitesQuery } = domainApiSlice

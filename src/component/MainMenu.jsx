@@ -9,9 +9,7 @@ import ListItem from '@mui/material/ListItem'
 import ListItemButton from '@mui/material/ListItemButton'
 import ListItemText from '@mui/material/ListItemText'
 import ProfileMenu from '../component/ProfileMenu'
-import Divider from '@mui/material/Divider'
 import Button from '@mui/material/Button'
-import Stack from '@mui/material/Stack'
 
 const MainMenu = () => {
     const dispatch = useDispatch()

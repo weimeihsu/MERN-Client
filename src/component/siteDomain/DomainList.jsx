@@ -13,34 +13,45 @@ import TextField from '@mui/material/TextField'
 import DeleteIcon from '@mui/icons-material/Delete'
 import Stack from '@mui/material/Stack'
 import Button from '@mui/material/Button'
+import InputAdornment from '@mui/material/InputAdornment'
+import SearchIcon from '@mui/icons-material/Search'
 
-import { fetchDomains, setSelectedDomain } from '../../slices/siteDomainSlice'
+import { setSelectedDomain } from '../../slices/siteDomainSlice'
+import { setSearchTerm } from '../../slices/domainFilterSlice'
 import { useGetDomainsQuery, useAddDomainMutation, useDeleteDomainMutation } from '../../slices/domainApiSlice'
+
 
 const DomainList = ({toggleSitePanel}) => {
     const dispatch = useDispatch()
     const [ selected, setSelected ] = useState('')
     const [ newDomain, setNewDomain ] = useState('')
     
-    const { filteredDomains, selectedSiteName } = useSelector(state=>state.siteDomainSlice)
+    const { selectedSiteName } = useSelector(state=>state.siteDomainSlice)
     const canSave = Boolean(newDomain)
     const canAdd = Boolean(selectedSiteName)
+
+    const { searchTerm } = useSelector(state => state.domainFilterSlice)
+    const { categoryTerm } = useSelector(state => state.domainFilterSlice)
+    const [ search, setSearch ] = useState('')
 
     const {
       data:domains,
       isLoading,
       error
-    } = useGetDomainsQuery()
+    } = useGetDomainsQuery({searchTerm,categoryTerm})
     
     const [ addDomain ] = useAddDomainMutation() 
     const [ deleteDomain ] = useDeleteDomainMutation() 
 
-    useEffect(()=>{
-      dispatch(fetchDomains())},[])
+    // useEffect(()=>{
+    //   dispatch(fetchDomains())},[])
 
     const changeNewDomain = (e) => {
       setNewDomain(e.target.value)
     }  
+    const changeSearch =(e)=>{
+      dispatch(setSearchTerm(search))
+    }
     const getDomain = (domain) => {
       setSelected(domain)
       dispatch(setSelectedDomain({domain}))
@@ -69,12 +80,25 @@ const DomainList = ({toggleSitePanel}) => {
             <MenuIcon />
           </IconButton>
             <Typography variant="h5">Domains</Typography>
-              <Stack spacing={1} direction="row" alignItems="center" useFlexGap flexWrap="wrap" sx={{mt:2}}>
+            <Stack direction="row" alignItems="center" sx={{mt:2}}>
+              <Stack spacing={1} direction="row" alignItems="center" useFlexGap flexWrap="wrap" sx={{flexGrow:1}}>
                 <TextField id="domain" label="Domain" variant="outlined" size="small" value={newDomain} onChange={changeNewDomain} disabled={!canAdd}/>
-                {selectedSiteName && <Typography variant="subtitle1" color="neutral.main">.{selectedSiteName}</Typography>}
+                {categoryTerm && <Typography variant="subtitle1" color="neutral.main">.{categoryTerm}</Typography>}
+                
                 {newDomain && <Button variant="text" disabled={!canSave} sx={{ml:2}} onClick={clearInput}>Clear</Button>}
                 <Button variant="contained" disabled={!canSave} type='submit' onClick={handleSubmit}>Add</Button>
               </Stack>
+              <TextField size='small'
+                label="Search in domains"
+                id="search-in-domains"
+                variant="outlined"
+                value={search}
+                onChange={changeSearch}
+                InputProps={{
+                  startAdornment: <InputAdornment position="start"><SearchIcon fontSize='small'/></InputAdornment>
+                }}
+              />
+            </Stack>
 
             
             {error ? (
@@ -117,7 +141,7 @@ const DomainList = ({toggleSitePanel}) => {
               </List>  
             ) : null}
 
-            <List color='secondary'>
+            {/* <List color='secondary'>
               {filteredDomains.map(recordItem => (
                 <Link to={`${recordItem.sitename}/${recordItem.domainname}`} key={recordItem._id}>
                   <ListItem sx={{padding:'4px 0'}}>
@@ -149,7 +173,7 @@ const DomainList = ({toggleSitePanel}) => {
                   </ListItem>
                 </Link>
               ))}
-            </List>  
+            </List>   */}
         </> 
      );
 }

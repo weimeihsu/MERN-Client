@@ -36,7 +36,7 @@ const initialState = {
 }
 
 export const navListSlice = createSlice({
-    name:'navlist',
+    name:'navListSlice',
     initialState,
     reducers:{
         // setSelectedSite: (state, action)=>{

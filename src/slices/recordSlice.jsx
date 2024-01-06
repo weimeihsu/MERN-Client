@@ -14,7 +14,7 @@ export const fetchRecords = createAsyncThunk('records/fetchRecords', async()=>{
 })
 
 export const recordsSlice = createSlice({
-    name:'records',
+    name:'recordsSlice',
     initialState,
     reducers:{
         addRecord: (state, action)=>{
