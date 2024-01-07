@@ -8,7 +8,7 @@ export const domainApiSlice = apiSlice.injectEndpoints({
         getDomains: builder.query({
             query: ({searchTerm, categoryTerm}) => {
                 if(searchTerm){
-                    return `${API_URL}/search?q=${searchTerm}`
+                    return `${API_URL}/search?domainname=${searchTerm}`
                 }
                 if(categoryTerm){
                     return `${API_URL}/categroy?sitename=${categoryTerm}`
