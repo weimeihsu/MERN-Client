@@ -48,6 +48,7 @@ export const siteDomainSlice = createSlice({
         },
         clearSite: (state, action) => {
             state.selectedSiteName = null
+            console.log(state.selectedSiteName)
         },
         clearDomain: (state, action) => {
             state.selectedDomainName = null

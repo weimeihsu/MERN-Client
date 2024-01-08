@@ -10,7 +10,6 @@ import DomainList from '../component/siteDomain/DomainList'
 import SiteList from '../component/siteDomain/SiteList'
 
 const SiteDomainLayout = () => {
-    const { selectedDomainName } = useSelector(store=>store.siteDomainSlice)
     const [isOpen, setIsOpen] = useState(true)
     const toggleSitePanel = () =>{
         setIsOpen(isOpen => !isOpen)

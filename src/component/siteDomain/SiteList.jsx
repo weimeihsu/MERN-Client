@@ -11,27 +11,26 @@ import { setCategoryTerm } from '../../slices/domainFilterSlice'
 
 const SiteList = () => {
   const dispatch = useDispatch()
-  // const { sites } = useSelector(state => state.siteDomainSlice)
+  const { selectedSite } = useSelector(state => state.domainFilterSlice)
   const [ selected, setSelected ] = useState('')
 
-  // useEffect(()=>{
-  //   dispatch(fetchSites())},[])
+  useEffect(()=>{
+    setSelected('')},[selectedSite])
   
   const getSite = (site) =>{
     setSelected(site)
     dispatch(setCategoryTerm(site))
-    dispatch(clearDomain()) 
   }
 
-  const {data:sitess, isLoading, error } = useGetSitesQuery()
+  const { data:sites, isLoading, error } = useGetSitesQuery()
 
     return ( 
       <>
         <Typography variant="h5">Sites</Typography>
         {error ? (<Typography>Oh no, there was an error</Typography>
         ) : isLoading ? ( <Typography>Loading...</Typography>
-        ) : sitess ? (<List>{
-          sitess.map(item=>(
+        ) : sites ? (<List>{
+          sites.map(item=>(
             <ListItem key={item._id} disablePadding>
               <ListItemButton selected={selected === item.sitename} onClick={()=>getSite(item.sitename)}>
                  <ListItemText primary={item.sitename} />

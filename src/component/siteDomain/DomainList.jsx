@@ -32,7 +32,7 @@ const DomainList = ({toggleSitePanel}) => {
 
     const { searchTerm } = useSelector(state => state.domainFilterSlice)
     const { categoryTerm } = useSelector(state => state.domainFilterSlice)
-    const [ search, setSearch ] = useState('')
+    const [ search, setSearch ] = useState(searchTerm)
 
     const {
       data:domains,
@@ -49,12 +49,14 @@ const DomainList = ({toggleSitePanel}) => {
     const changeNewDomain = (e) => {
       setNewDomain(e.target.value)
     }  
-    const changeSearch =(e)=>{
+    const changeSearchTerm =(e)=>{
+      setSearch(e.target.value)
       dispatch(setSearchTerm(search))
     }
     const getDomain = (domain) => {
       setSelected(domain)
       dispatch(setSelectedDomain({domain}))
+      setSearch('')
     }
     const handleSubmit = (e) =>{
       e.preventDefault()
@@ -81,19 +83,19 @@ const DomainList = ({toggleSitePanel}) => {
           </IconButton>
             <Typography variant="h5">Domains</Typography>
             <Stack direction="row" alignItems="center" sx={{mt:2}}>
+            {categoryTerm &&
               <Stack spacing={1} direction="row" alignItems="center" useFlexGap flexWrap="wrap" sx={{flexGrow:1}}>
                 <TextField id="domain" label="Domain" variant="outlined" size="small" value={newDomain} onChange={changeNewDomain} disabled={!canAdd}/>
-                {categoryTerm && <Typography variant="subtitle1" color="neutral.main">.{categoryTerm}</Typography>}
-                
+                 <Typography variant="subtitle1" color="neutral.main">.{categoryTerm}</Typography>
                 {newDomain && <Button variant="text" disabled={!canSave} sx={{ml:2}} onClick={clearInput}>Clear</Button>}
                 <Button variant="contained" disabled={!canSave} type='submit' onClick={handleSubmit}>Add</Button>
-              </Stack>
+              </Stack>}
               <TextField size='small'
                 label="Search in domains"
                 id="search-in-domains"
                 variant="outlined"
                 value={search}
-                onChange={changeSearch}
+                onChange={changeSearchTerm}
                 InputProps={{
                   startAdornment: <InputAdornment position="start"><SearchIcon fontSize='small'/></InputAdornment>
                 }}
