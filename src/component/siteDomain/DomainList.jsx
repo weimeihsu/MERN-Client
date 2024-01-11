@@ -43,8 +43,14 @@ const DomainList = ({toggleSitePanel}) => {
     const [ addDomain ] = useAddDomainMutation() 
     const [ deleteDomain ] = useDeleteDomainMutation() 
 
-    // useEffect(()=>{
-    //   dispatch(fetchDomains())},[])
+    // useEffect(() => {
+
+    //   return () => {
+    //    dispatch(getSelectedDomain({
+    //     selectedDomain: null
+    //    }))
+    //   }
+    //  }, [])
 
     const changeNewDomain = (e) => {
       setNewDomain(e.target.value)
