@@ -11,11 +11,9 @@ import { setCategoryTerm } from '../../slices/domainFilterSlice'
 
 const SiteList = () => {
   const dispatch = useDispatch()
-  const { selectedSite } = useSelector(state => state.domainFilterSlice)
+  // const { selectedSite } = useSelector(state => state.domainFilterSlice)
   const [ selected, setSelected ] = useState('')
 
-  useEffect(()=>{
-    setSelected('')},[selectedSite])
   
   const getSite = (site) =>{
     setSelected(site)
