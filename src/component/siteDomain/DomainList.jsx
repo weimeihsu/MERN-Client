@@ -16,7 +16,6 @@ import Button from '@mui/material/Button'
 import InputAdornment from '@mui/material/InputAdornment'
 import SearchIcon from '@mui/icons-material/Search'
 
-import { setSelectedDomain } from '../../slices/siteDomainSlice'
 import { setSearchTerm } from '../../slices/domainFilterSlice'
 import { useGetDomainsQuery, useAddDomainMutation, useDeleteDomainMutation } from '../../slices/domainApiSlice'
 
@@ -26,13 +25,14 @@ const DomainList = ({toggleSitePanel}) => {
     const [ selected, setSelected ] = useState('')
     const [ newDomain, setNewDomain ] = useState('')
     
-    const { selectedSiteName } = useSelector(state=>state.siteDomainSlice)
-    const canSave = Boolean(newDomain)
-    const canAdd = Boolean(selectedSiteName)
-
     const { searchTerm } = useSelector(state => state.domainFilterSlice)
     const { categoryTerm } = useSelector(state => state.domainFilterSlice)
     const [ search, setSearch ] = useState(searchTerm)
+
+    const canSave = Boolean(newDomain)
+    const canAdd = Boolean(categoryTerm)
+
+    
 
     const {
       data:domains,
@@ -61,13 +61,12 @@ const DomainList = ({toggleSitePanel}) => {
     }
     const getDomain = (domain) => {
       setSelected(domain)
-      dispatch(setSelectedDomain({domain}))
       setSearch('')
     }
     const handleSubmit = (e) =>{
       e.preventDefault()
       try{
-        const res = addDomain({domainname:newDomain + '.' + selectedSiteName, sitename:selectedSiteName}).unwrap
+        const res = addDomain({domainname:newDomain + '.' + categoryTerm, sitename:categoryTerm}).unwrap
         // dispatch(setCredentials({...res}))
         }catch(err){
             console.log(err?.data?.message || err.error)
@@ -149,39 +148,6 @@ const DomainList = ({toggleSitePanel}) => {
               </List>  
             ) : null}
 
-            {/* <List color='secondary'>
-              {filteredDomains.map(recordItem => (
-                <Link to={`${recordItem.sitename}/${recordItem.domainname}`} key={recordItem._id}>
-                  <ListItem sx={{padding:'4px 0'}}>
-                  <ListItemButton
-                  onClick={()=>getDomain(recordItem.domainname)}
-                  selected={selected === recordItem.domainname}
-                  sx={{border: '1px solid ',
-                  borderColor: 'secondary.light',
-                  borderRadius: 1,
-                  '&:hover': {
-                    backgroundColor: 'secondary.light',
-                    color:'secondary.contrastText'
-                  },
-                  '&.Mui-selected, && .Mui-selected:hover': {
-                    backgroundColor: 'secondary.light',
-                    color:'secondary.contrastText',
-                    '&:hover':{
-                        backgroundColor: 'secondary.light',
-                        color:'secondary.contrastText'
-                    }
-                  }  
-                  }}>
-                    <ListItemText primary={recordItem.domainname} />
-                    
-                    <IconButton size="small" aria-label="delete" >
-                      <DeleteIcon fontSize="inherit"/>
-                    </IconButton>
-                  </ListItemButton>
-                  </ListItem>
-                </Link>
-              ))}
-            </List>   */}
         </> 
      );
 }

@@ -1,6 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { useState, useEffect } from 'react'
-import { getSiteName, filter, clearDomain } from '../../slices/siteDomainSlice'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
 import ListItemButton from '@mui/material/ListItemButton'
@@ -11,16 +10,19 @@ import { setCategoryTerm } from '../../slices/domainFilterSlice'
 
 const SiteList = () => {
   const dispatch = useDispatch()
-  // const { selectedSite } = useSelector(state => state.domainFilterSlice)
-  const [ selected, setSelected ] = useState('')
+  const { categoryTerm } = useSelector(state => state.domainFilterSlice)
+  const [ selected, setSelected ] = useState(categoryTerm)
 
+  const { data:sites, isLoading, error } = useGetSitesQuery()
+
+  useEffect(()=>{
+    setSelected(categoryTerm)
+  }, [categoryTerm])
   
   const getSite = (site) =>{
     setSelected(site)
     dispatch(setCategoryTerm(site))
   }
-
-  const { data:sites, isLoading, error } = useGetSitesQuery()
 
     return ( 
       <>

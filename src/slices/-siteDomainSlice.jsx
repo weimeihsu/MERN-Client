@@ -4,7 +4,7 @@ import api from '../axois/api'
 const initialState = {
     sites:[],
     domains:[],
-    filteredDomains:[],
+    // filteredDomains:[],
     selectedSiteName: null,
     selectedDomainName: null,
     // fetchSitesStatus:'idle', //'idle' | 'loading' | 'succeded' | 'failed'
@@ -28,9 +28,9 @@ export const siteDomainSlice = createSlice({
     name:'siteDomainSlice',
     initialState,
     reducers:{
-        initDomains: (state, action) => {
-            state.filteredDomains = [...state.domains]
-        },
+        // initDomains: (state, action) => {
+        //     state.filteredDomains = [...state.domains]
+        // },
         // filter: (state, action) => {
         //     const { site } = action.payload
         //     // const site = state.selectedSiteName.unwrap()

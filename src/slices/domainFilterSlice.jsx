@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
     searchTerm:'',
     categoryTerm:'',
-    selectedSite:''
+    selectedDomain:''
 }
 
 export const domainFilterSlice = createSlice({
@@ -18,12 +18,11 @@ export const domainFilterSlice = createSlice({
             state.searchTerm='',
             state.categoryTerm = action.payload
         },
-        initSelectedSite: (state, action) =>{
-            state.selectedSite=action.payload
-            console.log(state.selectedSite)
+        clearCategoryTerm: (state, action)=>{
+            state.categoryTerm=''
         }
     }
 })
 
-export const {setSearchTerm, setCategoryTerm, initSelectedSite} = domainFilterSlice.actions
+export const {setSearchTerm, setCategoryTerm, clearCategoryTerm} = domainFilterSlice.actions
 export default domainFilterSlice.reducer
