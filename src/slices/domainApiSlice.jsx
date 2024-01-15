@@ -11,7 +11,7 @@ export const domainApiSlice = apiSlice.injectEndpoints({
                     return `${API_URL}/search?domainname=${searchTerm}`
                 }
                 if(categoryTerm){
-                    return `${API_URL}/categroy?sitename=${categoryTerm}`
+                    return `${API_URL}/${categoryTerm}`
                 }
                 return `${API_URL}`
                 // /api/domains?limit=10
