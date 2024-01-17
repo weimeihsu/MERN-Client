@@ -27,37 +27,29 @@ const DomainList = ({toggleSitePanel}) => {
     
     const { searchTerm } = useSelector(state => state.domainFilterSlice)
     const { categoryTerm } = useSelector(state => state.domainFilterSlice)
-    const [ search, setSearch ] = useState(searchTerm)
-
-    const canSave = Boolean(newDomain)
-    const canAdd = Boolean(categoryTerm)
-
-    
-
     const {
       data:domains,
       isLoading,
       error
-    } = useGetDomainsQuery({searchTerm,categoryTerm})
+    } = useGetDomainsQuery({categoryTerm})
     
+    const [ search, setSearch ] = useState('')
+    const [ filtered, setFiltered ] = useState(domains)
+
+    const canSave = Boolean(newDomain)
+    const canAdd = Boolean(categoryTerm)
+
     const [ addDomain ] = useAddDomainMutation() 
     const [ deleteDomain ] = useDeleteDomainMutation() 
-
-    // useEffect(() => {
-
-    //   return () => {
-    //    dispatch(getSelectedDomain({
-    //     selectedDomain: null
-    //    }))
-    //   }
-    //  }, [])
 
     const changeNewDomain = (e) => {
       setNewDomain(e.target.value)
     }  
     const changeSearchTerm =(e)=>{
       setSearch(e.target.value)
-      dispatch(setSearchTerm(search))
+      // const filter = domains.filter(domain=>{
+      //   return domain.domainname.toLowerCase().includes(search)
+      // })
     }
     const getDomain = (domain) => {
       setSelected(domain)
@@ -107,7 +99,9 @@ const DomainList = ({toggleSitePanel}) => {
               />
             </Stack>
 
-            
+            {/* {result.map(item=>(
+              <p key={item._id}>{item.domainname}</p>
+            ))} */}
             {error ? (
               <Typography>Oh no, there was an error</Typography>
             ) : isLoading ? (

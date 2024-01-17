@@ -11,11 +11,11 @@ export const domainFilterSlice = createSlice({
     initialState,
     reducers:{
         setSearchTerm: (state, action) => {
-            state.categoryTerm=''
+            // state.categoryTerm=''
             state.searchTerm = action.payload
         },
         setCategoryTerm: (state, action) => {
-            state.searchTerm='',
+            // state.searchTerm='',
             state.categoryTerm = action.payload
         },
         clearCategoryTerm: (state, action)=>{

@@ -6,10 +6,10 @@ const API_URL = '/api/domains'
 export const domainApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         getDomains: builder.query({
-            query: ({searchTerm, categoryTerm}) => {
-                if(searchTerm){
-                    return `${API_URL}/search?domainname=${searchTerm}`
-                }
+            query: ({categoryTerm}) => {
+                // if(searchTerm){
+                //     return `${API_URL}/search?domainname=${searchTerm}`
+                // }
                 if(categoryTerm){
                     return `${API_URL}/${categoryTerm}`
                 }
