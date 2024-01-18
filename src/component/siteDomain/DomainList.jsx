@@ -16,7 +16,7 @@ import Button from '@mui/material/Button'
 import InputAdornment from '@mui/material/InputAdornment'
 import SearchIcon from '@mui/icons-material/Search'
 
-import { clearSearchText } from '../../slices/domainFilterSlice'
+import { setSearchText } from '../../slices/domainFilterSlice'
 import { useGetDomainsQuery, useAddDomainMutation, useDeleteDomainMutation } from '../../slices/domainApiSlice'
 
 
@@ -28,6 +28,7 @@ const DomainList = ({toggleSitePanel}) => {
     // const { searchTerm } = useSelector(state => state.domainFilterSlice)
     const { categoryTerm, searchText } = useSelector(state => state.domainFilterSlice)
     const [ search, setSearch ] = useState(searchText)
+    const [ filtered, setFiltered ] = useState([])
 
     const {
       data:domains,
@@ -46,10 +47,11 @@ const DomainList = ({toggleSitePanel}) => {
     }  
     const changeSearchTerm =(e)=>{
       setSearch(e.target.value)
+      dispatch(setSearchText(search))
       const filter = domains.filter(domain=>{
-        return domain.domainname.toLowerCase().includes(search)
+        return domain.domainname.toLowerCase().includes(searchText)
       })
-      console.log(filter)
+      setFiltered(filter)
     }
     const getDomain = (domain) => {
       setSelected(domain)
@@ -99,9 +101,9 @@ const DomainList = ({toggleSitePanel}) => {
               />
             </Stack>
 
-            {/* {result.map(item=>(
+            {filtered.map(item=>(
               <p key={item._id}>{item.domainname}</p>
-            ))} */}
+            ))}
             {error ? (
               <Typography>Oh no, there was an error</Typography>
             ) : isLoading ? (

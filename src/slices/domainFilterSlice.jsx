@@ -11,10 +11,10 @@ export const domainFilterSlice = createSlice({
     name:'domainFilterSlice',
     initialState,
     reducers:{
-        // setSearchTerm: (state, action) => {
-        //     // state.categoryTerm=''
-        //     state.searchTerm = action.payload
-        // },
+        setSearchText: (state, action) => {
+            // state.categoryTerm=''
+            state.searchText = action.payload
+        },
         setCategoryTerm: (state, action) => {
             // state.searchTerm='',
             state.categoryTerm = action.payload
@@ -24,10 +24,9 @@ export const domainFilterSlice = createSlice({
         },
         clearSearchText: (state, action) =>{
             state.searchText=''
-            console.log('clreared')
         }
     }
 })
 
-export const {setSearchTerm, setCategoryTerm, clearCategoryTerm, clearSearchText} = domainFilterSlice.actions
+export const {setSearchTerm, setCategoryTerm, clearCategoryTerm, clearSearchText, setSearchText} = domainFilterSlice.actions
 export default domainFilterSlice.reducer
