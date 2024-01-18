@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { useState } from 'react'
 import { Link, useNavigate} from 'react-router-dom'
-import { clearCategoryTerm } from '../slices/domainFilterSlice'
+import { clearCategoryTerm, clearSearchText } from '../slices/domainFilterSlice'
 
 import Toolbar from '@mui/material/Toolbar'
 import List from '@mui/material/List'
@@ -20,6 +20,7 @@ const MainMenu = () => {
     const handlesSelected = (id) =>{
       setSelected(id)
       dispatch(clearCategoryTerm())
+      dispatch(clearSearchText())
     }
  
     const toProfile = () =>{

@@ -6,7 +6,7 @@ import ListItemButton from '@mui/material/ListItemButton'
 import ListItemText from '@mui/material/ListItemText'
 import Typography from '@mui/material/Typography'
 import { useGetSitesQuery } from '../../slices/domainApiSlice'
-import { setCategoryTerm } from '../../slices/domainFilterSlice'
+import { setCategoryTerm, clearSearchText } from '../../slices/domainFilterSlice'
 
 const SiteList = () => {
   const dispatch = useDispatch()
@@ -21,6 +21,7 @@ const SiteList = () => {
   
   const getSite = (site) =>{
     setSelected(site)
+    dispatch(clearSearchText())
     dispatch(setCategoryTerm(site))
   }
 
