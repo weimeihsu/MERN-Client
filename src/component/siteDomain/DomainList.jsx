@@ -16,7 +16,7 @@ import Button from '@mui/material/Button'
 import InputAdornment from '@mui/material/InputAdornment'
 import SearchIcon from '@mui/icons-material/Search'
 
-import { setSearchText } from '../../slices/domainFilterSlice'
+import { setSearchText, clearSearchText } from '../../slices/domainFilterSlice'
 import { useGetDomainsQuery, useAddDomainMutation, useDeleteDomainMutation } from '../../slices/domainApiSlice'
 
 
@@ -28,13 +28,18 @@ const DomainList = ({toggleSitePanel}) => {
     // const { searchTerm } = useSelector(state => state.domainFilterSlice)
     const { categoryTerm, searchText } = useSelector(state => state.domainFilterSlice)
     const [ search, setSearch ] = useState(searchText)
-    const [ filtered, setFiltered ] = useState([])
+
+    useEffect(()=>{
+      setSearch(searchText)
+    }, [searchText])
 
     const {
       data:domains,
       isLoading,
       error
     } = useGetDomainsQuery({categoryTerm})
+
+    const [ filtered, setFiltered ] = useState([])
 
     const canSave = Boolean(newDomain)
     const canAdd = Boolean(categoryTerm)
@@ -46,8 +51,9 @@ const DomainList = ({toggleSitePanel}) => {
       setNewDomain(e.target.value)
     }  
     const changeSearchTerm =(e)=>{
-      setSearch(e.target.value)
-      dispatch(setSearchText(search))
+      // setSearch(e.target.value)
+      const value = e.target.value
+      dispatch(setSearchText(value))
       const filter = domains.filter(domain=>{
         return domain.domainname.toLowerCase().includes(searchText)
       })
@@ -55,7 +61,7 @@ const DomainList = ({toggleSitePanel}) => {
     }
     const getDomain = (domain) => {
       setSelected(domain)
-      setSearch('')
+      dispatch(clearSearchText())
     }
     const handleSubmit = (e) =>{
       e.preventDefault()
