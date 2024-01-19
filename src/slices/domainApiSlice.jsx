@@ -1,7 +1,6 @@
 import { apiSlice } from './apiSlice'
 const API_URL = '/api/domains'
 
-
 // this serves the same purpose of axios crud function
 export const domainApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
@@ -14,7 +13,6 @@ export const domainApiSlice = apiSlice.injectEndpoints({
                     return `${API_URL}/${categoryTerm}`
                 }
                 return `${API_URL}`
-                // /api/domains?limit=10
             },
             // transformResponse: res => res.data,
             providesTags:['Domains']

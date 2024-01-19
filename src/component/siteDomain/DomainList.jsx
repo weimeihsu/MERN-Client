@@ -38,9 +38,8 @@ const DomainList = ({toggleSitePanel}) => {
       isLoading,
       error
     } = useGetDomainsQuery({categoryTerm})
-
+    
     const [ filtered, setFiltered ] = useState([])
-
     const canSave = Boolean(newDomain)
     const canAdd = Boolean(categoryTerm)
 
@@ -54,10 +53,10 @@ const DomainList = ({toggleSitePanel}) => {
       // setSearch(e.target.value)
       const value = e.target.value
       dispatch(setSearchText(value))
-      const filter = domains.filter(domain=>{
-        return domain.domainname.toLowerCase().includes(searchText)
+      const results = domains.filter(item=>{
+        return item.domainname.toLowerCase().includes(searchText)
       })
-      setFiltered(filter)
+      setFiltered(results)
     }
     const getDomain = (domain) => {
       setSelected(domain)
@@ -107,9 +106,9 @@ const DomainList = ({toggleSitePanel}) => {
               />
             </Stack>
 
-            {filtered.map(item=>(
+            {/* {filtered.map(item=>(
               <p key={item._id}>{item.domainname}</p>
-            ))}
+            ))} */}
             {error ? (
               <Typography>Oh no, there was an error</Typography>
             ) : isLoading ? (
