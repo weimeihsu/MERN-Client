@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-
+import Domain from './Domain'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
 import ListItemButton from '@mui/material/ListItemButton'
@@ -28,18 +28,22 @@ const DomainList = ({toggleSitePanel}) => {
     // const { searchTerm } = useSelector(state => state.domainFilterSlice)
     const { categoryTerm, searchText } = useSelector(state => state.domainFilterSlice)
     const [ search, setSearch ] = useState(searchText)
+    
+    const {
+      data:domains=[],
+      isLoading,
+      error
+    } = useGetDomainsQuery({categoryTerm})
+
+    const filtering = domains.filter((item=>{
+        return item.domainname.toLowerCase().includes(searchText)
+      }))
+    // console.log(filtering)
 
     useEffect(()=>{
       setSearch(searchText)
     }, [searchText])
 
-    const {
-      data:domains,
-      isLoading,
-      error
-    } = useGetDomainsQuery({categoryTerm})
-    
-    const [ filtered, setFiltered ] = useState([])
     const canSave = Boolean(newDomain)
     const canAdd = Boolean(categoryTerm)
 
@@ -53,10 +57,10 @@ const DomainList = ({toggleSitePanel}) => {
       // setSearch(e.target.value)
       const value = e.target.value
       dispatch(setSearchText(value))
-      const results = domains.filter(item=>{
-        return item.domainname.toLowerCase().includes(searchText)
-      })
-      setFiltered(results)
+      // const results = domains.filter(item=>{
+      //   return item.domainname.toLowerCase().includes(searchText)
+      // })
+      // setFiltered(results)
     }
     const getDomain = (domain) => {
       setSelected(domain)
@@ -115,36 +119,8 @@ const DomainList = ({toggleSitePanel}) => {
               <Typography>Loading...</Typography>
             ) : domains ? (
               <List color='secondary' >
-              {domains.map(recordItem => (
-                <Link key={recordItem._id} to={`${recordItem.sitename}/${recordItem.domainname}`} >
-                  <ListItem sx={{padding:'4px 0'}}>
-                  <ListItemButton
-                  onClick={()=>getDomain(recordItem.domainname)}
-                  selected={selected === recordItem.domainname}
-                  sx={{border: '1px solid ',
-                  borderColor: 'secondary.light',
-                  borderRadius: 1,
-                  '&:hover': {
-                    backgroundColor: 'secondary.light',
-                    color:'secondary.contrastText'
-                  },
-                  '&.Mui-selected, && .Mui-selected:hover': {
-                    backgroundColor: 'secondary.light',
-                    color:'secondary.contrastText',
-                    '&:hover':{
-                        backgroundColor: 'secondary.light',
-                        color:'secondary.contrastText'
-                    }
-                  }  
-                  }}>
-                    <ListItemText primary={recordItem.domainname} />
-
-                    <IconButton size="small" aria-label="delete" onClick={(e) => handleDelete(e, recordItem._id)}>
-                      <DeleteIcon fontSize="inherit"/>
-                    </IconButton>
-                  </ListItemButton>
-                  </ListItem>
-                </Link>
+              {filtering.map(recordItem => (
+                <Domain key={recordItem._id} recordItem={recordItem} selected={selected} getDomain={getDomain} handleDelete={handleDelete}/>
               ))}
               </List>  
             ) : null}
