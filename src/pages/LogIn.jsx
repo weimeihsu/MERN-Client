@@ -17,10 +17,17 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 const LogIn = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const [ login, {isLoading} ] = useLoginMutation()
-    const { userInfo } = useSelector(store=>store.authSlice)
     const [ email, setEmail ] = useState('')
     const [ password, setPassword ] = useState('')
+    const [ login, { isLoading } ] = useLoginMutation()
+    const { userInfo } = useSelector(store=>store.authSlice)
+    
+    useEffect(()=>{
+        if(userInfo){
+            navigate('/')
+        }
+    },[navigate, userInfo])
+
     const changeEmail = (e) => {
         setEmail(e.target.value)
     }
@@ -35,14 +42,11 @@ const LogIn = () => {
             dispatch(setCredentials({...res}))
             navigate('/')
         } catch(err){
-           console.log(err?.data?.message || err.error)
+           console.log(err.data)
+        //    backend res.status(400).json({err:'The User Exists'})
         }
     }
-    useEffect(()=>{
-        if(userInfo){
-            navigate('/')
-        }
-    },[navigate, userInfo])
+   
     return ( 
         <>
         <header>

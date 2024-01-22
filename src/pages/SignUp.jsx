@@ -42,7 +42,9 @@ const SignUp = () => {
             dispatch(setCredentials({...res}))
             navigate('/')
         }catch(err){
-            console.log(err?.data?.message || err.error)
+            console.log(err.data)
+            // backend res.json(err.message)
+            // res.status(400).json('The User Exists')-if email exist
         }
     }
 
