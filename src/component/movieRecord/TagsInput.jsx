@@ -8,33 +8,42 @@ import DeleteIcon from '@mui/icons-material/Delete'
 import CreateIcon from '@mui/icons-material/Create'
 import Stack from '@mui/material/Stack'
 import { useState } from 'react'
-import { useGetGenresQuery } from '../../slices/genreApiSlice'
-
-
+import { useGetGenresQuery, useAddGenreMutation } from '../../slices/genreApiSlice'
 
 const TagsInputs = () => {
     const [ trackedValue, setTrackedValue ] = useState('')
-    const { data: genres, isLoading } = useGetGenresQuery()
+    const { data: genres=[], isLoading } = useGetGenresQuery()
+    const [ addGenre ] = useAddGenreMutation()
     const [ genre, setGenre ] = useState([])
+    // const [ newGenre, serNewGenre ] = useState('')
     const handleChange = (e) => {
             setTrackedValue(e.target.value)
         }
     const handleKeyDown = (e) => {
         if (e.key === 'Enter'){
             setGenre([...genre, trackedValue])
-            setTrackedValue('')
+            // serNewGenre(trackedValue)
+            
+            try{
+                const res = addGenre({ name: trackedValue }).unwrap
+                // dispatch(setCredentials({...res}))
+                }catch(err){
+                    console.log(err?.data?.message || err.error)
+                }
+                setTrackedValue('')
         }
+        
     }
     const handleDelete = (idx) => {
         console.log('You clicked the delete icon.'+ idx);
     }
     return ( 
         <>
-            {genre.map((item,idx)=>(
-                <Stack key={idx} direction="row" justifyContent="space-between">
-                    <Chip label={item}/>
+            {genres.map(item=>(
+                <Stack key={item._id} direction="row" justifyContent="space-between">
+                    <Chip label={item.name}/>
                     <Stack direction="row" spacing={1}>
-                        <IconButton aria-label="delete" size="small" onClick={()=>handleDelete(idx)}>
+                        <IconButton aria-label="delete" size="small" onClick={()=>handleDelete(item._id)}>
                         <DeleteIcon fontSize="inherit" />
                         </IconButton>
                         <IconButton aria-label="createIcon" size="small">
