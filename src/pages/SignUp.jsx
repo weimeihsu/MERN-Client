@@ -13,6 +13,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import { useSelector, useDispatch } from 'react-redux'
 import { useRegisterMutation } from '../slices/userApiSlice'
 import { setCredentials } from '../slices/authSlice'
+import { toast } from 'react-toastify'
 
 const SignUp = () => {
     const dispatch = useDispatch()
@@ -42,7 +43,7 @@ const SignUp = () => {
             dispatch(setCredentials({...res}))
             navigate('/')
         }catch(err){
-            console.log(err.data)
+            toast.error(err.data)
             // backend res.json(err.message)
             // res.status(400).json('The User Exists')-if email exist
         }

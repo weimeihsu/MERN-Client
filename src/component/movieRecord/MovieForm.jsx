@@ -13,27 +13,27 @@ import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
 import api from '../../axois/api'
 
-const MovieForm = ({recordID, recordTitle, recordCategory, formTitle, btnText, closeForm}) => {
+const MovieForm = ({recordID, recordTitle, recordGenre, formTitle, btnText, closeForm}) => {
     const dispatch = useDispatch()
-    const {categories} = useSelector(store => store.recordSlice)
+    const { genres } = useSelector(store => store.recordSlice)
     // this state is for button and title text
 
     const [title, setTitle] = useState(recordID ? recordTitle : '')
-    const [category, setCategory] = useState(recordID ? recordCategory :'')
+    const [genre, setGenre] = useState(recordID ? recordGenre :'')
     const [error, setError] = useState(null)
     
     const changeTitle = (e) => {
         setTitle(e.target.value);
     }
-    const changeCategory = (e) => {
-        setCategory(e.target.value)
+    const changeGenre = (e) => {
+        setGenre(e.target.value)
     }
     // condition. add or update
     const handleSubmit = (e) => {
         e.preventDefault()
-        // recordCreate({title, category})
+        // recordCreate({title, genre})
         const id = recordID 
-        const record = {title, category}
+        const record = {title, genre}
         id ? recordUpdate(id, record) : recordCreate(record)           
     }
     // create record
@@ -42,7 +42,7 @@ const MovieForm = ({recordID, recordTitle, recordCategory, formTitle, btnText, c
             const res = await api.post('/api/records', record)
             const newRecord = await res.data
             dispatch(addRecord({newRecord}))
-            setCategory('')
+            setGenre('')
             setTitle('')
         }
         catch(err){
@@ -55,7 +55,7 @@ const MovieForm = ({recordID, recordTitle, recordCategory, formTitle, btnText, c
             const res = await api.put(`/api/records/${id}`, record)
             const theRecord = await res.data
             dispatch(updateRecord({theRecord, record}))
-            setCategory('')
+            setGenre('')
             setTitle('')
             closeForm()
         }catch(err){
@@ -74,22 +74,22 @@ const MovieForm = ({recordID, recordTitle, recordCategory, formTitle, btnText, c
                     <Typography>Current Data</Typography>
                     <div><Typography mr={2} sx={{fontWeight:'bold'}}>Movie ID:</Typography>{recordID}</div>
                     <div><Typography mr={2} sx={{fontWeight:'bold'}}>Moview Title:</Typography>{recordTitle}</div>
-                    <div><Typography mr={2} sx={{fontWeight:'bold'}}>Movie Category:</Typography>{recordCategory}</div>
+                    <div><Typography mr={2} sx={{fontWeight:'bold'}}>Movie Genre:</Typography>{recordGenre}</div>
                 </Stack>
             </Grid>
          }
             <Grid item>
             <TextField id="movie-name" label="Movie name" variant="outlined" size="small" sx={{mb:2}} fullWidth onChange={changeTitle} value={title}/>
                     <FormControl fullWidth required size="small" sx={{mb:2}}>
-                        <InputLabel id="movie-category">Category</InputLabel>
+                        <InputLabel id="movie-genre">Genre</InputLabel>
                         <Select
-                        labelId="label-movie-category"
-                        value={category}
-                        label="Category"
-                        onChange={changeCategory}  
+                        labelId="label-movie-genre"
+                        value={genre}
+                        label="Genre"
+                        onChange={changeGenre}  
                         >
-                            {categories.map((categoryItem, idx)=>(
-                                <MenuItem name={categoryItem} key={idx} value={categoryItem}>{categoryItem}</MenuItem>
+                            {genres.map((genreItem, idx)=>(
+                                <MenuItem name={genreItem} key={idx} value={genreItem}>{genreItem}</MenuItem>
                             ))}
                         </Select>
                     </FormControl>

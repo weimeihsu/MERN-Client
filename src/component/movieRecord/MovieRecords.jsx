@@ -20,7 +20,7 @@ const movieRecords = () => {
         dispatch(fetchRecords())
     },[])
     
-    const {records} = useSelector(store => store.recordSlice)
+    const { records } = useSelector(store => store.recordSlice)
     const handleDelete = async (id) =>{
         try{
             const res = await api.delete(`/api/records/${id}`)
@@ -37,7 +37,7 @@ const movieRecords = () => {
                     <Typography variant="h6">
                         {recordItem.title}
                     </Typography>
-                    <Chip label={recordItem.category} size="small" sx={{mr:1}}/>
+                    <Chip label={recordItem.genre} size="small" sx={{mr:1}}/>
                     <Typography variant="caption">
                         {recordItem.createdAt}
                     </Typography>
@@ -47,7 +47,7 @@ const movieRecords = () => {
                     <IconButton size="small" aria-label="delete" onClick={() => handleDelete(recordItem._id)}>
                         <DeleteIcon fontSize="inherit"/>
                     </IconButton>
-                    <OpenModal key={recordItem._id} id={recordItem._id} title={recordItem.title} category={recordItem.category}/>
+                    <OpenModal key={recordItem._id} id={recordItem._id} title={recordItem.title} genre={recordItem.genre}/>
                 </CardActions> 
             </Card>
         ))} 

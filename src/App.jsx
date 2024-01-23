@@ -1,5 +1,7 @@
 import Routers from './routers/Routers'
 import { RouterProvider } from 'react-router-dom'
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 // const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })
@@ -21,7 +23,10 @@ import { RouterProvider } from 'react-router-dom'
 
 const App = () => {
   return (
+    <>
+      <ToastContainer />
       <RouterProvider router={Routers}/>
+    </>
   )
 }
 

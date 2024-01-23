@@ -1,6 +1,5 @@
 
 import FormControl from '@mui/material/FormControl'
-import InputLabel from '@mui/material/InputLabel'
 import OutlinedInput from '@mui/material/OutlinedInput'
 import FormHelperText from '@mui/material/FormHelperText'
 import Chip from '@mui/material/Chip'
@@ -9,30 +8,33 @@ import DeleteIcon from '@mui/icons-material/Delete'
 import CreateIcon from '@mui/icons-material/Create'
 import Stack from '@mui/material/Stack'
 import { useState } from 'react'
+import { useGetGenresQuery } from '../../slices/genreApiSlice'
+
 
 
 const TagsInputs = () => {
     const [ trackedValue, setTrackedValue ] = useState('')
-    const [ category, setCategory ] = useState([])
+    const { data: genres, isLoading } = useGetGenresQuery()
+    const [ genre, setGenre ] = useState([])
     const handleChange = (e) => {
             setTrackedValue(e.target.value)
         }
     const handleKeyDown = (e) => {
         if (e.key === 'Enter'){
-            setCategory([...category, trackedValue])
+            setGenre([...genre, trackedValue])
             setTrackedValue('')
         }
     }
     const handleDelete = (idx) => {
-        console.info('You clicked the delete icon.'+ idx);
+        console.log('You clicked the delete icon.'+ idx);
     }
     return ( 
         <>
-            {category.map((item,idx)=>(
+            {genre.map((item,idx)=>(
                 <Stack key={idx} direction="row" justifyContent="space-between">
                     <Chip label={item}/>
                     <Stack direction="row" spacing={1}>
-                        <IconButton aria-label="delete" size="small">
+                        <IconButton aria-label="delete" size="small" onClick={()=>handleDelete(idx)}>
                         <DeleteIcon fontSize="inherit" />
                         </IconButton>
                         <IconButton aria-label="createIcon" size="small">

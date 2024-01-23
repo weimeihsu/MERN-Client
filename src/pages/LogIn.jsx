@@ -13,6 +13,7 @@ import Typography from '@mui/material/Typography'
 import Toolbar from '@mui/material/Toolbar'
 import Logo from '../component/Logo'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
+import { toast } from 'react-toastify'
 
 const LogIn = () => {
     const dispatch = useDispatch()
@@ -42,7 +43,7 @@ const LogIn = () => {
             dispatch(setCredentials({...res}))
             navigate('/')
         } catch(err){
-           console.log(err.data)
+            toast.error(err.data)
         //    backend res.status(400).json({err:'The User Exists'})
         }
     }

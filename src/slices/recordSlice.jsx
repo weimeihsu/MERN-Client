@@ -3,7 +3,7 @@ import api from '../axois/api'
 
 const initialState = {
     records:[],
-    categories:['Action','Drama','Fiction','Fantasy','Animation'],
+    genres:['Action','Drama','Fiction','Fantasy','Animation'],
     status:'idle', //'idle' | 'loading' | 'succeded' | 'failed'
     error:null
 } 
@@ -29,12 +29,12 @@ export const recordsSlice = createSlice({
         updateRecord: (state, action)=>{
             const { theRecord, record } = action.payload
             const RecordsLeft = state.records.filter(item => item._id !== theRecord._id)
-            const UpdateTheLocalRecord = {...theRecord, title:record.title, category:record.category}
+            const UpdateTheLocalRecord = {...theRecord, title:record.title, genre:record.genre}
             // remove the updated record before add in
             state.records = [UpdateTheLocalRecord, ...RecordsLeft]
 
             // const recordIdx = state.records.findIndex(item => item._id === id)
-            // const updatedRecord = {...state.records[recordIdx], title:theRecord.title, category:theRecord.category}
+            // const updatedRecord = {...state.records[recordIdx], title:theRecord.title, genre:theRecord.genre}
             // const newArry = [...state.records] 
             // newArry[recordIdx] = updatedRecord
             // state.records = newArry
