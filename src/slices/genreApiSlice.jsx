@@ -5,7 +5,7 @@ export const genreApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         getGenres: builder.query({
             query:()=>`${API_URL}`,
-            providesTags:['Genres']
+            providesTags: ['Genres']
         }),
         addGenre: builder.mutation({
             query: (genre) => ({
@@ -13,7 +13,7 @@ export const genreApiSlice = apiSlice.injectEndpoints({
                 method: "POST",
                 body: genre
             }),
-            invalidatesTags:['Genres']
+            invalidatesTags: ['Genres']
             // this tag can help clean cache and get updated data right away
         }),
     })

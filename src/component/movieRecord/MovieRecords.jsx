@@ -13,14 +13,14 @@ import Chip from '@mui/material/Chip'
 import OpenModal from './OpenModal'
 import api from '../../axois/api'
 
-const movieRecords = () => {
+const MovieRecords = () => {
     const dispatch = useDispatch()
 
     useEffect(()=>{
         dispatch(fetchRecords())
     },[])
     
-    const { records } = useSelector(store => store.recordSlice)
+    const { filtered } = useSelector(store => store.recordSlice)
     const handleDelete = async (id) =>{
         try{
             const res = await api.delete(`/api/records/${id}`)
@@ -31,7 +31,7 @@ const movieRecords = () => {
     }
     return ( 
         <>
-         {records && records.map(recordItem=>(
+         {filtered && filtered.map(recordItem=>(
             <Card key={recordItem._id} variant="outlined" sx={{mb:1, display:'flex', justifyContent:'space-between'}} >
                 <CardContent>
                     <Typography variant="h6">
@@ -55,4 +55,4 @@ const movieRecords = () => {
      );
 }
  
-export default movieRecords;
+export default MovieRecords;

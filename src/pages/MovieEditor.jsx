@@ -1,8 +1,9 @@
-import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
 import TagsInputs from '../component/movieRecord/TagsInput'
 import Typography from '@mui/material/Typography'
+
 import MovieRecords from '../component/movieRecord/MovieRecords'
+import TagMovieEditor from '../component/movieRecord/TagMovieEditor'
 
 const MovieEditor = () => {
   return ( 
@@ -11,12 +12,12 @@ const MovieEditor = () => {
     alignItems="flex-start"
     spacing={2}>
         <Grid item xs={6}>
-          <Typography variant='h5'>Movie Tags Create and Update</Typography>
-          <TagsInputs/>
+          <Typography variant='h5'>Create Tags</Typography>
+              <TagsInputs/>
         </Grid>
         <Grid item xs={6}>
-          <Typography variant='h5'>Current MovieList</Typography>
-          {/* <MovieRecords/> */}
+          <Typography variant='h5'>Tag and Movie</Typography>
+              <TagMovieEditor/>
         </Grid>  
     </Grid>
    );

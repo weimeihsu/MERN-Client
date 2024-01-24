@@ -3,7 +3,9 @@ import api from '../axois/api'
 
 const initialState = {
     records:[],
-    genres:['Action','Drama','Fiction','Fantasy','Animation'],
+    filtered:[],
+    selectedGenre:'',
+    // genres:['Action','Drama','Fiction','Fantasy','Animation'],
     status:'idle', //'idle' | 'loading' | 'succeded' | 'failed'
     error:null
 } 
@@ -28,16 +30,24 @@ export const recordsSlice = createSlice({
         },
         updateRecord: (state, action)=>{
             const { theRecord, record } = action.payload
-            const RecordsLeft = state.records.filter(item => item._id !== theRecord._id)
+            const noChangeRecords = state.records.filter(item => item._id !== theRecord._id)
             const UpdateTheLocalRecord = {...theRecord, title:record.title, genre:record.genre}
             // remove the updated record before add in
-            state.records = [UpdateTheLocalRecord, ...RecordsLeft]
+            state.records = [UpdateTheLocalRecord, ...noChangeRecords]
 
             // const recordIdx = state.records.findIndex(item => item._id === id)
             // const updatedRecord = {...state.records[recordIdx], title:theRecord.title, genre:theRecord.genre}
             // const newArry = [...state.records] 
             // newArry[recordIdx] = updatedRecord
             // state.records = newArry
+        },
+        filter: (state, action) => {
+            const { theGenre } = action.payload
+            const result = state.records.filter(item => item.genre === theGenre)
+            state.filtered = result
+        },
+        setSelectedGenre: (state, action) => {
+            state.selectedGenre = action.payload
         }
     },
     extraReducers(builder) {
@@ -48,6 +58,7 @@ export const recordsSlice = createSlice({
         .addCase(fetchRecords.fulfilled, (state, action)=>{
             state.status='succeeded'
             state.records=action.payload
+            state.filtered=action.payload
         })
         .addCase(fetchRecords.rejected, (state)=>{
             state.status='failed'
@@ -57,7 +68,7 @@ export const recordsSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { addRecord, deleteRecord, updateRecord } = recordsSlice.actions
+export const { addRecord, deleteRecord, updateRecord, filter, setSelectedGenre } = recordsSlice.actions
 // export const { selectAllRecords } = state => state.recordsState.records
 // export const { getFetchStatus } = state => state.recordsState.status
 // export const { getFetchError } = state => state.recordsState.error

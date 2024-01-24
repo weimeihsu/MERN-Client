@@ -6,15 +6,11 @@ export const domainApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         getDomains: builder.query({
             query: ({categoryTerm}) => {
-                // if(searchTerm){
-                //     return `${API_URL}/search?domainname=${searchTerm}`
-                // }
                 if(categoryTerm){
                     return `${API_URL}/${categoryTerm}`
                 }
                 return `${API_URL}`
             },
-            // transformResponse: res => res.data,
             providesTags:['Domains']
         }),
         // getDomains: builder.query({

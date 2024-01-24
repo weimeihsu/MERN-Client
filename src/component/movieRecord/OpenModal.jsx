@@ -34,7 +34,7 @@ const OpenModal = ({id, title, genre}) => {
         aria-labelledby="modal-MovieForm"
         aria-describedby="modal-description"
         >
-            <Box sx={style}>
+            <Box sx={style}> 
                 <MovieForm recordID={id} recordTitle={title} recordGenre={genre} formTitle={'Movie Update'} btnText={'Update'} closeForm={handleClose}/>
             </Box>
         </Modal>

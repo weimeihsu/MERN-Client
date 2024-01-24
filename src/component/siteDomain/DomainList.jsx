@@ -113,7 +113,7 @@ const DomainList = ({toggleSitePanel}) => {
             ) : isLoading ? (
               <Typography>Loading...</Typography>
             ) : domains ? (
-              <List color='secondary' >
+              <List>
               {filtering.map(recordItem => (
                 <Domain key={recordItem._id} recordItem={recordItem} selected={selected} getDomain={getDomain} handleDelete={handleDelete}/>
               ))}

@@ -1,7 +1,6 @@
 import Drawer from '@mui/material/Drawer'
 import MainMenu from './MainMenu'
 
-
 const LeftDrawer = ({drawerWidth, open}) => {
     return ( 
         <Drawer

@@ -12,15 +12,17 @@ import Button from '@mui/material/Button'
 import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
 import api from '../../axois/api'
+import { useGetGenresQuery } from '../../slices/genreApiSlice'
 
 const MovieForm = ({recordID, recordTitle, recordGenre, formTitle, btnText, closeForm}) => {
     const dispatch = useDispatch()
-    const { genres } = useSelector(store => store.recordSlice)
+    const { data: genres=[], isLoading } = useGetGenresQuery()
+    // const { genres } = useSelector(store => store.recordSlice)
     // this state is for button and title text
 
-    const [title, setTitle] = useState(recordID ? recordTitle : '')
-    const [genre, setGenre] = useState(recordID ? recordGenre :'')
-    const [error, setError] = useState(null)
+    const [ title, setTitle ] = useState(recordID ? recordTitle : '')
+    const [ genre, setGenre ] = useState(recordID ? recordGenre : '')
+    const [ error, setError ] = useState(null)
     
     const changeTitle = (e) => {
         setTitle(e.target.value);
@@ -88,8 +90,8 @@ const MovieForm = ({recordID, recordTitle, recordGenre, formTitle, btnText, clos
                         label="Genre"
                         onChange={changeGenre}  
                         >
-                            {genres.map((genreItem, idx)=>(
-                                <MenuItem name={genreItem} key={idx} value={genreItem}>{genreItem}</MenuItem>
+                            {genres.map(item=>(
+                                <MenuItem name={item.name} key={item._id} value={item.name}>{item.name}</MenuItem>
                             ))}
                         </Select>
                     </FormControl>

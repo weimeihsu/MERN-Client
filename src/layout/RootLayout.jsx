@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import TopNavBar from '../component/TopNavBar'
-import { CustomMain, MainHeader} from '../customStyle/CustomComponent'
+import { CustomMain, MainHeader } from '../customStyle/CustomComponent'
 import LeftDrawer from '../component/LeftDrawer'
 import { ThemeProvider } from '@mui/material/styles'
 import { mainTheme } from '../mainTheme'

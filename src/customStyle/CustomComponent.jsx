@@ -1,4 +1,6 @@
 import { styled } from '@mui/material/styles'
+import { mainTheme } from '../mainTheme'
+import ListItemButton from '@mui/material/ListItemButton'
 
 const drawerWidth = 240;
 
@@ -28,4 +30,22 @@ const MainHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-end',
 }));
 
-export  { CustomMain, MainHeader }
+const StyledListItemButton = styled(ListItemButton)(({ theme })=>({
+  border: '1px solid',
+  borderColor: theme.palette.secondary.light,
+  borderRadius: 2,
+  '&:hover': {
+    backgroundColor: theme.palette.secondary.light,
+    color: theme.palette.secondary.contrastText
+  },
+  '&.Mui-selected, && .Mui-selected:hover': {
+    backgroundColor: theme.palette.secondary.light,
+    color: theme.palette.secondary.contrastText,
+    '&:hover':{
+        backgroundColor: theme.palette.secondary.light,
+        color: theme.palette.secondary.contrastText
+    }
+  }
+}))
+
+export { CustomMain, MainHeader, StyledListItemButton }
