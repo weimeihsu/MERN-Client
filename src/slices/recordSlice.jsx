@@ -48,6 +48,10 @@ export const recordsSlice = createSlice({
         },
         setSelectedGenre: (state, action) => {
             state.selectedGenre = action.payload
+        },
+        clearSelectedGenre: (state, action) => {
+            state.selectedGenre = ''
+            state.filtered=state.records
         }
     },
     extraReducers(builder) {
@@ -68,7 +72,7 @@ export const recordsSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { addRecord, deleteRecord, updateRecord, filter, setSelectedGenre } = recordsSlice.actions
+export const { addRecord, deleteRecord, updateRecord, filter, setSelectedGenre, clearSelectedGenre } = recordsSlice.actions
 // export const { selectAllRecords } = state => state.recordsState.records
 // export const { getFetchStatus } = state => state.recordsState.status
 // export const { getFetchError } = state => state.recordsState.error

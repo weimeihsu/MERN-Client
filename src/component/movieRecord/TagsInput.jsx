@@ -1,4 +1,9 @@
 
+import { toTitleCase } from '../../func/toTitleCase'
+import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { filter, setSelectedGenre } from '../../slices/recordSlice'
+import { useGetGenresQuery, useAddGenreMutation } from '../../slices/genreApiSlice'
 import FormControl from '@mui/material/FormControl'
 import OutlinedInput from '@mui/material/OutlinedInput'
 import FormHelperText from '@mui/material/FormHelperText'
@@ -8,19 +13,18 @@ import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
 import ListItemText from '@mui/material/ListItemText'
 import { StyledListItemButton } from '../../customStyle/CustomComponent'
-import { toTitleCase } from '../../func/toTitleCase'
-import { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { filter, setSelectedGenre } from '../../slices/recordSlice'
-import { useGetGenresQuery, useAddGenreMutation } from '../../slices/genreApiSlice'
 
 const TagsInputs = () => {
     const dispatch = useDispatch()
     const { selectedGenre } = useSelector(state=>state.recordSlice)
+    const [ selected, setSelected ] = useState(selectedGenre)
     const [ trackedValue, setTrackedValue ] = useState('')
     const { data: genres=[], isLoading } = useGetGenresQuery()
     const [ addGenre ] = useAddGenreMutation()
-    const [ selected, setSelected ] = useState(selectedGenre)
+    useEffect(()=>{
+        setSelected(selectedGenre)
+    },[selectedGenre])
+
     // const [ newGenre, serNewGenre ] = useState('')
     const handleChange = (e) => {
         setTrackedValue(e.target.value)
