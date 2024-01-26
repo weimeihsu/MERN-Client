@@ -8,9 +8,11 @@ import Button from '@mui/material/Button'
 const TagMovieEditor = () => {
     const { selectedGenre } = useSelector(state=>state.recordSlice)
     const [ newGenre, setNewGenre ] = useState(selectedGenre)
-   
+    const [ placeholder, setPlaceholder] = useState(selectedGenre)
+    useEffect(()=>{
+        setPlaceholder(selectedGenre)
+    },[selectedGenre])
     const canSave = Boolean(newGenre)
-    const canAdd = Boolean(newGenre)
     const changeGenre = (e) => {
         setNewGenre(e.target.value)
       } 
@@ -24,7 +26,7 @@ const TagMovieEditor = () => {
         <>
         {selectedGenre &&
             <Stack spacing={1} direction="row" alignItems="center" useFlexGap flexWrap="wrap" sx={{flexGrow:1}}>
-              <TextField id="genre" label="Genre" variant="outlined" size="small" value={newGenre} onChange={changeGenre} disabled={!canAdd}/>
+              <TextField id="genre" variant="outlined" size="small" placeholder={placeholder} value={newGenre} onChange={changeGenre}/>
 
               {selectedGenre && <Button variant="text" disabled={!canSave} sx={{ml:2}} onClick={clearInput}>Cancel</Button>}
               <Button variant="contained" disabled={!canSave} type='submit' onClick={handleSubmit}>Update</Button>
