@@ -42,9 +42,9 @@ const TagsInputs = () => {
         }
         
     }
-    const handleEdit = (genre) => { 
-        setSelected(genre)
-        dispatch(filter({ theGenre: genre }))
+    const getGenre = (genre) => { 
+        setSelected(genre._id)
+        dispatch(filter({ theGenre: genre.name }))
         dispatch(setSelectedGenre(genre))
     }
     return ( 
@@ -63,9 +63,9 @@ const TagsInputs = () => {
         </FormControl>
         <List>
             {genres.map(item=>(
-                <ListItem sx={{padding:'4px 0'}} key={item._id} onClick={() => handleEdit(item.name)}>
+                <ListItem sx={{padding:'4px 0'}} key={item._id} onClick={() => getGenre(item)}>
                 <StyledListItemButton
-                selected={selected === item.name}
+                selected={selected === item._id}
                 >
                   <ListItemText primary={item.name} />
                   <IconButton size="small" aria-label="delete" >

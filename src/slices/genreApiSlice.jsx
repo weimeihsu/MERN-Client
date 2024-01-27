@@ -16,7 +16,23 @@ export const genreApiSlice = apiSlice.injectEndpoints({
             invalidatesTags: ['Genres']
             // this tag can help clean cache and get updated data right away
         }),
+        updateGenre: builder.mutation({
+            query: ({genre}) => ({
+                url: `${API_URL}/genre/${genre._id}`,
+                method: "PATCH",
+                body: genre
+            }),
+            invalidatesTags:['Genres']
+        }),
+        deleteGenre: builder.mutation({
+            query: ({id}) => ({
+                url: `${API_URL}/genre/${id}`,
+                method: "DELETE",
+                body: id
+            }),
+            invalidatesTags:['Genres']
+        }),
     })
 })
 
-export const { useGetGenresQuery, useAddGenreMutation } = genreApiSlice
+export const { useGetGenresQuery, useAddGenreMutation, useDeleteGenreMutation, useUpdateGenreMutation } = genreApiSlice
