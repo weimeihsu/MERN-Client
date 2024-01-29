@@ -39,12 +39,14 @@ const TagMovieEditor = () => {
                 console.log(err?.data?.message || err.error)
             }
             setNewGenre('')
+            setPlaceholder('')
+            setOpenDialog(false)
     }
     const handleClickOpenDialog = () => {
-        setOpenDialog(true);
+        setOpenDialog(true)
     }
     const handleCloseDialog = () => {
-        setOpenDialog(false);
+        setOpenDialog(false)
     }
 
     return ( 

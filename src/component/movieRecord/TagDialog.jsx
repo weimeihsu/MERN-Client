@@ -6,7 +6,7 @@ import DialogContentText from '@mui/material/DialogContentText'
 import DialogTitle from '@mui/material/DialogTitle'
 import Button from '@mui/material/Button'
 
-const TagDialog = ({openDialog, handleCloseDialog, handleSubmit }) => {
+const TagDialog = ({openDialog, handleCloseDialog, handleSubmit}) => {
     
     return ( 
         <Dialog
@@ -16,17 +16,17 @@ const TagDialog = ({openDialog, handleCloseDialog, handleSubmit }) => {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {"Use Google's location service?"}
+          {"Update this Tag?"}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            All the items with this tag will be updated as well.
+            All the items using this tag will be updated as well.
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseDialog}>Cancel</Button>
           <Button onClick={handleSubmit} variant='contained' type='submit'>
-            OK
+            Yes
           </Button>
         </DialogActions>
       </Dialog>
