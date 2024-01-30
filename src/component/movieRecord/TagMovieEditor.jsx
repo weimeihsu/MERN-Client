@@ -13,7 +13,7 @@ const TagMovieEditor = () => {
     const selectedGenreName = useSelector(state=>state.recordSlice.selectedGenre.name)
     const [ placeholder, setPlaceholder] = useState(selectedGenreName)
     const [ newGenre, setNewGenre ] = useState(selectedGenreName)
-    const [openDialog, setOpenDialog] = useState(false)
+    const [ openDialog, setOpenDialog ] = useState(false)
 
     useEffect(()=>{
         setNewGenre('')
