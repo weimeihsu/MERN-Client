@@ -11,7 +11,6 @@ const style = {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: '50%',
-    bgcolor: 'background.paper',
     borderRadius:'4px',
     px: 4,
     pb: 4

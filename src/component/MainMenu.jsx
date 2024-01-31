@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { Link, useNavigate} from 'react-router-dom'
 import { clearCategoryTerm, clearSearchText } from '../slices/domainFilterSlice'
 import { clearSelectedGenre } from '../slices/recordSlice'
+import { setSelectedMainMenuName } from '../slices/navListSlice'
 import Toolbar from '@mui/material/Toolbar'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
@@ -17,11 +18,12 @@ const MainMenu = () => {
     const { mainMenu } = useSelector(store=>store.navListSlice)
     const { userInfo } = useSelector(store=>store.authSlice)
     const [ selected, setSelected ] = useState('')
-    const handlesSelected = (id) =>{
-      setSelected(id)
+    const handlesSelected = (item) =>{
+      setSelected(item.id)
       dispatch(clearCategoryTerm())
       dispatch(clearSearchText())
       dispatch(clearSelectedGenre())
+      dispatch(setSelectedMainMenuName(item.name))
     }
  
     const toProfile = () =>{
@@ -44,7 +46,7 @@ const MainMenu = () => {
             {mainMenu.map(navitem => (
               <Link to={navitem.path} key={navitem.id}>
                 <ListItem disablePadding>
-                  <ListItemButton selected={ selected === navitem.id } onClick={()=>handlesSelected(navitem.id)} >
+                  <ListItemButton selected={ selected === navitem.id } onClick={()=>handlesSelected(navitem)} >
                       <ListItemText primary={navitem.name} />
                   </ListItemButton>
                 </ListItem>

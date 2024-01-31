@@ -1,67 +1,39 @@
-import MovieRecords from "./MovieRecords"
-import { useState, useEffect } from "react"
-import { useSelector } from "react-redux"
-import TextField from '@mui/material/TextField'
-import { useUpdateGenreMutation } from "../../slices/genreApiSlice"
-import Stack from '@mui/material/Stack'
-import Button from '@mui/material/Button'
-import TagDialog from "./TagDialog"
+import { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+
+import { useGetGenresQuery } from "../../slices/genreApiSlice"
+import { filter, setSelectedGenre } from '../../slices/recordSlice'
+
+import Chip from '@mui/material/Chip'
+import DeleteIcon from '@mui/icons-material/Delete'
+
+import MovieRecords from './MovieRecords'
+import TagUpdate from './TagUpdate'
+
 
 const TagMovieEditor = () => {
-    const { selectedGenre } = useSelector(state=>state.recordSlice)
+    const dispatch = useDispatch()
     const selectedGenreID = useSelector(state=>state.recordSlice.selectedGenre._id)
     const selectedGenreName = useSelector(state=>state.recordSlice.selectedGenre.name)
-    const [ placeholder, setPlaceholder] = useState(selectedGenreName)
-    const [ newGenre, setNewGenre ] = useState(selectedGenreName)
-    const [ openDialog, setOpenDialog ] = useState(false)
-
-    useEffect(()=>{
-        setNewGenre('')
-        setPlaceholder(selectedGenreName)
-    },[selectedGenreName])
-
-    const canSave = Boolean(newGenre)
-    const changeGenre = (e) => {
-        setNewGenre(e.target.value)
-      } 
-    const clearInput = () =>{
-        setNewGenre('')
-    }
-    const [ updateGenre ] = useUpdateGenreMutation() 
-    const handleSubmit = (e) =>{
-        e.preventDefault()
-        try{
-            const genre = {...selectedGenre, name:newGenre}
-            console.log(genre)
-            const res = updateGenre({genre})
-            // dispatch(setCredentials({...res}))
-            }catch(err){
-                console.log(err?.data?.message || err.error)
-            }
-            setNewGenre('')
-            setPlaceholder('')
-            setOpenDialog(false)
-    }
-    const handleClickOpenDialog = () => {
-        setOpenDialog(true)
-    }
-    const handleCloseDialog = () => {
-        setOpenDialog(false)
+    const [ selected, setSelected ] = useState(selectedGenreID)
+    
+    const { data: genres=[], isLoading } = useGetGenresQuery()
+    
+    const getGenre = (genre) => { 
+        setSelected(genre._id)
+        dispatch(filter({ theGenre: genre.name }))
+        dispatch(setSelectedGenre(genre))
     }
 
     return ( 
         <>
-        {selectedGenreName &&
-            <Stack spacing={1} direction="row" alignItems="center" useFlexGap flexWrap="wrap" sx={{flexGrow:1, my:1}}>
-              <TextField id={selectedGenreID} variant="outlined" size="small" placeholder={placeholder} value={newGenre} onChange={changeGenre}/>
-
-              <Button variant="text" disabled={!canSave} onClick={clearInput}>Cancel</Button>
-              <Button variant="contained" disabled={!canSave} onClick={handleClickOpenDialog}>Update</Button>
-              <TagDialog openDialog={openDialog} handleCloseDialog={handleCloseDialog} handleSubmit={handleSubmit}/>
-            </Stack>}
-        <MovieRecords/>
+        {genres.map(item=>(
+            <Chip key={item._id} onClick={() => getGenre(item)} label={item.name} variant={item._id === selectedGenreID ? 'filled' : 'outlined'} sx={{mr:1, mb:1}} onDelete={()=>handleDelete(item._id)} deleteIcon={<DeleteIcon fontSize='small'/>} />
+        ))} 
+        {selectedGenreName && <TagUpdate/>}
+        <MovieRecords selectedGenreName={selectedGenreName}/>
         </>
      );
 }
  
-export default TagMovieEditor;
+export default TagMovieEditor

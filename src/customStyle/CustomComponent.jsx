@@ -48,4 +48,11 @@ const StyledListItemButton = styled(ListItemButton)(({ theme })=>({
   }
 }))
 
-export { CustomMain, MainHeader, StyledListItemButton }
+const LightBgBox = styled('div')(({theme})=>({
+  backgroundColor: theme.palette.secondary.light,
+  borderRadius: '4px',
+  padding: theme.spacing(2),
+  marginBottom:theme.spacing(2)
+}))
+
+export { CustomMain, MainHeader, StyledListItemButton, LightBgBox }

@@ -1,35 +1,23 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { fetchRecords, deleteRecord, filter } from '../../slices/recordSlice'
-
+import { fetchRecords, syncToFilter } from '../../slices/recordSlice'
+import EditTools from './EditTools'
 import Card from '@mui/material/Card'
-import CardActions from '@mui/material/CardActions'
 import CardContent from '@mui/material/CardContent'
-import IconButton from '@mui/material/IconButton'
-import DeleteIcon from '@mui/icons-material/Delete'
 import Typography from '@mui/material/Typography'
 import Chip from '@mui/material/Chip'
 
-import OpenModal from './OpenModal'
-import api from '../../axois/api'
 
 const MovieRecords = () => {
     const dispatch = useDispatch()
-
-    const { filtered, selectedGenre } = useSelector(store => store.recordSlice)
-
+    const { records, filtered } = useSelector(state => state.recordSlice)
+    const { selectedMainMenuName } = useSelector(state => state.navListSlice)
+    const canEdit = Boolean(selectedMainMenuName === 'Movie Editor')
     useEffect(()=>{
         dispatch(fetchRecords())
-    },[])
-
-    const handleDelete = async (id) =>{
-        try{
-            const res = await api.delete(`/api/records/${id}`)
-            dispatch(deleteRecord({recordID: id}))
-        }catch(err){
-            return err.message
-        }
-    }
+        dispatch(syncToFilter())
+    },[records])
+    
     return ( 
         <>
          {filtered && filtered.map(recordItem=>(
@@ -43,13 +31,7 @@ const MovieRecords = () => {
                         {recordItem.createdAt}
                     </Typography>
                 </CardContent>
-
-                <CardActions sx={{p:2}}>
-                    <IconButton size="small" aria-label="delete" onClick={() => handleDelete(recordItem._id)}>
-                        <DeleteIcon fontSize="inherit"/>
-                    </IconButton>
-                    <OpenModal key={recordItem._id} id={recordItem._id} title={recordItem.title} genre={recordItem.genre}/>
-                </CardActions> 
+                {canEdit ? (<EditTools id={recordItem._id} title={recordItem.title} genre={recordItem.genre}/>):(null)}
             </Card>
         ))} 
         </>

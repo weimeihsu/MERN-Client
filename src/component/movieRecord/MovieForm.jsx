@@ -30,6 +30,10 @@ const MovieForm = ({recordID, recordTitle, recordGenre, formTitle, btnText, clos
     const changeGenre = (e) => {
         setGenre(e.target.value)
     }
+    const handleClear =() =>{
+        setGenre('')
+        setTitle('')
+    }
     // condition. add or update
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -67,41 +71,33 @@ const MovieForm = ({recordID, recordTitle, recordGenre, formTitle, btnText, clos
     return ( 
         <Box sx={{ paddingTop: recordID ? 4 : 0}}>
         <Typography variant='h5'>{formTitle}</Typography>
-        <Box component="form" onSubmit={handleSubmit} sx={{paddingTop:2}}>
-
-        <Grid sx={{ flexGrow: 1 }} container spacing={2}>
         {recordID && 
-            <Grid item>
-                 <Stack spacing={2}>
-                    <Typography>Current Data</Typography>
-                    <div><Typography mr={2} sx={{fontWeight:'bold'}}>Movie ID:</Typography>{recordID}</div>
-                    <div><Typography mr={2} sx={{fontWeight:'bold'}}>Moview Title:</Typography>{recordTitle}</div>
-                    <div><Typography mr={2} sx={{fontWeight:'bold'}}>Movie Genre:</Typography>{recordGenre}</div>
-                </Stack>
-            </Grid>
+            <Stack spacing={2}>
+                <div><Typography mr={2} sx={{fontWeight:'bold'}}>Movie ID:</Typography>{recordID}</div>
+                <div><Typography mr={2} sx={{fontWeight:'bold'}}>Moview Title:</Typography>{recordTitle}</div>
+                <div><Typography mr={2} sx={{fontWeight:'bold'}}>Movie Genre:</Typography>{recordGenre}</div>
+            </Stack>
          }
-            <Grid item>
+        <Box component="form" onSubmit={handleSubmit} sx={{paddingTop:2}}>    
             <TextField id="movie-name" label="Movie name" variant="outlined" size="small" sx={{mb:2}} fullWidth onChange={changeTitle} value={title}/>
-                    <FormControl fullWidth required size="small" sx={{mb:2}}>
-                        <InputLabel id="movie-genre">Genre</InputLabel>
-                        <Select
-                        labelId="label-movie-genre"
-                        value={genre}
-                        label="Genre"
-                        onChange={changeGenre}  
-                        >
-                            {genres.map(item=>(
-                                <MenuItem name={item.name} key={item._id} value={item.name}>{item.name}</MenuItem>
-                            ))}
-                        </Select>
-                    </FormControl>
-                <Stack spacing={2} direction="row">
-                    <Button variant="contained" type='submit'>{btnText}</Button>
-                    {recordID && <Button variant="outlined" type='button' onClick={closeForm}>Cancel</Button>}      
-                </Stack>
-                {error && <div>{error}</div>}
-            </Grid>
-        </Grid>  
+            <FormControl fullWidth required size="small" sx={{mb:2}}>
+                <InputLabel id="movie-genre">Genre</InputLabel>
+                <Select
+                labelId="label-movie-genre"
+                value={genre}
+                label="Genre"
+                onChange={changeGenre}  
+                >
+                    {genres.map(item=>(
+                        <MenuItem name={item.name} key={item._id} value={item.name}>{item.name}</MenuItem>
+                    ))}
+                </Select>
+            </FormControl>
+            <Stack spacing={2} direction="row" justifyContent="flex-end"> 
+                {recordID ? (<Button variant='text' type='button' onClick={closeForm}>Cancel</Button>) : (<Button variant='text' onClick={handleClear}>Cancel</Button>) }      
+                <Button variant="contained" type='submit'>{btnText}</Button> 
+            </Stack>
+            {error && <div>{error}</div>}
         </Box>
         </Box>
     );

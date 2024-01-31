@@ -10,7 +10,7 @@ const initialState = {
         {id:6, path:'/store-editor', name:'Store Editor'},
         {id:7, path:'/try-layout', name:'Try Layout'}
     ],
-    selectedValue:'',
+    selectedMainMenuName:'',
     checkOutPage:[
         {id:1, path:'/checkout', name:'Checkout'},
         {id:2, path:'/checkout-success', name:'Checkout Success'},
@@ -57,17 +57,11 @@ export const navListSlice = createSlice({
         //     // const site = state.selectedSiteName.unwrap()
         //     state.filteredDomains = [...state.domainList].filter(item => item.sitename === site)
         // },
-        initValue: (state, action) => {
-            state.selectedValue = ''
-        },
-        // initDomains: (state, action) => {
-        //     state.filteredDomains = [...state.domainList]
-        // },
-        // initSites: (state, action) => {
-        //     state.selectedSiteName = null
-        // }
+        setSelectedMainMenuName: (state, action) => {
+            state.selectedMainMenuName = action.payload
+        }
     }
 })
 
-export const { } = navListSlice.actions
+export const { setSelectedMainMenuName } = navListSlice.actions
 export default navListSlice.reducer

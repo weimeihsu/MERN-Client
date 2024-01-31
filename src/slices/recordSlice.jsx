@@ -41,6 +41,9 @@ export const recordsSlice = createSlice({
             // newArry[recordIdx] = updatedRecord
             // state.records = newArry
         },
+        syncToFilter: (state, action) => { 
+            state.filtered = state.records
+        },
         filter: (state, action) => {
             const { theGenre } = action.payload
             const result = state.records.filter(item => item.genre === theGenre)
@@ -62,7 +65,6 @@ export const recordsSlice = createSlice({
         .addCase(fetchRecords.fulfilled, (state, action)=>{
             state.status='succeeded'
             state.records=action.payload
-            state.filtered=action.payload
         })
         .addCase(fetchRecords.rejected, (state)=>{
             state.status='failed'
@@ -72,7 +74,7 @@ export const recordsSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { addRecord, deleteRecord, updateRecord, filter, setSelectedGenre, clearSelectedGenre } = recordsSlice.actions
+export const { addRecord, deleteRecord, updateRecord, filter, setSelectedGenre, clearSelectedGenre, syncToFilter } = recordsSlice.actions
 // export const { selectAllRecords } = state => state.recordsState.records
 // export const { getFetchStatus } = state => state.recordsState.status
 // export const { getFetchError } = state => state.recordsState.error
