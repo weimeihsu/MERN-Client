@@ -57,6 +57,7 @@ const TagUpdate = () => {
     }
 
     return ( 
+        <>
         <LightBgBox>
             <Typography variant='h5'>Update Tag</Typography>
             <Stack spacing={1} direction="row" alignItems="center" useFlexGap flexWrap="wrap" sx={{flexGrow:1, my:1}}>
@@ -67,6 +68,8 @@ const TagUpdate = () => {
               <TagDialog openDialog={openDialog} handleCloseDialog={handleCloseDialog} handleSubmit={handleSubmit}/>
             </Stack>
         </LightBgBox>
+        <Typography variant='h6'>The tag is used by the following records</Typography>
+        </>
      );
 }
  

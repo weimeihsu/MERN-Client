@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { addRecord, updateRecord } from '../../slices/recordSlice'
 import Box from '@mui/material/Box'
-import Grid from '@mui/material/Grid'
 import InputLabel from '@mui/material/InputLabel'
 import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl'
@@ -11,8 +10,10 @@ import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
+import CloudUploadIcon from '@mui/icons-material/CloudUpload'
 import api from '../../axois/api'
 import { useGetGenresQuery } from '../../slices/genreApiSlice'
+import { VisuallyHiddenInput } from '../../customStyle/CustomComponent'
 
 const MovieForm = ({recordID, recordTitle, recordGenre, formTitle, btnText, closeForm}) => {
     const dispatch = useDispatch()
@@ -22,13 +23,17 @@ const MovieForm = ({recordID, recordTitle, recordGenre, formTitle, btnText, clos
 
     const [ title, setTitle ] = useState(recordID ? recordTitle : '')
     const [ genre, setGenre ] = useState(recordID ? recordGenre : '')
+    const [ file, setFile ] = useState()
     const [ error, setError ] = useState(null)
     
     const changeTitle = (e) => {
-        setTitle(e.target.value);
+        setTitle(e.target.value)
     }
     const changeGenre = (e) => {
         setGenre(e.target.value)
+    }
+    const changeFile = (e) => {
+        setFile(e.target.files[0])
     }
     const handleClear =() =>{
         setGenre('')
@@ -38,9 +43,12 @@ const MovieForm = ({recordID, recordTitle, recordGenre, formTitle, btnText, clos
     const handleSubmit = (e) => {
         e.preventDefault()
         // recordCreate({title, genre})
-        const id = recordID 
-        const record = {title, genre}
-        id ? recordUpdate(id, record) : recordCreate(record)           
+        const formData = new FormData()
+        formData.append('file', file)
+
+        const record = {title, genre, formData}
+
+        recordID ? recordUpdate(id, record) : recordCreate(record)           
     }
     // create record
     const recordCreate = async (record) => {
@@ -93,6 +101,10 @@ const MovieForm = ({recordID, recordTitle, recordGenre, formTitle, btnText, clos
                     ))}
                 </Select>
             </FormControl>
+            <Button component="label" variant="contained" sx={{mb:2}} startIcon={<CloudUploadIcon />} >
+                Product Photo Upload
+                <VisuallyHiddenInput type="file" onChange={changeFile}/>
+            </Button>
             <Stack spacing={2} direction="row" justifyContent="flex-end"> 
                 {recordID ? (<Button variant='text' type='button' onClick={closeForm}>Cancel</Button>) : (<Button variant='text' onClick={handleClear}>Cancel</Button>) }      
                 <Button variant="contained" type='submit'>{btnText}</Button> 
