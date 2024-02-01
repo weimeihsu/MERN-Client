@@ -1,6 +1,5 @@
-import { useEffect, useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { fetchRecords, syncToFilter } from '../../slices/recordSlice'
+import { useSelector } from 'react-redux'
+import { useGetRecordsQuery } from '../../slices/recordApiSlice'
 import EditTools from './EditTools'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
@@ -9,18 +8,15 @@ import Chip from '@mui/material/Chip'
 
 
 const MovieRecords = () => {
-    const dispatch = useDispatch()
-    const { records, filtered } = useSelector(state => state.recordSlice)
+    const selectedGenreName = useSelector(state => state.recordSlice.selectedGenre.name)
     const { selectedMainMenuName } = useSelector(state => state.navListSlice)
-    const canEdit = Boolean(selectedMainMenuName === 'Movie Editor')
-    useEffect(()=>{
-        dispatch(fetchRecords())
-        dispatch(syncToFilter())
-    },[records])
+    const { data: filteredRecords=[], isLoading } = useGetRecordsQuery({selectedGenreName})
     
+    const canEdit = Boolean(selectedMainMenuName === 'Movie Editor')
+
     return ( 
         <>
-         {filtered && filtered.map(recordItem=>(
+         {filteredRecords && filteredRecords.map(recordItem=>(
             <Card key={recordItem._id} variant="outlined" sx={{mb:1, display:'flex', justifyContent:'space-between'}} >
                 <CardContent>
                     <Typography variant="h6">

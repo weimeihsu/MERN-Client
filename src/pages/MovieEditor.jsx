@@ -20,7 +20,7 @@ const MovieEditor = () => {
             </LightBgBox>      
         </Grid>
         <Grid item xs={9}>
-              <TagMovieEditor/>
+            <TagMovieEditor/>
         </Grid>  
     </Grid>
    );

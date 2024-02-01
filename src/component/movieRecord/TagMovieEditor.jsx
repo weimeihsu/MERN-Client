@@ -31,7 +31,7 @@ const TagMovieEditor = () => {
             <Chip key={item._id} onClick={() => getGenre(item)} label={item.name} variant={item._id === selectedGenreID ? 'filled' : 'outlined'} sx={{mr:1, mb:1}} onDelete={()=>handleDelete(item._id)} deleteIcon={<DeleteIcon fontSize='small'/>} />
         ))} 
         {selectedGenreName && <TagUpdate/>}
-        <MovieRecords selectedGenreName={selectedGenreName}/>
+        <MovieRecords/>
         </>
      );
 }

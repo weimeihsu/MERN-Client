@@ -16,7 +16,8 @@ export const colorToken = {
     neutral:{
         main: '#9e9e9e',
         light: '#eeeeee',
-        dark:'#424242'
+        dark:'#424242',
+        wht: '#ffffff'
     }
     
 }
@@ -50,7 +51,8 @@ export const mainTheme = createTheme({
         neutral:{
             main: colorToken.neutral.main,
             light: colorToken.neutral.light,
-            dark: colorToken.neutral.dark
+            dark: colorToken.neutral.dark,
+            wht: colorToken.neutral.wht,
         }   
     },
     components:{

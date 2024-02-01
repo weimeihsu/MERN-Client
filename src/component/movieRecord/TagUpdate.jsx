@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { LightBgBox } from '../../customStyle/CustomComponent'
-import { useUpdateGenreMutation } from "../../slices/genreApiSlice"
+import { useUpdateGenreMutation } from '../../slices/genreApiSlice'
+import { useUpdateRecordGenreMutation } from '../../slices/recordApiSlice'
 import TextField from '@mui/material/TextField'
 import Stack from '@mui/material/Stack'
 import Button from '@mui/material/Button'
@@ -17,6 +18,7 @@ const TagUpdate = () => {
     
     const [ openDialog, setOpenDialog ] = useState(false)
     const [ updateGenre ] = useUpdateGenreMutation() 
+    const [ updateRecordGenre ] = useUpdateRecordGenreMutation()
 
     useEffect(()=>{
         setNewGenre('')
@@ -31,9 +33,9 @@ const TagUpdate = () => {
         e.preventDefault()
         try{
             const genre = {...selectedGenre, name:newGenre}
-            console.log(genre)
+            
             const res = updateGenre({genre})
-            // dispatch(setCredentials({...res}))
+            updateRecordGenre({oldGenre:selectedGenreName, newGenre})
             }catch(err){
                 console.log(err?.data?.message || err.error)
             }
@@ -54,7 +56,6 @@ const TagUpdate = () => {
         console.log(id)
     }
 
-    
     return ( 
         <LightBgBox>
             <Typography variant='h5'>Update Tag</Typography>

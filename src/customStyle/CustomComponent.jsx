@@ -55,4 +55,16 @@ const LightBgBox = styled('div')(({theme})=>({
   marginBottom:theme.spacing(2)
 }))
 
-export { CustomMain, MainHeader, StyledListItemButton, LightBgBox }
+const WhtBgBox = styled('div')(({theme})=>({
+  backgroundColor: theme.palette.neutral.wht,
+  borderRadius: '4px',
+  padding: theme.spacing(2),
+  marginBottom:theme.spacing(2),
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: '50%',
+}))
+
+export { CustomMain, MainHeader, StyledListItemButton, LightBgBox, WhtBgBox }
