@@ -12,8 +12,10 @@ import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
 import CloudUploadIcon from '@mui/icons-material/CloudUpload'
 import api from '../../axois/api'
+import yelo_3 from '../../assets/img/yelo_3.jpg'
 import { useGetGenresQuery } from '../../slices/genreApiSlice'
 import { VisuallyHiddenInput } from '../../customStyle/CustomComponent'
+import { convertToBase64 } from '../../func/funcs'
 
 const MovieForm = ({recordID, recordTitle, recordGenre, formTitle, btnText, closeForm}) => {
     const dispatch = useDispatch()
@@ -23,7 +25,7 @@ const MovieForm = ({recordID, recordTitle, recordGenre, formTitle, btnText, clos
 
     const [ title, setTitle ] = useState(recordID ? recordTitle : '')
     const [ genre, setGenre ] = useState(recordID ? recordGenre : '')
-    const [ file, setFile ] = useState()
+    const [ img, setImg ] = useState(recordID ? recordGenre : '')
     const [ error, setError ] = useState(null)
     
     const changeTitle = (e) => {
@@ -32,21 +34,22 @@ const MovieForm = ({recordID, recordTitle, recordGenre, formTitle, btnText, clos
     const changeGenre = (e) => {
         setGenre(e.target.value)
     }
-    const changeFile = (e) => {
-        setFile(e.target.files[0])
+    const handleFileUpload = async (e) => {
+        const file = e.target.files[0]
+        const base64Img = await convertToBase64(file)
+        setImg(base64Img)
     }
     const handleClear =() =>{
         setGenre('')
         setTitle('')
+        setImg('')
     }
     // condition. add or update
     const handleSubmit = (e) => {
         e.preventDefault()
         // recordCreate({title, genre})
-        const formData = new FormData()
-        formData.append('file', file)
 
-        const record = {title, genre, formData}
+        const record = {title, genre, img}
 
         recordID ? recordUpdate(id, record) : recordCreate(record)           
     }
@@ -58,6 +61,7 @@ const MovieForm = ({recordID, recordTitle, recordGenre, formTitle, btnText, clos
             dispatch(addRecord({newRecord}))
             setGenre('')
             setTitle('')
+            setImg('')
         }
         catch(err){
             err.message
@@ -103,8 +107,9 @@ const MovieForm = ({recordID, recordTitle, recordGenre, formTitle, btnText, clos
             </FormControl>
             <Button component="label" variant="contained" sx={{mb:2}} startIcon={<CloudUploadIcon />} >
                 Product Photo Upload
-                <VisuallyHiddenInput type="file" onChange={changeFile}/>
+                <VisuallyHiddenInput type="file" onChange={(e)=>handleFileUpload(e)} accept='.jpeg, .png, .jpg'/>
             </Button>
+            <img src={img} width='200px'/>
             <Stack spacing={2} direction="row" justifyContent="flex-end"> 
                 {recordID ? (<Button variant='text' type='button' onClick={closeForm}>Cancel</Button>) : (<Button variant='text' onClick={handleClear}>Cancel</Button>) }      
                 <Button variant="contained" type='submit'>{btnText}</Button> 

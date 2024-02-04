@@ -1,5 +1,5 @@
 
-import { toTitleCase } from '../../func/toTitleCase'
+import { toTitleCase } from '../../func/funcs'
 import { useState } from 'react'
 import { useAddGenreMutation } from '../../slices/genreApiSlice'
 import FormControl from '@mui/material/FormControl'
