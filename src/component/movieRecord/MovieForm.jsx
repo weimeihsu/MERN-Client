@@ -12,7 +12,6 @@ import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
 import CloudUploadIcon from '@mui/icons-material/CloudUpload'
 import api from '../../axois/api'
-import yelo_3 from '../../assets/img/yelo_3.jpg'
 import { useGetGenresQuery } from '../../slices/genreApiSlice'
 import { VisuallyHiddenInput } from '../../customStyle/CustomComponent'
 import { convertToBase64 } from '../../func/funcs'
@@ -34,11 +33,16 @@ const MovieForm = ({recordID, recordTitle, recordGenre, formTitle, btnText, clos
     const changeGenre = (e) => {
         setGenre(e.target.value)
     }
-    const handleFileUpload = async (e) => {
+    const changeImg = async (e) => {
         const file = e.target.files[0]
         const base64Img = await convertToBase64(file)
         setImg(base64Img)
     }
+    // const handleFileUpload = async (e) => {
+    //     const file = e.target.files[0]
+    //     const base64Img = await convertToBase64(file)
+    //     setImg(base64Img)
+    // }
     const handleClear =() =>{
         setGenre('')
         setTitle('')
@@ -106,8 +110,8 @@ const MovieForm = ({recordID, recordTitle, recordGenre, formTitle, btnText, clos
                 </Select>
             </FormControl>
             <Button component="label" variant="contained" sx={{mb:2}} startIcon={<CloudUploadIcon />} >
-                Product Photo Upload
-                <VisuallyHiddenInput type="file" onChange={(e)=>handleFileUpload(e)} accept='.jpeg, .png, .jpg'/>
+                img Upload
+                <VisuallyHiddenInput type="file" onChange={changeImg} accept='.jpeg, .png, .jpg'/>
             </Button>
             <img src={img} width='200px'/>
             <Stack spacing={2} direction="row" justifyContent="flex-end"> 
