@@ -38,11 +38,6 @@ const MovieForm = ({recordID, recordTitle, recordGenre, formTitle, btnText, clos
         const base64Img = await convertToBase64(file)
         setImg(base64Img)
     }
-    // const handleFileUpload = async (e) => {
-    //     const file = e.target.files[0]
-    //     const base64Img = await convertToBase64(file)
-    //     setImg(base64Img)
-    // }
     const handleClear =() =>{
         setGenre('')
         setTitle('')
@@ -51,17 +46,17 @@ const MovieForm = ({recordID, recordTitle, recordGenre, formTitle, btnText, clos
     // condition. add or update
     const handleSubmit = (e) => {
         e.preventDefault()
-        // recordCreate({title, genre})
 
         const record = {title, genre, img}
 
-        recordID ? recordUpdate(id, record) : recordCreate(record)           
+        recordID ? recordUpdate(id, record) : recordCreate(record)          
     }
     // create record
     const recordCreate = async (record) => {
         try{
             const res = await api.post('/api/records', record)
             const newRecord = await res.data
+            console.log(res)
             dispatch(addRecord({newRecord}))
             setGenre('')
             setTitle('')
