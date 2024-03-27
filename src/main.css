@@ -32,3 +32,10 @@ li a {
 .card-gap{
     margin-bottom: 0;
 }
+
+img {
+    max-width: 50%;
+    height: auto;
+    padding: 0;
+    margin: 0;
+}

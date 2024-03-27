@@ -113,6 +113,20 @@ export const mainTheme = createTheme({
                 }
             }
         },
+        MuiGrid:{
+            styleOverrides:{
+                root:{
+                    marginTop:'0px',
+                }
+            }
+        },
+        MuiChip:{
+            styleOverrides:{
+                root:{
+                    maxWidth:'fit-content'
+                }
+            }
+        },
         MuiSelect:{
             styleOverrides:{
                 select:{
