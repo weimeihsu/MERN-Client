@@ -56,7 +56,7 @@ const MovieForm = ({recordID, recordTitle, recordGenre, formTitle, btnText, clos
         try{
             const res = await api.post('/api/records', record)
             const newRecord = await res.data
-            console.log(res)
+
             dispatch(addRecord({newRecord}))
             setGenre('')
             setTitle('')
