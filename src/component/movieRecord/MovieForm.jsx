@@ -16,7 +16,7 @@ import { useGetGenresQuery } from '../../slices/genreApiSlice'
 import { VisuallyHiddenInput } from '../../customStyle/CustomComponent'
 import { convertToBase64 } from '../../func/funcs'
 
-const MovieForm = ({recordID, recordTitle, recordGenre, formTitle, btnText, closeForm}) => {
+const MovieForm = ({recordID, recordTitle, recordGenre, recordImg, formTitle, imgBtnText, btnText, closeForm}) => {
     const dispatch = useDispatch()
     const { data: genres=[], isLoading } = useGetGenresQuery()
     // const { genres } = useSelector(store => store.recordSlice)
@@ -24,7 +24,7 @@ const MovieForm = ({recordID, recordTitle, recordGenre, formTitle, btnText, clos
 
     const [ title, setTitle ] = useState(recordID ? recordTitle : '')
     const [ genre, setGenre ] = useState(recordID ? recordGenre : '')
-    const [ img, setImg ] = useState(recordID ? recordGenre : '')
+    const [ img, setImg ] = useState(recordID ? recordImg : '')
     const [ error, setError ] = useState(null)
     
     const changeTitle = (e) => {
@@ -80,7 +80,7 @@ const MovieForm = ({recordID, recordTitle, recordGenre, formTitle, btnText, clos
         }         
     }
     return ( 
-        <Box sx={{ paddingTop: recordID ? 4 : 0}}>
+        <Box>
         <Typography variant='h5'>{formTitle}</Typography>
         {recordID && 
             <Stack spacing={2}>
@@ -89,7 +89,7 @@ const MovieForm = ({recordID, recordTitle, recordGenre, formTitle, btnText, clos
                 <div><Typography mr={2} sx={{fontWeight:'bold'}}>Movie Genre:</Typography>{recordGenre}</div>
             </Stack>
          }
-        <Box component="form" onSubmit={handleSubmit} sx={{paddingTop:2}}>    
+        <Box component="form" onSubmit={handleSubmit}>    
             <TextField id="movie-name" label="Movie name" variant="outlined" size="small" sx={{mb:2}} fullWidth onChange={changeTitle} value={title}/>
             <FormControl fullWidth required size="small" sx={{mb:2}}>
                 <InputLabel id="movie-genre">Genre</InputLabel>
@@ -105,7 +105,7 @@ const MovieForm = ({recordID, recordTitle, recordGenre, formTitle, btnText, clos
                 </Select>
             </FormControl>
             <Button component="label" variant="contained" sx={{mb:2}} startIcon={<CloudUploadIcon />} >
-                img Upload
+                {imgBtnText}
                 <VisuallyHiddenInput type="file" onChange={changeImg} accept='.jpeg, .png, .jpg'/>
             </Button>
             <img src={img} width='200px'/>
@@ -121,6 +121,7 @@ const MovieForm = ({recordID, recordTitle, recordGenre, formTitle, btnText, clos
 
 MovieForm.defaultProps = {
     formTitle: 'Create Movie',
+    imgBtnText: 'Img Upload',
     btnText:'Create',
 }
 export default MovieForm;

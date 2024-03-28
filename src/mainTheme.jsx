@@ -74,7 +74,7 @@ export const mainTheme = createTheme({
                             color: 'white',
                         }
                       }  
-                },
+                }
             }
         },
         MuiMenuItem:{
@@ -141,7 +141,6 @@ export const mainTheme = createTheme({
             styleOverrides:{
                 root: { margin: '0px' }
             }
-        }
-        
+        }, 
     }
   });

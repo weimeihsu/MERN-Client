@@ -12,7 +12,7 @@ const LeftDrawer = ({drawerWidth, open}) => {
             border:'none',
             boxSizing: 'border-box',
             '& .MuiList-padding':{
-              padding:3
+              padding:2
             }},
         }}
         variant="persistent"

@@ -38,10 +38,7 @@ const RootLayout = () => {
             <LeftDrawer drawerWidth={drawerWidth} toggleDrawer={toggleDrawer} open={open}/>
         <CustomMain open={!open}>
             <MainHeader/>
-            <Box sx={{ height:'12px'}}/>
-            <Box sx={{ flexGrow: 1, m:2}}>
-                <Outlet/>
-            </Box>
+            <Outlet/>
         </CustomMain>
         </ThemeProvider>
      );

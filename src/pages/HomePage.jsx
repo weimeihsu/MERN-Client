@@ -9,6 +9,7 @@ import InputLabel from '@mui/material/InputLabel'
 import Select from '@mui/material/Select'
 import MenuItem from '@mui/material/MenuItem'
 import Typography from '@mui/material/Typography'
+import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
 import CircularProgress from '@mui/material/CircularProgress'
 import Card from '@mui/material/Card'
@@ -56,18 +57,19 @@ const HomePage = () => {
      }
      
      return (
-          <Grid container
-          direction="row"
-          alignItems="flex-start"
-          spacing={2}
-          >
+          <Container maxWidth="md">
+               <Grid container
+               direction="row"
+               alignItems="flex-start"
+               spacing={2}
+               >
                <Grid item
                xs={12} md={6}
                component="form"
                autoComplete="off"
                onSubmit={handleSubmit}
                >
-                    <Stack direction='column' spacing={2}>
+                    <Stack spacing={2}>
                     <Typography variant='h5'>OpenAI Generated Photo</Typography>
                          <TextField required size="small" id="prompt" label="prompt" variant="outlined" value={prompt} onChange={changePrompt}/>
                          <FormControl fullWidth required sx={{mb:2}} size='small'>
@@ -100,6 +102,7 @@ const HomePage = () => {
                
                </Grid>
           </Grid>
+          </Container>
      );
 }
  

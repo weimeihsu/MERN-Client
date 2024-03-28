@@ -6,7 +6,7 @@ import EditIcon from '@mui/icons-material/Edit'
 import { WhtBgBox } from '../../customStyle/CustomComponent'
 
 
-const OpenModal = ({id, title, genre}) => {
+const OpenModal = ({id, title, genre, img}) => {
 
     const [open, setOpen] = useState(false)
     const handleOpen = () => setOpen(true)
@@ -24,7 +24,7 @@ const OpenModal = ({id, title, genre}) => {
         aria-describedby="modal-description"
         >
             <WhtBgBox> 
-                <MovieForm recordID={id} recordTitle={title} recordGenre={genre} formTitle={'Movie Update'} btnText={'Update'} closeForm={handleClose}/>
+                <MovieForm recordID={id} recordTitle={title} recordGenre={genre} recordImg={img} formTitle={'Movie Update'} imgBtnText={'Img Update'} btnText={'Update'} closeForm={handleClose}/>
             </WhtBgBox>
         </Modal>
         </>  

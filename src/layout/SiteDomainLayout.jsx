@@ -19,7 +19,6 @@ const SiteDomainLayout = () => {
         direction="row"
         alignItems="flex-start"
         maxWidth='false'
-        sx={{ my:-4}}
        >
             <Grid item >
                 <Collapse in={isOpen} orientation="horizontal">

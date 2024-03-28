@@ -2,13 +2,16 @@ import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { useGetGenresQuery } from "../../slices/genreApiSlice"
+import { useGetRecordsQuery } from '../../slices/recordApiSlice'
 import { filter, setSelectedGenre } from '../../slices/recordSlice'
 
 import Chip from '@mui/material/Chip'
 import DeleteIcon from '@mui/icons-material/Delete'
+import Grid from '@mui/material/Grid'
 
 import MovieRecords from './MovieRecords'
 import TagUpdate from './TagUpdate'
+import MovieCard from './MovieCard'
 
 
 const TagMovieEditor = () => {
@@ -18,20 +21,31 @@ const TagMovieEditor = () => {
     const [ selected, setSelected ] = useState(selectedGenreID)
     
     const { data: genres=[], isLoading } = useGetGenresQuery()
+
+    const { data: filteredRecords=[] } = useGetRecordsQuery({selectedGenreName})
     
     const getGenre = (genre) => { 
         setSelected(genre._id)
         dispatch(filter({ theGenre: genre.name }))
         dispatch(setSelectedGenre(genre))
     }
-
     return ( 
         <>
+        <div>
         {genres.map(item=>(
-            <Chip key={item._id} onClick={() => getGenre(item)} label={item.name} variant={item._id === selectedGenreID ? 'filled' : 'outlined'} sx={{mr:1, mb:1}} onDelete={()=>handleDelete(item._id)} deleteIcon={<DeleteIcon fontSize='small'/>} />
+            <Chip size="small" key={item._id} onClick={() => getGenre(item)} label={item.name} variant={item._id === selectedGenreID ? 'filled' : 'outlined'} sx={{mr:1, mb:1}} onDelete={()=>handleDelete(item._id)} deleteIcon={<DeleteIcon/>} />
         ))} 
+        </div>
+        
         {selectedGenreName && <TagUpdate/>}
-        <MovieRecords/>
+        <Grid container spacing={1}>
+            {filteredRecords && filteredRecords.map(recordItem=>(
+                <Grid item xs={12} md={6} key={recordItem._id}>
+                    <MovieCard {...recordItem}/>
+                </Grid>
+            ))} 
+        </Grid> 
+        {/* <MovieRecords/> */}
         </>
      );
 }
