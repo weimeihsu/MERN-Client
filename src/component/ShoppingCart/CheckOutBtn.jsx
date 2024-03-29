@@ -15,8 +15,8 @@ const CheckOutBtn = () => {
 
     return ( 
     <Link to='/checkout'>
-        <IconButton sx={{ p: 0, color: 'white' }} size="small">
-            <ShoppingCartIcon fontSize='inherit'/>
+        <IconButton sx={{ p: 0 }} size="small">
+            <ShoppingCartIcon fontSize="inherit" />
             {quantityInCart ? <div className="amount-container">
                 <p className="total-amount">{quantityInCart}</p>
             </div> : null}

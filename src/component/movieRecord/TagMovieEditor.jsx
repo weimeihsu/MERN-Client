@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { useGetGenresQuery } from "../../slices/genreApiSlice"
+import { useGetGenresQuery, useDeleteGenreMutation } from "../../slices/genreApiSlice"
 import { useGetRecordsQuery } from '../../slices/recordApiSlice'
 import { filter, setSelectedGenre } from '../../slices/recordSlice'
 
@@ -24,16 +24,21 @@ const TagMovieEditor = () => {
 
     const { data: filteredRecords=[] } = useGetRecordsQuery({selectedGenreName})
     
+    const [ deleteGenre ] = useDeleteGenreMutation() 
+
     const getGenre = (genre) => { 
         setSelected(genre._id)
         dispatch(filter({ theGenre: genre.name }))
         dispatch(setSelectedGenre(genre))
     }
+    const handleDelete = (id) => {
+        deleteGenre({id})
+    }
     return ( 
         <>
         <div>
         {genres.map(item=>(
-            <Chip size="small" key={item._id} onClick={() => getGenre(item)} label={item.name} variant={item._id === selectedGenreID ? 'filled' : 'outlined'} sx={{mr:1, mb:1}} onDelete={()=>handleDelete(item._id)} deleteIcon={<DeleteIcon/>} />
+            <Chip size="small" key={item._id} onClick={() => getGenre(item)} label={item.name} variant={item._id === selected ? 'filled' : 'outlined'} sx={{mr:1, mb:1}} onDelete={()=>handleDelete(item._id)} deleteIcon={<DeleteIcon/>} />
         ))} 
         </div>
         

@@ -4,12 +4,13 @@ import MenuIcon from '@mui/icons-material/Menu'
 import IconButton from '@mui/material/IconButton'
 import Stack from '@mui/material/Stack'
 import CheckOutBtn from './ShoppingCart/CheckOutBtn'
+import { ThemeProvider } from '@mui/material/styles';
 
 import Logo from './Logo'
 
 const TopNavBar = ({toggleDrawer, open}) => {
     return ( 
-        <AppBar position="fixed" open={open} sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }} elevation={0}>
+        <AppBar enableColorOnDark position="fixed" open={open} sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }} elevation={0}>
             <Toolbar>
                 <IconButton
                 color="inherit"

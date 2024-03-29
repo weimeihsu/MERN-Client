@@ -37,6 +37,7 @@ export const mainTheme = createTheme({
         }
     },
     palette: {
+        mode: 'dark',
         primary: {
             main: colorToken.primary.main,
             light: colorToken.primary.light,
