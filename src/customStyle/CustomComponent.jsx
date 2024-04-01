@@ -4,7 +4,7 @@ import ListItemButton from '@mui/material/ListItemButton'
 
 const drawerWidth = 240;
 
-const CustomMain = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })
+const StyledMainBody = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })
   (({ theme, open }) => ({
   flexGrow: 1,
   transition: theme.transitions.create('margin', {
@@ -21,7 +21,7 @@ const CustomMain = styled('main', { shouldForwardProp: (prop) => prop !== 'open'
   }),
 }));
 
-const MainHeader = styled('div')(({ theme }) => ({
+const StyledHeaderHeight = styled('div')(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   padding: theme.spacing(0, 1),
@@ -78,4 +78,4 @@ const VisuallyHiddenInput = styled('input')({
   whiteSpace: 'nowrap',
   width: 1,
 });
-export { CustomMain, MainHeader, StyledListItemButton, LightBgBox, WhtBgBox, VisuallyHiddenInput }
+export { StyledMainBody, StyledHeaderHeight, StyledListItemButton, LightBgBox, WhtBgBox, VisuallyHiddenInput }

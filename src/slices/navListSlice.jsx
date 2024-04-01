@@ -5,11 +5,14 @@ const initialState = {
         {id:1, path:'/', name:'Homepage'},
         {id:2, path:'/site-domain', name:'Sites Domains'},
         {id:3, path:'/movies', name:'Movies'},
-        {id:4, path:'/movie-editor', name:'Movie Editor'},
-        {id:5, path:'/online-store', name:'Online Store'},
+        {id:4, path:'/online-store', name:'Online Store'},
+        
+    ],
+    adminMenu:[
+        {id:5, path:'/movie-editor', name:'Movie Editor'},
         {id:6, path:'/store-editor', name:'Store Editor'}
     ],
-    selectedMainMenuName:'',
+    selectedMainMenuID:'',
     checkOutPage:[
         {id:1, path:'/checkout', name:'Checkout'},
         {id:2, path:'/checkout-success', name:'Checkout Success'},
@@ -38,29 +41,12 @@ export const navListSlice = createSlice({
     name:'navListSlice',
     initialState,
     reducers:{
-        // setSelectedSite: (state, action)=>{
-        //     // const { selectedSiteName } = action.payload
-        //     // state.selectedSiteName = selectedSiteName
-        //     state.selectedSiteName = action.payload
-        //     localStorage.setItem('site', JSON.stringify(action.payload))
-        // },
-        // setSelectedDomain: (state, action) => {
-        //     // const { selectedDomain } = action.payload
-        //     // state.selectedDomainName = selectedDomain
-        //     state.selectedDomainName = action.payload
-        //     localStorage.setItem('domain', JSON.stringify(action.payload))
-        //     console.log(state.selectedDomainName)
-        // },
-        // filter: (state, action) => {
-        //     const { site } = action.payload
-        //     // const site = state.selectedSiteName.unwrap()
-        //     state.filteredDomains = [...state.domainList].filter(item => item.sitename === site)
-        // },
-        setSelectedMainMenuName: (state, action) => {
-            state.selectedMainMenuName = action.payload
+        setSelectedMainMenuID: (state, action) => {
+            state.selectedMainMenuID = action.payload
+            console.log(state.selectedMainMenuID)
         }
     }
 })
 
-export const { setSelectedMainMenuName } = navListSlice.actions
+export const { setSelectedMainMenuID } = navListSlice.actions
 export default navListSlice.reducer

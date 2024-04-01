@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { useLogoutMutation } from '../slices/userApiSlice'
 import { clearCredentials } from '../slices/authSlice'
+import { setSelectedMainMenuID } from '../slices/navListSlice'
 
 import AccountCircle from '@mui/icons-material/AccountCircle'
 import Menu from '@mui/material/Menu'
@@ -11,7 +12,7 @@ import ListItemText from '@mui/material/ListItemText'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 
-const ProfileMenu = ({user, toProfile}) => {
+const ProfileMenu = ({user}) => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const [ logoutApiCall ] = useLogoutMutation()
@@ -20,14 +21,15 @@ const ProfileMenu = ({user, toProfile}) => {
     const handleOpenUserMenu = (event) => {
         setAnchorElUser(event.currentTarget)
       }
-      const handleCloseUserMenu = (event) => {
-        setAnchorElUser(null)
-      }
-    // const toProfile = ()=>{
-    //     navigate('/user-profile')
-    //     selected=false
-    //     setAnchorElUser(null)
-    // }
+    const handleCloseUserMenu = () => {
+    setAnchorElUser(null)
+    }
+
+    const toProfile = () =>{
+    navigate('/user-profile')
+    dispatch(setSelectedMainMenuID(''))
+    setAnchorElUser(null)
+    }
     const handleLogOut = async () => {
         try {
             await logoutApiCall().unwrap()
@@ -40,7 +42,7 @@ const ProfileMenu = ({user, toProfile}) => {
     }
     return ( 
         <Box sx={{ padding:2 }}>
-            <Button fullWidth startIcon={<AccountCircle />} onClick={handleOpenUserMenu} size="medium" color="secondary">
+            <Button variant='outlined' startIcon={<AccountCircle />} onClick={handleOpenUserMenu} size="small" color="secondary">
             {user}
             </Button>
             <Menu
@@ -49,7 +51,7 @@ const ProfileMenu = ({user, toProfile}) => {
             anchorEl={anchorElUser}
             anchorOrigin={{
                 vertical: 'top',
-                horizontal: 'right',
+                horizontal: 'left',
             }}
             keepMounted
             transformOrigin={{

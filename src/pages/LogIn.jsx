@@ -10,9 +10,6 @@ import Stack from '@mui/material/Stack'
 import Grid from '@mui/material/Grid'
 import Divider from '@mui/material/Divider'
 import Typography from '@mui/material/Typography'
-import Toolbar from '@mui/material/Toolbar'
-import Logo from '../component/Logo'
-import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import { toast } from 'react-toastify'
 
 const LogIn = () => {
@@ -48,16 +45,7 @@ const LogIn = () => {
         }
     }
    
-    return ( 
-        <>
-        <header>
-        <Link to="/">
-            <Toolbar>
-                <ArrowBackIcon />
-                <Logo/>
-            </Toolbar>
-        </Link>
-        </header>
+    return (      
         <Grid container
         direction="column"
         justifyContent="center"
@@ -70,18 +58,22 @@ const LogIn = () => {
             autoComplete="off"
             onSubmit={handleSubmit}
             >
-                <Stack direction='column' spacing={2}>
+                <Stack spacing={2}>
                     <TextField size="small" id="email" label="email" variant="outlined" value={email} onChange={changeEmail}/>
                     <TextField size="small" id="password" label="password" variant="outlined" value={password} onChange={changePassword}/>
                     <Button variant="contained" type='submit'>Log In</Button>
                     <Divider/>
-                    <Link to='/signup'>
-                        <Button>Sign up</Button>
-                    </Link>
+                    
+                    <Stack direction='row' alignItems="center" spacing={1}>
+                        <Typography variant="caption">No Account?</Typography>
+                        <Link to='/auth/signup'>
+                            <Button>Sign up</Button>
+                        </Link>
+                    </Stack>
+                   
                 </Stack>
             </Box>
         </Grid>
-        </>
      );
 }
  

@@ -37,7 +37,6 @@ export const mainTheme = createTheme({
         }
     },
     palette: {
-        mode: 'dark',
         primary: {
             main: colorToken.primary.main,
             light: colorToken.primary.light,
@@ -110,7 +109,7 @@ export const mainTheme = createTheme({
         MuiAppBar:{
             styleOverrides:{
                 root:{
-                    // backgroundColor:'white'
+                    // backgroundColor: 'transparent'
                 }
             }
         },

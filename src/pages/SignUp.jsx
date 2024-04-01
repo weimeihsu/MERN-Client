@@ -49,18 +49,7 @@ const SignUp = () => {
         }
     }
 
-    return ( 
-        <>
-        <Box sx={{ flexGrow: 1 }}>
-        <header>
-        <Link to="/">
-            <Toolbar>
-                <ArrowBackIcon />
-                <Logo/>
-            </Toolbar>
-        </Link>
-        </header>
-        </Box>
+    return (  
         <Grid container
         direction="column"
         justifyContent="center"
@@ -73,18 +62,21 @@ const SignUp = () => {
             autoComplete="off"
             onSubmit={handleSubmit}
             >
-                <Stack direction='column' spacing={2}>
+                <Stack spacing={2}>
                     <TextField size="small" id="email" label="email" variant="outlined" value={email} onChange={changeEmail}/>
                     <TextField size="small" id="password" label="password" variant="outlined" value={password} onChange={changePassword}/>
                     <Button variant="contained" type='submit'>Sign Up</Button>
                     <Divider/>
-                        <Link to='/login'>
-                        <Button>Log In</Button>
-                        </Link> 
+                    <Stack direction='row' alignItems="center" spacing={1}>
+                        <Typography variant="caption">Has an Account?</Typography>
+                            <Link to='/auth'>
+                            <Button>Log In</Button>
+                            </Link> 
+                    </Stack>
+                    
                 </Stack>
             </Box>
         </Grid>
-        </>
      );
 }
  

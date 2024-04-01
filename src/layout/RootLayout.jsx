@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import { Outlet } from 'react-router-dom'
+import { StyledMainBody, StyledHeaderHeight } from '../customStyle/CustomComponent'
 import TopNavBar from '../component/TopNavBar'
-import { CustomMain, MainHeader } from '../customStyle/CustomComponent'
 import LeftDrawer from '../component/LeftDrawer'
 import { ThemeProvider } from '@mui/material/styles'
+import MenuIcon from '@mui/icons-material/Menu'
 import { mainTheme } from '../mainTheme'
-import Box from '@mui/material/Box'
 
 // const drawerWidth = 240
 // const CustomMain = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })
@@ -26,20 +26,20 @@ import Box from '@mui/material/Box'
 // }));
 
 const RootLayout = () => {
-    const [open, setOpen] = useState(true);
+
+    const [open, setOpen] = useState(true)
     const toggleDrawer = () => {
     setOpen(!open);
     }
 
-    const drawerWidth = 240
     return ( 
         <ThemeProvider theme={mainTheme}>
-            <TopNavBar toggleDrawer={toggleDrawer}/>
-            <LeftDrawer drawerWidth={drawerWidth} toggleDrawer={toggleDrawer} open={open}/>
-        <CustomMain open={!open}>
-            <MainHeader/>
+            <TopNavBar toggleDrawer={toggleDrawer} OptionIcon={<MenuIcon />}/>
+            <LeftDrawer toggleDrawer={toggleDrawer} open={open}/>
+        <StyledMainBody open={!open}>
+            <StyledHeaderHeight/>
             <Outlet/>
-        </CustomMain>
+        </StyledMainBody>
         </ThemeProvider>
      );
 }

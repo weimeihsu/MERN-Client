@@ -1,6 +1,7 @@
 import { Route, createBrowserRouter,
     createRoutesFromElements, } from 'react-router-dom'
 import RootLayout from '../layout/RootLayout'
+import AuthLayout from '../layout/AuthLayout'
 import CheckOutLayout from '../layout/CheckOutLayout'
 import SiteDomainLayout from '../layout/SiteDomainLayout'
 
@@ -41,8 +42,10 @@ const Routers = createBrowserRouter(
                 <Route path="checkout-failed" element={<CheckOutFailed/> } />
                 <Route path="checkout-success" element={<CheckOutSuccess/> } />  
             </Route>
-            <Route path="login" element={<LogIn/> }/>
-            <Route path="signup" element={<SignUp/> }/>
+            <Route path='auth' element={<AuthLayout/>}>
+                <Route index element={<LogIn/> }/>
+                <Route path="signup" element={<SignUp/> }/>
+            </Route>
         </Route>
     )
 )

@@ -8,7 +8,8 @@ import Stack from '@mui/material/Stack'
 
 const MovieCard = ({_id, title, genre, img, createdAt}) => {
     const { selectedMainMenuName } = useSelector(state => state.navListSlice)
-    const canEdit = Boolean(selectedMainMenuName === 'Movie Editor')
+    const { userInfo } = useSelector(store=>store.authSlice)
+    // const canEdit = Boolean(selectedMainMenuName === 'Movie Editor')
 
     return ( 
         <Box variant="outlined" sx={{padding:'8px 12px 8px 8px', border: '1px  solid #eeeeee'}}>
@@ -30,7 +31,7 @@ const MovieCard = ({_id, title, genre, img, createdAt}) => {
                     </Typography>
                     </Stack>
                 </Stack>
-            {canEdit ? (<EditTools id={_id} title={title} genre={genre} img={img}/>):(null)}
+            {userInfo ? (<EditTools id={_id} title={title} genre={genre} img={img}/>):(null)}
         </Box>
      );
 }

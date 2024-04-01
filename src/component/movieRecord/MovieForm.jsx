@@ -81,40 +81,40 @@ const MovieForm = ({recordID, recordTitle, recordGenre, recordImg, formTitle, im
     }
     return ( 
         <Box>
-        <Typography variant='h5'>{formTitle}</Typography>
-        {recordID && 
-            <Stack spacing={2}>
-                <div><Typography mr={2} sx={{fontWeight:'bold'}}>Movie ID:</Typography>{recordID}</div>
-                <div><Typography mr={2} sx={{fontWeight:'bold'}}>Moview Title:</Typography>{recordTitle}</div>
-                <div><Typography mr={2} sx={{fontWeight:'bold'}}>Movie Genre:</Typography>{recordGenre}</div>
-            </Stack>
-         }
-        <Box component="form" onSubmit={handleSubmit}>    
-            <TextField id="movie-name" label="Movie name" variant="outlined" size="small" sx={{mb:2}} fullWidth onChange={changeTitle} value={title}/>
-            <FormControl fullWidth required size="small" sx={{mb:2}}>
-                <InputLabel id="movie-genre">Genre</InputLabel>
-                <Select
-                labelId="label-movie-genre"
-                value={genre}
-                label="Genre"
-                onChange={changeGenre}  
-                >
-                    {genres.map(item=>(
-                        <MenuItem name={item.name} key={item._id} value={item.name}>{item.name}</MenuItem>
-                    ))}
-                </Select>
-            </FormControl>
-            <Button component="label" variant="contained" sx={{mb:2}} startIcon={<CloudUploadIcon />} >
-                {imgBtnText}
-                <VisuallyHiddenInput type="file" onChange={changeImg} accept='.jpeg, .png, .jpg'/>
-            </Button>
-            <img src={img} width='200px'/>
-            <Stack spacing={2} direction="row" justifyContent="flex-end"> 
-                {recordID ? (<Button variant='text' type='button' onClick={closeForm}>Cancel</Button>) : (<Button variant='text' onClick={handleClear}>Cancel</Button>) }      
-                <Button variant="contained" type='submit'>{btnText}</Button> 
-            </Stack>
-            {error && <div>{error}</div>}
-        </Box>
+            <Typography variant='h5'>{formTitle}</Typography>
+            {recordID && 
+                <Stack spacing={2}>
+                    <div><Typography mr={2} sx={{fontWeight:'bold'}}>Movie ID:</Typography>{recordID}</div>
+                    <div><Typography mr={2} sx={{fontWeight:'bold'}}>Moview Title:</Typography>{recordTitle}</div>
+                    <div><Typography mr={2} sx={{fontWeight:'bold'}}>Movie Genre:</Typography>{recordGenre}</div>
+                </Stack>
+            }
+            <Box component="form" onSubmit={handleSubmit}>    
+                <TextField id="movie-name" label="Movie name" variant="outlined" size="small" sx={{mb:2}} fullWidth onChange={changeTitle} value={title}/>
+                <FormControl fullWidth required size="small" sx={{mb:2}}>
+                    <InputLabel id="movie-genre">Genre</InputLabel>
+                    <Select
+                    labelId="label-movie-genre"
+                    value={genre}
+                    label="Genre"
+                    onChange={changeGenre}  
+                    >
+                        {genres.map(item=>(
+                            <MenuItem name={item.name} key={item._id} value={item.name}>{item.name}</MenuItem>
+                        ))}
+                    </Select>
+                </FormControl>
+                <Button component="label" variant="contained" sx={{mb:2}} startIcon={<CloudUploadIcon />} >
+                    {imgBtnText}
+                    <VisuallyHiddenInput type="file" onChange={changeImg} accept='.jpeg, .png, .jpg'/>
+                </Button>
+                <img src={img} width='200px'/>
+                <Stack spacing={2} direction="row" justifyContent="flex-end"> 
+                    {recordID ? (<Button variant='text' type='button' onClick={closeForm}>Cancel</Button>) : (<Button variant='text' onClick={handleClear}>Cancel</Button>) }      
+                    <Button variant="contained" type='submit'>{btnText}</Button> 
+                </Stack>
+                {error && <div>{error}</div>}
+            </Box>
         </Box>
     );
 }

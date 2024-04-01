@@ -1,14 +1,14 @@
 import Drawer from '@mui/material/Drawer'
 import MainMenu from './MainMenu'
 
-const LeftDrawer = ({drawerWidth, open}) => {
+const LeftDrawer = ({open}) => {
     return ( 
         <Drawer
         sx={{
-          width: drawerWidth,
+          width: '240px',
           flexShrink: 0,
           '& .MuiDrawer-paper': {
-            width: drawerWidth,
+            width: '240px',
             border:'none',
             boxSizing: 'border-box',
             '& .MuiList-padding':{

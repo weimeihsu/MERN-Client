@@ -5,16 +5,7 @@ const CategoryChip = (item) => {
     const toggleColor = () => {
        setColored(!colored)
         }
-        // const coloredChip = {...categories[idx], isSelected: !selectedItem.isSelected}
-        // const coloredCategories = [...categories]
-        // coloredCategories[idx] = coloredChip
-        
-        // if(coloredCategories.includes(text)){
-        //     console.log(text)
-        //     state.filteredChips=state.filteredChips.filter(chip => chip !== text)
-        // }else{state.filteredChips.push(text)}
-        // setColored(coloredCategories)
-
+       
     return ( 
         <>
         <Chip label={item.name} variant={colored ? 'filled':'outlined'} color='primary' onClick={toggleColor} size='small'></Chip>

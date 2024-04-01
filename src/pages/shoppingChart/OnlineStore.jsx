@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import Grid from '@mui/material/Grid'
 import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
@@ -12,18 +12,18 @@ const OnlineStore = () => {
     const [filter, setFilter] = useState(categories)
     return ( 
         <Container maxWidth="md">
-             <Grid container spacing={2}>
-                <Grid item xs={12}>
-                    <Typography variant='h5'>Online Store</Typography>
-                    <Stack direction="row" spacing={1} mb={2}>
-                    {filter.map((item, idx)=>(
-                        <CategoryChip key={idx} {...item} />
-                    ))}
-                    </Stack>
-                    {shopItemsLocal && shopItemsLocal.map(item=>(
-                    <ShopItemCard key={item._id} {...item}/>    
-                    ))}
-                </Grid>
+            <Typography variant='h5'>Online Store</Typography>
+            <Stack direction="row" spacing={1} mb={2}>
+                {filter.map((item, idx)=>(
+                    <CategoryChip key={idx} {...item} />
+                ))}
+            </Stack>
+             <Grid container spacing={1}>
+                {shopItemsLocal && shopItemsLocal.map(item=>(
+                <Grid item xs={12} md={6}>  
+                    <ShopItemCard key={item._id} {...item}/>  
+                </Grid>  
+                ))}
             </Grid>
         </Container>
        

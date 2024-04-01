@@ -20,9 +20,9 @@ export const userApiSlice = apiSlice.injectEndpoints({
             invalidatesTags:['User']
         }),
         logout: builder.mutation({
-            query: (data)=>({
+            query: ()=>({
                 url:`${USERS_URL}/logout`,
-                method:'DELETE'
+                method:'POST'
             }),
             invalidatesTags:['User']
         }),

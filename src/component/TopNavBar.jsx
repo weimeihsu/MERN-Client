@@ -1,28 +1,37 @@
+import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 import AppBar from '@mui/material/AppBar'
 import Toolbar from '@mui/material/Toolbar'
-import MenuIcon from '@mui/icons-material/Menu'
 import IconButton from '@mui/material/IconButton'
 import Stack from '@mui/material/Stack'
+import Button from '@mui/material/Button'
 import CheckOutBtn from './ShoppingCart/CheckOutBtn'
-import { ThemeProvider } from '@mui/material/styles';
+import ProfileMenu from '../component/ProfileMenu'
 
 import Logo from './Logo'
 
-const TopNavBar = ({toggleDrawer, open}) => {
+const TopNavBar = ({toggleDrawer, open, OptionIcon, toHome, isLoginHeader}) => {
+    const { userInfo } = useSelector(store=>store.authSlice)
+    
     return ( 
-        <AppBar enableColorOnDark position="fixed" open={open} sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }} elevation={0}>
+        <AppBar position="fixed" color="transparent" open={open} sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, backdropFilter:"blur(80px)", borderBottom: 'solid thin', borderColor: (theme) => theme.palette.neutral.light }} elevation={0}>
             <Toolbar>
                 <IconButton
-                color="inherit"
                 aria-label="open drawer"
-                onClick={toggleDrawer}
+                onClick={isLoginHeader ? toHome: toggleDrawer}
                 edge="start"
                 sx={{ mr: 2 }}
             >
-                 <MenuIcon />
+                {OptionIcon}
                 </IconButton>
                 <Logo/>
-                <Stack direction="row" alignItems="center" spacing={3}>
+                
+                <Stack direction="row" alignItems="center" spacing={2}>
+                {userInfo ? (<ProfileMenu user={userInfo.email}/>):(
+                    <Link to='/auth'>
+                        <Button color="secondary" variant='outlined' size='small'>Login / Signup</Button>
+                    </Link>
+                )}          
                   <CheckOutBtn/>
                 </Stack>
             </Toolbar>
