@@ -1,8 +1,12 @@
 import Typography from '@mui/material/Typography'
+import Container from '@mui/material/Container'
 
 const UserProfile = () => {
     return ( 
-        <Typography variant='h5'>User Profile</Typography>
+        <Container maxWidth="md">
+            <Typography variant='h5'>User Profile</Typography>
+        </Container>
+        
      );
 }
  

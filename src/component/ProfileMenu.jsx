@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { useLogoutMutation } from '../slices/userApiSlice'
 import { clearCredentials } from '../slices/authSlice'
-import { setSelectedMainMenuID } from '../slices/navListSlice'
+import { setSelectedPathName } from '../slices/navListSlice'
 
 import AccountCircle from '@mui/icons-material/AccountCircle'
 import Menu from '@mui/material/Menu'
@@ -15,6 +15,8 @@ import Button from '@mui/material/Button'
 const ProfileMenu = ({user}) => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const location = useLocation()
+    const {pathname} = location
     const [ logoutApiCall ] = useLogoutMutation()
     const [ anchorElUser, setAnchorElUser ] = useState(null)
 
@@ -27,7 +29,8 @@ const ProfileMenu = ({user}) => {
 
     const toProfile = () =>{
     navigate('/user-profile')
-    dispatch(setSelectedMainMenuID(''))
+    console.log(pathname)
+    dispatch(setSelectedPathName(pathname))
     setAnchorElUser(null)
     }
     const handleLogOut = async () => {

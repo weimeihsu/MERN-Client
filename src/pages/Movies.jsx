@@ -15,8 +15,8 @@ const Movies = () => {
             <Typography variant='h5'>Movie List</Typography>
             <Grid container spacing={1}>
                 {filteredRecords && filteredRecords.map(recordItem=>(
-                    <Grid item xs={12} md={4}>
-                        <MovieCard key={recordItem._id} {...recordItem}/>
+                    <Grid item xs={12} md={4} key={recordItem._id} >
+                        <MovieCard {...recordItem}/>
                     </Grid>
                 ))} 
             </Grid> 

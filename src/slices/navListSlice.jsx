@@ -12,7 +12,7 @@ const initialState = {
         {id:5, path:'/movie-editor', name:'Movie Editor'},
         {id:6, path:'/store-editor', name:'Store Editor'}
     ],
-    selectedMainMenuID:'',
+    selectedPathName:'',
     checkOutPage:[
         {id:1, path:'/checkout', name:'Checkout'},
         {id:2, path:'/checkout-success', name:'Checkout Success'},
@@ -41,12 +41,12 @@ export const navListSlice = createSlice({
     name:'navListSlice',
     initialState,
     reducers:{
-        setSelectedMainMenuID: (state, action) => {
-            state.selectedMainMenuID = action.payload
-            console.log(state.selectedMainMenuID)
+        setSelectedPathName: (state, action) => {
+            state.selectedPathName = action.payload
+            console.log(state.selectedPathName)
         }
     }
 })
 
-export const { setSelectedMainMenuID } = navListSlice.actions
+export const { setSelectedPathName } = navListSlice.actions
 export default navListSlice.reducer

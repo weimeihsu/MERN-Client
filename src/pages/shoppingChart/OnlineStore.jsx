@@ -8,7 +8,7 @@ import CategoryChip from '../../component/ShoppingCart/CategoryChip'
 import ShopItemCard from '../../component/ShoppingCart/ShopItemCard'
 const OnlineStore = () => {
     
-    const { shopItems, shopItemsLocal, categories } = useSelector(store => store.shopItemSlice)
+    const { shopItemsLocal, categories } = useSelector(store => store.shopItemSlice)
     const [filter, setFilter] = useState(categories)
     return ( 
         <Container maxWidth="md">
@@ -20,8 +20,8 @@ const OnlineStore = () => {
             </Stack>
              <Grid container spacing={1}>
                 {shopItemsLocal && shopItemsLocal.map(item=>(
-                <Grid item xs={12} md={6}>  
-                    <ShopItemCard key={item._id} {...item}/>  
+                <Grid item xs={12} md={6} key={item._id}>  
+                    <ShopItemCard {...item}/>  
                 </Grid>  
                 ))}
             </Grid>
