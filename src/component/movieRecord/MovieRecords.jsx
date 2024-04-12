@@ -1,10 +1,6 @@
 import { useSelector } from 'react-redux'
 import { useGetRecordsQuery } from '../../slices/recordApiSlice'
-import EditTools from './EditTools'
-import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
-import Chip from '@mui/material/Chip'
-import Stack from '@mui/material/Stack'
+
 import MovieCard from './MovieCard'
 
 const MovieRecords = () => {

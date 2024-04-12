@@ -43,7 +43,6 @@ export const navListSlice = createSlice({
     reducers:{
         setSelectedPathName: (state, action) => {
             state.selectedPathName = action.payload
-            console.log(state.selectedPathName)
         }
     }
 })
