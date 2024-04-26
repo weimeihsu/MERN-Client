@@ -2,7 +2,6 @@ import { useSelector } from 'react-redux'
 import { useGetRecordsQuery } from '../slices/recordApiSlice'
 import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
-import MovieRecords from '../component/movieRecord/MovieRecords'
 import Typography from '@mui/material/Typography'
 import MovieCard from '../component/movieRecord/MovieCard'
 

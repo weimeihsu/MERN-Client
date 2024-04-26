@@ -20,10 +20,9 @@ const MainMenu = () => {
     const [ selected, setSelected ] = useState(selectedPathName)
     const { userInfo } = useSelector(store=>store.authSlice)
     
-    useEffect(()=>{setSelected('123'), [pathname]})
-    console.log(selected)
+    useEffect(()=>{setSelected(pathname), [pathname]})
+
     const handlesSelected = (item) =>{
-      console.log(pathname)
       setSelected(item.path)
       dispatch(clearCategoryTerm())
       dispatch(clearSearchText())
@@ -58,7 +57,7 @@ const MainMenu = () => {
             {adminMenu.map(navitem => (
               <Link to={navitem.path} key={navitem.id}>
                 <ListItem disablePadding>
-                  <ListItemButton selected={ selected === navitem.id } onClick={()=>handlesSelected(navitem)} >
+                  <ListItemButton selected={ selected === navitem.path } onClick={()=>handlesSelected(navitem)} >
                       <ListItemText primary={navitem.name} />
                   </ListItemButton>
                 </ListItem>
